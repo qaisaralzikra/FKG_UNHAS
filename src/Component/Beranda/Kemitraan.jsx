@@ -16,7 +16,7 @@ export function Mitra() {
   return (
     <div className="px-[70px] py-[64px]">
       <div>
-        <h1 className="font-medium text-[32px]">Kemitraan</h1>
+        <h1 className="font-semibold text-[32px]">Kemitraan</h1>
         <div className="grid grid-cols-2 2xl:gap-[40px] xl:gap-[20px] mt-[20px]">
           {data.map((item) => (
             <div

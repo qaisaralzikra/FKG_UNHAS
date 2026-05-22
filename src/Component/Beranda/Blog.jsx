@@ -138,7 +138,7 @@ export function Blog() {
     <div className="relative w-full h-dvh px-[70px] pt-[64px] bg-white text-black">
       <div className="flex flex-col gap-[20px]">
         <div className="flex items-center justify-between">
-          <h1 className="font-medium text-[32px]">Berita Terbaru</h1>
+          <h1 className="font-semibold text-[32px]">Berita Terbaru</h1>
           <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px]">Lihat Semua <i class="ri-arrow-right-long-line text-[20px]"></i></button>
         </div>
         <div className="grid grid-cols-12 2xl:gap-x-[60px] xl:gap-x-[20px]">

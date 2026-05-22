@@ -18,7 +18,7 @@ export function Jurnal() {
   return (
     <div className="px-[70px] py-[64px]">
       <div>
-        <h1 className="font-medium text-[32px]">Jurnal & Publikasi</h1>
+        <h1 className="font-semibold text-[32px]">Jurnal & Publikasi</h1>
         <div className="grid grid-cols-2 gap-[40px] mt-[20px]">
           {data.map((item, index) => (
             <div key={item.id}>
