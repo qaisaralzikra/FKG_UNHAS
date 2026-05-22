@@ -1,4 +1,3 @@
-import Logo from "../../../public/logo unhas.png";
 import { motion } from "motion/react";
 
 function VideoPlayer() {
@@ -26,11 +25,11 @@ function Bg() {
 
 export function HeroSection() {
   return (
-    <div className="h-dvh overflow-hidden">
+    <div className="min-h-svh overflow-hidden">
       <Bg />
       <VideoPlayer />
-      <div className="flex flex-col items-start justify-center text-start z-1 gap-[36px] top-0 w-full h-[100%] text-white mx-[70px]">
-        <div className="z-1 leading-[50px] w-[600px]">
+      <div className="mt-[300px] md:mt-[350px] relative flex flex-col items-start justify-center text-start z-1 gap-6 lg:gap-[36px] top-0 w-full h-full text-white px-4 sm:px-6 lg:px-[70px]">
+        <div className="z-1 leading-tight lg:leading-[50px] w-full max-w-[600px] h-full">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,11 +37,12 @@ export function HeroSection() {
               duration: 0.8,
               ease: "easeInOut",
             }}
+            className="text-center md:text-start"
           >
-            <h3 className="text-[28px] font-medium z-1">
+            <h3 className="text-xl md:text-2xl lg:text-[28px] font-medium z-1">
               Universitas Hasanuddin
             </h3>
-            <h1 className="text-[48px] font-semibold z-1">
+            <h1 className="text-3xl md:text-5xl lg:text-[48px] font-semibold z-1">
               Fakultas Kedokteran <br /> Gigi
             </h1>
           </motion.div>

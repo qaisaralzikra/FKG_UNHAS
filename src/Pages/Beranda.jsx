@@ -5,7 +5,7 @@ import { Jurnal } from "../Component/Beranda/JurnalDanPublikasi";
 import { Mitra } from "../Component/Beranda/Kemitraan";
 import { Layanan } from "../Component/Beranda/Layanan";
 import { VisiMisi } from "../Component/Beranda/VisiMisi";
-import { motion } from "motion/react";
+
 
 export function Beranda() {
   return (

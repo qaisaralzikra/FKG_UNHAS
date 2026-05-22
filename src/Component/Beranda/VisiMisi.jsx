@@ -3,29 +3,26 @@ import { motion } from "motion/react";
 
 function Card({ data }) {
   return (
-    <div className="grid grid-cols-12 2xl:gap-x-[40px] xl:gap-x-[20px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-[100px] lg:gap-x-[40px]">
       {data.map((item) => (
         <div
           key={item.id}
-          className="col-span-4 bg-white py-[8px] px-[8px] rounded-[40px] h-[472px] relative w-[366px]"
+          className="col-span-1 bg-white py-[8px] px-[8px] rounded-[40px] h-[372px] md:h-[472px] relative w-[330px] md:max-w-[400px] md:max-w-none mx-auto"
         >
-          <div className="w-[173px] h-[48px] bg-[#b00000] rounded-[10px] absolute z-11 top-[-12px] right-1/4">
-            <p className="text-[32px] font-semibold text-white text-center">
+          <div className="w-[173px] h-[48px] bg-[#b00000] rounded-[10px] absolute z-11 top-[-12px] left-1/2 -translate-x-1/2 md:left-auto md:right-1/4 md:-translate-x-0">
+            <p className="text-2xl md:text-[32px] font-semibold text-white text-center leading-[48px]">
               {item.title}
             </p>
           </div>
           <div className="relative p-[3px] rounded-[40px] bg-gradient-to-b from-[#4A0000] to-[#B00000] w-full h-full">
             <div className="absolute inset-2 bg-white rounded-[40px] z-0"></div>
-            <div className="relative z-10 px-8 py-8">
+            <div className="relative z-10 px-4 md:px-8 py-8 md:py-8 text-sm md:text-base">
               <p>{item.desc}</p>
             </div>
           </div>
-          <div className="w-[133px] h-[133px] border-[8px] border-[#b00000] rounded-full bg-white absolute z-12 bottom-[-56px] right-1/3 flex items-center justify-center">
+          <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] lg:w-[110px] lg:h-[110px] border-[6px] md:border-[8px] border-[#b00000] rounded-full bg-white absolute z-12 bottom-[-42px] md:bottom-[-56px] left-1/2 -translate-x-1/2 md:left-auto md:right-1/3 md:-translate-x-0 flex items-center justify-center">
             <i
-              className={`${item.icon} text-[80px] text-[#b00000] text-center`}
-            ></i>
-            <i
-              className={`ri-space-ship-2-line text-[80px] text-[#b00000] text-center`}
+              className={`${item.icon} text-5xl md:text-[64px] lg:text-[60px] text-[#b00000] text-center`}
             ></i>
           </div>
         </div>
@@ -56,7 +53,7 @@ export function VisiMisi() {
     },
   ];
   return (
-    <div className="w-full bg-[#4A0000] h-dvh px-[70px] flex items-center justify-center">
+    <div className="w-full bg-[#4A0000] px-4 sm:px-6 lg:px-[70px] py-20 md:py-[100px] lg:py-20 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}

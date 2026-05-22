@@ -2,15 +2,15 @@ import { motion } from "motion/react";
 
 function Card({ data }) {
   return (
-    <div className="grid grid-cols-3 xl:gap-[20px] 2xl:gap-[40px] mt-[32px] text-black text-[20px]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[20px] 2xl:gap-[40px] mt-6 lg:mt-[32px] text-black text-base lg:text-[20px]">
       {data.map((item) => (
         <div
           key={item.id}
-          className="col-span-1 w-[366px] h-[298px] bg-white rounded-[20px] p-[10px] flex items-start flex-col gap-[8px]"
+          className="col-span-1 w-full min-h-[220px] lg:h-[298px] bg-white rounded-[20px] p-3 lg:p-[10px] flex items-start flex-col gap-2 lg:gap-[8px]"
         >
-          <i className="ri-tooth-line text-[53px] text-[#b00000]"></i>
-          <p className="w-[291px] text-[22px] h-[132px]">{item.title}</p>
-          <a href={item.url} className="hover:text-[#b00000] duration-[0.4s]">
+          <i className="ri-tooth-line text-4xl lg:text-[53px] text-[#b00000]"></i>
+          <p className="w-full text-base lg:text-[22px] line-clamp-4 lg:line-clamp-none flex-1">{item.title}</p>
+          <a href={item.url} className="hover:text-[#b00000] duration-[0.4s] shrink-0">
             Lihat <i className="ri-arrow-right-long-line"></i>
           </a>
         </div>
@@ -95,7 +95,7 @@ export function Layanan() {
     },
   ];
   return (
-    <div className="w-full bg-[#4A0000] px-[70px] py-[64px]">
+    <div className="w-full bg-[#4A0000] px-4 sm:px-6 lg:px-[70px] py-8 md:py-12 lg:py-[64px]">
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export function Layanan() {
         }}
       >
         <div className="text-white">
-          <h1 className="font-semibold text-[32px]">Layanan Mahasiswa</h1>
+          <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Layanan Mahasiswa</h1>
           <Card data={data} />
         </div>
       </motion.div>

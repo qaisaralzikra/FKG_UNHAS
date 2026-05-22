@@ -5,13 +5,13 @@ import {motion} from 'motion/react'
 // ================= COLUMN KIRI (DAFTAR 4 BERITA SISA) =================
 function ColumnKiri({ data }) {
   return (
-    <div className="col-span-4 flex flex-col justify-between h-[502px] overflow-y-auto pr-2 gap-3">
+    <div className="col-span-12 lg:col-span-4 flex flex-col justify-between h-auto lg:h-[502px] overflow-y-auto gap-3">
       {data.map((item, index) => (
         <div
           key={item.id || index}
           className="flex gap-4 items-start group cursor-pointer border-b border-gray-100 pb-2 last:border-0 hover:bg-gray-50/50 transition-all duration-300 p-1"
         >
-          <div className="w-[120px] h-[90px] rounded-[15px] overflow-hidden flex-shrink-0">
+          <div className="w-[100px] lg:w-[120px] h-[75px] lg:h-[90px] rounded-[15px] overflow-hidden flex-shrink-0">
             <img
               src={item.image}
               alt={item.title}
@@ -21,7 +21,7 @@ function ColumnKiri({ data }) {
           <div className="flex flex-col justify-between h-full py-1">
             <a
               href=""
-              className="font-semibold text-[14px] leading-snug line-clamp-3 group-hover:text-[#b00000] duration-300"
+              className="font-semibold text-[13px] lg:text-[14px] leading-snug line-clamp-3 group-hover:text-[#b00000] duration-300"
             >
               {item.title}
             </a>
@@ -40,21 +40,21 @@ function ColumnKanan({ activeData }) {
   if (!activeData) return null;
 
   return (
-    <div className="col-span-8 w-full h-[502px] overflow-hidden rounded-[20px] group relative cursor-pointer">
+    <div className="col-span-12 lg:col-span-8 w-full h-[280px] sm:h-[350px] lg:h-[502px] overflow-hidden rounded-[20px] group relative cursor-pointer">
       <img
-        key={activeData.id} // Key di sini memicu refresh animasi fade/scale saat data berganti
+        key={activeData.id}
         src={activeData.image}
         className="w-full h-full object-cover group-hover:scale-105 duration-500 absolute top-0 left-0"
         alt={activeData.title}
       />
       <div className="w-full h-full absolute top-0 left-0 bg-black/20 z-10"></div>
-      <div className="absolute bottom-0 left-0 w-full z-20 flex flex-col p-8 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-24">
-        <span className="text-white/80 text-[14px] font-light mb-2">
+      <div className="absolute bottom-0 left-0 w-full z-20 flex flex-col p-4 sm:p-6 lg:p-8 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-12 lg:pt-24">
+        <span className="text-white/80 text-[12px] lg:text-[14px] font-light mb-2">
           {activeData.date}
         </span>
         <a
           href=""
-          className="text-[24px] font-bold leading-snug mb-4 max-w-[90%] hover:underline text-white"
+          className="text-base sm:text-lg lg:text-[24px] font-bold leading-snug mb-4 max-w-[90%] hover:underline text-white"
         >
           {activeData.title}
         </a>
@@ -136,7 +136,7 @@ export function Blog() {
   const daftarBeritaSisa = newsList.slice(1); // Data indeks 1 sampai 4 selalu masuk ke Kolom Kiri
 
   return (
-    <div className="relative w-full h-dvh px-[70px] pt-[64px] bg-white text-black">
+    <div className="relative w-full px-4 sm:px-6 lg:px-[70px] pt-6 sm:pt-8 lg:pt-[64px] pb-8 lg:pb-[66px] bg-white text-black">
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -147,12 +147,12 @@ export function Blog() {
       >
         <div className="flex flex-col gap-[20px]">
           <div className="flex items-center justify-between">
-            <h1 className="font-semibold text-[32px]">Berita Terbaru</h1>
-            <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px]">
-              Lihat Semua <i class="ri-arrow-right-long-line text-[20px]"></i>
+            <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Berita Terbaru</h1>
+            <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
+              Lihat Semua <i className="ri-arrow-right-long-line text-[20px]"></i>
             </button>
           </div>
-          <div className="grid grid-cols-12 2xl:gap-x-[60px] xl:gap-x-[20px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-x-[20px] 2xl:gap-x-[60px]">
             {/* Sisi Kanan: Selalu merender elemen pertama dari array state */}
             <ColumnKanan activeData={beritaUtama} />
 
