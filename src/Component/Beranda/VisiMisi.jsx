@@ -12,7 +12,7 @@ function Card({ data }) {
               <p>{item.desc}</p>
             </div>
           </div>
-          <div className="w-[173px] h-[173px] border-[8px] border-[#b00000] rounded-full bg-white absolute z-12 bottom-[-86px] right-1/4 flex items-center justify-center">
+          <div className="w-[133px] h-[133px] border-[8px] border-[#b00000] rounded-full bg-white absolute z-12 bottom-[-56px] right-1/3 flex items-center justify-center">
             <i className={`${item.icon} text-[80px] text-[#b00000] text-center`}></i>
             <i className={`ri-space-ship-2-line text-[80px] text-[#b00000] text-center`}></i>
           </div>
