@@ -7,10 +7,12 @@ export function Jurnal() {
     {
       id: 1,
       title: "Journal Of Dentomaxillofacial Science",
+      url: 'https://jdmfs.org/index.php/jdmfs'
     },
     {
       id: 2,
       title: "Journal Of Case Reports In Dental Medicine",
+      url: "https://jcrdm.org/index.php/jcrdm"
     },
   ];
   return (
@@ -20,7 +22,7 @@ export function Jurnal() {
         <div className="grid grid-cols-2 gap-[40px] mt-[20px]">
           {data.map((item, index) => (
             <div key={item.id}>
-              <a href="">
+              <a href={item.url} target="_blank">
                 <div className="w-[560px] h-[192px] bg-[#b00000] rounded-[20px] relative shadow-[0_0_20px_rgba(0,0,0,0.25)] overflow-hidden flex items-center justify-between">
                     <h1 className="text-white font-bold text-[96px] ms-[20px]">0{index + 1}</h1>
                     <img src={Vector1} className="absolute top-0 right-[-2px]" alt="" />
