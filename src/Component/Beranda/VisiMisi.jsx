@@ -2,7 +2,7 @@ function Card({ data }) {
   return (
     <div className="grid grid-cols-12 2xl:gap-x-[40px] xl:gap-x-[20px]">
       {data.map((item) => (
-        <div className="col-span-4 bg-white py-[8px] px-[8px] rounded-[40px] h-[472px] relative w-[366px]">
+        <div key={item.id} className="col-span-4 bg-white py-[8px] px-[8px] rounded-[40px] h-[472px] relative w-[366px]">
           <div className="w-[173px] h-[48px] bg-[#b00000] rounded-[10px] absolute z-11 top-[-12px] right-1/4">
             <p className="text-[32px] font-semibold text-white text-center">{item.title}</p>
           </div>

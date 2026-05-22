@@ -1,6 +1,7 @@
 import { Blog } from "../Component/Beranda/Blog";
 import { HeroSection } from "../Component/Beranda/HeroSection";
 import { Jurnal } from "../Component/Beranda/JurnalDanPublikasi";
+import { Mitra } from "../Component/Beranda/Kemitraan";
 import { VisiMisi } from "../Component/Beranda/VisiMisi";
 
 export function Beranda() {
@@ -10,6 +11,7 @@ export function Beranda() {
       <Blog />
       <VisiMisi />
       <Jurnal />
+      <Mitra />
     </>
   );
 }
