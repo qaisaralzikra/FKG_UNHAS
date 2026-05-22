@@ -1,4 +1,6 @@
 import Logo from "../../../public/logo unhas.png";
+import { motion } from "motion/react";
+
 function VideoPlayer() {
   return (
     <video
@@ -29,12 +31,21 @@ export function HeroSection() {
       <VideoPlayer />
       <div className="flex flex-col items-start justify-center text-start z-1 gap-[36px] top-0 w-full h-[100%] text-white mx-[70px]">
         <div className="z-1 leading-[50px] w-[600px]">
-          <h3 className="text-[28px] font-medium z-1">
-            Universitas Hasanuddin
-          </h3>
-          <h1 className="text-[48px] font-semibold z-1">
-            Fakultas Kedokteran <br /> Gigi
-          </h1>
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+          >
+            <h3 className="text-[28px] font-medium z-1">
+              Universitas Hasanuddin
+            </h3>
+            <h1 className="text-[48px] font-semibold z-1">
+              Fakultas Kedokteran <br /> Gigi
+            </h1>
+          </motion.div>
         </div>
       </div>
     </div>

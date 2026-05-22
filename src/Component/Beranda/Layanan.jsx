@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 function Card({ data }) {
   return (
     <div className="grid grid-cols-3 xl:gap-[20px] 2xl:gap-[40px] mt-[32px] text-black text-[20px]">
@@ -94,10 +96,19 @@ export function Layanan() {
   ];
   return (
     <div className="w-full bg-[#4A0000] px-[70px] py-[64px]">
-      <div className="text-white">
-        <h1 className="font-semibold text-[32px]">Layanan Mahasiswa</h1>
-        <Card data={data} />
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+      >
+        <div className="text-white">
+          <h1 className="font-semibold text-[32px]">Layanan Mahasiswa</h1>
+          <Card data={data} />
+        </div>
+      </motion.div>
     </div>
   );
 }

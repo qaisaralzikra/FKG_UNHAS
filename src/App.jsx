@@ -1,3 +1,4 @@
+import { Footer } from "./Component/Footer";
 import { Navigasi } from "./Component/Navigasi";
 import { Beranda } from "./Pages/Beranda";
 
@@ -6,6 +7,7 @@ function App() {
     <div classname="overflow-visible h-auto">
       <Navigasi />
       <Beranda />
+      <Footer />
       <Css />
     </div>
   );

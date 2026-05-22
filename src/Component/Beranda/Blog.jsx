@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Blog1 from "../../assets/blog1.png";
+import {motion} from 'motion/react'
 
 // ================= COLUMN KIRI (DAFTAR 4 BERITA SISA) =================
 function ColumnKiri({ data }) {
@@ -136,19 +137,30 @@ export function Blog() {
 
   return (
     <div className="relative w-full h-dvh px-[70px] pt-[64px] bg-white text-black">
-      <div className="flex flex-col gap-[20px]">
-        <div className="flex items-center justify-between">
-          <h1 className="font-semibold text-[32px]">Berita Terbaru</h1>
-          <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px]">Lihat Semua <i class="ri-arrow-right-long-line text-[20px]"></i></button>
-        </div>
-        <div className="grid grid-cols-12 2xl:gap-x-[60px] xl:gap-x-[20px]">
-          {/* Sisi Kanan: Selalu merender elemen pertama dari array state */}
-          <ColumnKanan activeData={beritaUtama} />
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+      >
+        <div className="flex flex-col gap-[20px]">
+          <div className="flex items-center justify-between">
+            <h1 className="font-semibold text-[32px]">Berita Terbaru</h1>
+            <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px]">
+              Lihat Semua <i class="ri-arrow-right-long-line text-[20px]"></i>
+            </button>
+          </div>
+          <div className="grid grid-cols-12 2xl:gap-x-[60px] xl:gap-x-[20px]">
+            {/* Sisi Kanan: Selalu merender elemen pertama dari array state */}
+            <ColumnKanan activeData={beritaUtama} />
 
-          {/* Sisi Kiri: Selalu merender 4 elemen sisa dari array state */}
-          <ColumnKiri data={daftarBeritaSisa} />
+            {/* Sisi Kiri: Selalu merender 4 elemen sisa dari array state */}
+            <ColumnKiri data={daftarBeritaSisa} />
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,10 +1,18 @@
+import { motion } from "motion/react";
+
+
 function Card({ data }) {
   return (
     <div className="grid grid-cols-12 2xl:gap-x-[40px] xl:gap-x-[20px]">
       {data.map((item) => (
-        <div key={item.id} className="col-span-4 bg-white py-[8px] px-[8px] rounded-[40px] h-[472px] relative w-[366px]">
+        <div
+          key={item.id}
+          className="col-span-4 bg-white py-[8px] px-[8px] rounded-[40px] h-[472px] relative w-[366px]"
+        >
           <div className="w-[173px] h-[48px] bg-[#b00000] rounded-[10px] absolute z-11 top-[-12px] right-1/4">
-            <p className="text-[32px] font-semibold text-white text-center">{item.title}</p>
+            <p className="text-[32px] font-semibold text-white text-center">
+              {item.title}
+            </p>
           </div>
           <div className="relative p-[3px] rounded-[40px] bg-gradient-to-b from-[#4A0000] to-[#B00000] w-full h-full">
             <div className="absolute inset-2 bg-white rounded-[40px] z-0"></div>
@@ -13,8 +21,12 @@ function Card({ data }) {
             </div>
           </div>
           <div className="w-[133px] h-[133px] border-[8px] border-[#b00000] rounded-full bg-white absolute z-12 bottom-[-56px] right-1/3 flex items-center justify-center">
-            <i className={`${item.icon} text-[80px] text-[#b00000] text-center`}></i>
-            <i className={`ri-space-ship-2-line text-[80px] text-[#b00000] text-center`}></i>
+            <i
+              className={`${item.icon} text-[80px] text-[#b00000] text-center`}
+            ></i>
+            <i
+              className={`ri-space-ship-2-line text-[80px] text-[#b00000] text-center`}
+            ></i>
           </div>
         </div>
       ))}
@@ -45,7 +57,16 @@ export function VisiMisi() {
   ];
   return (
     <div className="w-full bg-[#4A0000] h-dvh px-[70px] flex items-center justify-center">
-      <Card data={data} />
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+      >
+        <Card data={data} />
+      </motion.div>
     </div>
   );
 }
