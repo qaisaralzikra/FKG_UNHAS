@@ -2,18 +2,20 @@ import { motion } from "motion/react";
 
 function VideoPlayer() {
   return (
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-[100%] overflow-hidden h-[100%] z-0 absolute top-0 left-0 object-cover"
-    >
-      <source
-        src="https://dent.unhas.ac.id/assets/web/video/wellcome_video.mp4"
-        type="video/mp4"
-      />
-    </video>
+      <div className="absolute top-0 left-0 w-full h-full">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover z-0" // 2. Video mengisi full wrapper
+        >
+          <source
+            src="https://dent.unhas.ac.id/assets/web/video/wellcome_video.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
   );
 }
 
@@ -25,7 +27,7 @@ function Bg() {
 
 export function HeroSection() {
   return (
-    <div className="min-h-svh overflow-hidden">
+    <div className="min-h-svh relative overflow-hidden">
       <Bg />
       <VideoPlayer />
       <div className="mt-[300px] md:mt-[350px] relative flex flex-col items-start justify-center text-start z-1 gap-6 lg:gap-[36px] top-0 w-full h-full text-white px-4 sm:px-6 lg:px-[70px]">

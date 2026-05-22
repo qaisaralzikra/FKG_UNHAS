@@ -11,7 +11,7 @@ function Card({ data }) {
             <h1 className="text-[14px] lg:text-[16px] text-white font-bold">{item.y}</h1>
           </div>
           <div className="w-full h-[140px] sm:h-full sm:rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] sm:rounded-bl-[0px]  border-2 sm:border-s-0 border-[#4A0000] p-3 lg:p-[24px] flex flex-col items-start gap-2 lg:gap-[16px]">
-            <div className="w-[62px] h-[28px] rounded-full bg-[#4A0000] text-white flex items-center justify-center shrink-0">
+            <div className="px-[16px] h-[28px] rounded-full bg-[#4A0000] text-white flex items-center justify-center shrink-0">
               <p className="text-[12px]">{item.type}</p>
             </div>
             <h1 className="font-semibold text-[16px] lg:text-[20px] leading-tight">{item.title}</h1>
@@ -38,7 +38,7 @@ export function Acara() {
       id: 1,
       t: "30",
       m: "JUN",
-      y: "2025",
+      y: 2025,
       type: "EVENT",
       title: "Workshop Kesehatan Gigi & Mulut",
       time: "09:00 - 15:00",
@@ -48,7 +48,7 @@ export function Acara() {
       id: 2,
       t: "29",
       m: "JUN",
-      y: "2025",
+      y: 2025,
       type: "EVENT",
       title: "Workshop Perawatan Gigi",
       time: "09:00 - 15:00",

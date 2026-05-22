@@ -6,7 +6,7 @@ import logo from "../../public/logo unhas.png";
 import { useState, useRef } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
-function Profil({isScrolled}) {
+function Profil({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
   // Menyimpan string nama }sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -248,7 +248,7 @@ function Profil({isScrolled}) {
   );
 }
 
-function Akademik({isScrolled}) {
+function Akademik({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
   // Menyimpan string nama sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -380,7 +380,7 @@ function Akademik({isScrolled}) {
   );
 }
 
-function ProgramStudi({isScrolled}) {
+function ProgramStudi({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef(null);
 
@@ -489,7 +489,7 @@ function ProgramStudi({isScrolled}) {
   );
 }
 
-function KomiteEtik({isScrolled}) {
+function KomiteEtik({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef(null);
 
@@ -616,9 +616,13 @@ function MobileAccordion({ label, isOpen, onToggle, children, nested }) {
         onClick={onToggle}
       >
         <span>{label}</span>
-        <i className={`ri-arrow-down-s-line text-[20px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}></i>
+        <i
+          className={`ri-arrow-down-s-line text-[20px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        ></i>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+      >
         <div className="pb-2">{children}</div>
       </div>
     </div>
@@ -628,13 +632,16 @@ function MobileAccordion({ label, isOpen, onToggle, children, nested }) {
 function MobileDrawer({ isOpen, onClose }) {
   const [expanded, setExpanded] = useState({});
 
-  const toggle = (key) => setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (key) =>
+    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (
     <>
       <div
         className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 lg:hidden ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
       />
@@ -654,85 +661,248 @@ function MobileDrawer({ isOpen, onClose }) {
             Beranda
           </a>
 
-          <MobileAccordion label="Profil" isOpen={expanded.profil} onToggle={() => toggle("profil")}>
-            <MobileAccordion label="Selayang Pandang" isOpen={expanded.selayang1} onToggle={() => toggle("selayang1")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Selayang Pandang</a>
-              <a href="#" className="block py-2 text-sm ps-3">Sejarah</a>
-              <a href="#" className="block py-2 text-sm ps-3">Profil</a>
-              <a href="#" className="block py-2 text-sm ps-3">Visi & Misi</a>
+          <MobileAccordion
+            label="Profil"
+            isOpen={expanded.profil}
+            onToggle={() => toggle("profil")}
+          >
+            <MobileAccordion
+              label="Selayang Pandang"
+              isOpen={expanded.selayang1}
+              onToggle={() => toggle("selayang1")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Selayang Pandang
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Sejarah
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Profil
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Visi & Misi
+              </a>
             </MobileAccordion>
-            <MobileAccordion label="Profil Pimpinan" isOpen={expanded.pimpinan} onToggle={() => toggle("pimpinan")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Sambutan Dekan</a>
-              <a href="#" className="block py-2 text-sm ps-3">Pimpinan Fakultas</a>
-              <a href="#" className="block py-2 text-sm ps-3">Struktur Organisasi</a>
+            <MobileAccordion
+              label="Profil Pimpinan"
+              isOpen={expanded.pimpinan}
+              onToggle={() => toggle("pimpinan")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Sambutan Dekan
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Pimpinan Fakultas
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Struktur Organisasi
+              </a>
             </MobileAccordion>
-            <MobileAccordion label="Staff Fakultas" isOpen={expanded.staff} onToggle={() => toggle("staff")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Data Dosen</a>
-              <a href="#" className="block py-2 text-sm ps-3">Tenaga Pendidik</a>
+            <MobileAccordion
+              label="Staff Fakultas"
+              isOpen={expanded.staff}
+              onToggle={() => toggle("staff")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Data Dosen
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Tenaga Pendidik
+              </a>
             </MobileAccordion>
-            <MobileAccordion label="Fasilitas" isOpen={expanded.fasilitas} onToggle={() => toggle("fasilitas")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Sarana Prasarana</a>
-              <a href="#" className="block py-2 text-sm ps-3">Zona Integritas</a>
-              <a href="#" className="block py-2 text-sm ps-3">Download Center</a>
-              <a href="#" className="block py-2 text-sm ps-3">Kotak</a>
+            <MobileAccordion
+              label="Fasilitas"
+              isOpen={expanded.fasilitas}
+              onToggle={() => toggle("fasilitas")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Sarana Prasarana
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Zona Integritas
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Download Center
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Kotak
+              </a>
             </MobileAccordion>
-            <MobileAccordion label="PPID FKG" isOpen={expanded.ppid} onToggle={() => toggle("ppid")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Informasi Serta Merta</a>
-              <a href="#" className="block py-2 text-sm ps-3">Informasi Dikecualikan</a>
-              <a href="#" className="block py-2 text-sm ps-3">Informasi Setiap Saat</a>
-              <a href="#" className="block py-2 text-sm ps-3">Informasi Berkala</a>
+            <MobileAccordion
+              label="PPID FKG"
+              isOpen={expanded.ppid}
+              onToggle={() => toggle("ppid")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Informasi Serta Merta
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Informasi Dikecualikan
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Informasi Setiap Saat
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Informasi Berkala
+              </a>
             </MobileAccordion>
-            <a href="#" className="block py-3 text-[16px] border-b border-gray-100">Perjanjian</a>
-            <a href="#" className="block py-3 text-[16px]">Galeri</a>
+            <a
+              href="#"
+              className="block py-3 text-[16px] border-b border-gray-100"
+            >
+              Perjanjian
+            </a>
+            <a href="#" className="block py-3 text-[16px]">
+              Galeri
+            </a>
           </MobileAccordion>
 
-          <MobileAccordion label="Akademik" isOpen={expanded.akademik} onToggle={() => toggle("akademik")}>
-            <MobileAccordion label="Informasi Akademik" isOpen={expanded.infoAkademik} onToggle={() => toggle("infoAkademik")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Akreditasi</a>
-              <a href="#" className="block py-2 text-sm ps-3">SK & Kontrak Kinerja</a>
-              <a href="#" className="block py-2 text-sm ps-3">Pengabdian</a>
+          <MobileAccordion
+            label="Akademik"
+            isOpen={expanded.akademik}
+            onToggle={() => toggle("akademik")}
+          >
+            <MobileAccordion
+              label="Informasi Akademik"
+              isOpen={expanded.infoAkademik}
+              onToggle={() => toggle("infoAkademik")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Akreditasi
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                SK & Kontrak Kinerja
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Pengabdian
+              </a>
             </MobileAccordion>
-            <MobileAccordion label="Kemahasiswaan" isOpen={expanded.kemahasiswaan} onToggle={() => toggle("kemahasiswaan")} nested>
-              <a href="#" className="block py-2 text-sm ps-3">Kemahasiswaan</a>
-              <a href="#" className="block py-2 text-sm ps-3">Ormawa</a>
+            <MobileAccordion
+              label="Kemahasiswaan"
+              isOpen={expanded.kemahasiswaan}
+              onToggle={() => toggle("kemahasiswaan")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Kemahasiswaan
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Ormawa
+              </a>
             </MobileAccordion>
-            <a href="#" className="block py-3 text-[16px] border-b border-gray-100 ms-3">Buku Pedoman</a>
+            <a
+              href="#"
+              className="block py-3 text-[16px] border-b border-gray-100 ms-3"
+            >
+              Buku Pedoman
+            </a>
           </MobileAccordion>
 
-          <a href="#" className="block py-3 border-b text-[16px] font-medium">Departement</a>
+          <a href="#" className="block py-3 border-b text-[16px] font-medium">
+            Departement
+          </a>
 
-          <MobileAccordion label="Program Studi" isOpen={expanded.prodi} onToggle={() => toggle("prodi")}>
-            <a href="#" className="block py-2 text-sm ps-3">Doktor Ilmu Kedokteran Gigi</a>
-            <a href="#" className="block py-2 text-sm ps-3">Magister Ilmu Kedokteran Gigi</a>
-            <a href="#" className="block py-2 text-sm ps-3">Pendidikan Dokter Gigi</a>
-            <a href="#" className="block py-2 text-sm ps-3">Pendidikan Profesi Dokter Gigi</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Ilmu Bedah Mulut dan Maksilofasial</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Kedokteran Gigi Anak</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Konservasi Gigi</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Ortodonti</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Penyakit Mulut</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Periodonsia</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Prostodonsia</a>
-            <a href="#" className="block py-2 text-sm ps-3">PPDGS Radiologi Kedokteran Gigi</a>
+          <MobileAccordion
+            label="Program Studi"
+            isOpen={expanded.prodi}
+            onToggle={() => toggle("prodi")}
+          >
+            <a href="#" className="block py-2 text-sm ps-3">
+              Doktor Ilmu Kedokteran Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Magister Ilmu Kedokteran Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Pendidikan Dokter Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Pendidikan Profesi Dokter Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Ilmu Bedah Mulut dan Maksilofasial
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Kedokteran Gigi Anak
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Konservasi Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Ortodonti
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Penyakit Mulut
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Periodonsia
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Prostodonsia
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              PPDGS Radiologi Kedokteran Gigi
+            </a>
           </MobileAccordion>
 
-          <a href="#" className="block py-3 border-b text-[16px] font-medium">PPID</a>
+          <a href="#" className="block py-3 border-b text-[16px] font-medium">
+            PPID
+          </a>
 
-          <MobileAccordion label="Komite Etik" isOpen={expanded.komiteEtik} onToggle={() => toggle("komiteEtik")}>
-            <a href="#" className="block py-2 text-sm ps-3">Pendahuluan</a>
-            <a href="#" className="block py-2 text-sm ps-3">Akreditasi Komite Etik</a>
-            <a href="#" className="block py-2 text-sm ps-3">Struktur Organisasi & Alur Pengajuan</a>
-            <a href="#" className="block py-2 text-sm ps-3">Anggota Komite Etik</a>
-            <a href="#" className="block py-2 text-sm ps-3">Konsultan Independen Komite Etik</a>
-            <a href="#" className="block py-2 text-sm ps-3">SOP Penelitian Subjek Manusia</a>
-            <a href="#" className="block py-2 text-sm ps-3">SOP Penelitian Hewan</a>
-            <a href="#" className="block py-2 text-sm ps-3">Formulir & Panduan Pengajuan Untuk PI</a>
-            <a href="#" className="block py-2 text-sm ps-3">Jadwal Rapat</a>
-            <a href="#" className="block py-2 text-sm ps-3">Protokol Yang Disetujui</a>
-            <a href="#" className="block py-2 text-sm ps-3">Referensi Komite Etik</a>
-            <a href="#" className="block py-2 text-sm ps-3">Biaya Kontribusi Ethical Clearance</a>
-            <a href="#" className="block py-2 text-sm ps-3">Pelatihan Komite Etik</a>
-            <a href="#" className="block py-2 text-sm ps-3">Kontak Komite Etik</a>
+          <MobileAccordion
+            label="Komite Etik"
+            isOpen={expanded.komiteEtik}
+            onToggle={() => toggle("komiteEtik")}
+          >
+            <a href="#" className="block py-2 text-sm ps-3">
+              Pendahuluan
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Akreditasi Komite Etik
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Struktur Organisasi & Alur Pengajuan
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Anggota Komite Etik
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Konsultan Independen Komite Etik
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              SOP Penelitian Subjek Manusia
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              SOP Penelitian Hewan
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Formulir & Panduan Pengajuan Untuk PI
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Jadwal Rapat
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Protokol Yang Disetujui
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Referensi Komite Etik
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Biaya Kontribusi Ethical Clearance
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Pelatihan Komite Etik
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Kontak Komite Etik
+            </a>
           </MobileAccordion>
         </div>
       </div>
@@ -740,19 +910,28 @@ function MobileDrawer({ isOpen, onClose }) {
   );
 }
 
-function NavList({isScrolled}) {
+function NavList({ isScrolled }) {
   return (
     <div className="hidden lg:flex text-[16px] text-white items-center gap-[20px]">
-      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"}  duration-[0.4s] ease-in-out`}>
+      <a
+        href=""
+        className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"}  duration-[0.4s] ease-in-out`}
+      >
         Beranda
       </a>
       <Profil isScrolled={isScrolled} />
       <Akademik isScrolled={isScrolled} />
-      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}>
+      <a
+        href=""
+        className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}
+      >
         Departement
       </a>
       <ProgramStudi isScrolled={isScrolled} />
-      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}>
+      <a
+        href=""
+        className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}
+      >
         PPID
       </a>
       <KomiteEtik isScrolled={isScrolled} />
@@ -764,16 +943,22 @@ function GlassNav({ isScrolled, onToggleMobile }) {
   return (
     <div
       className={`w-full h-[72px] lg:h-[96px] px-4 sm:px-6 lg:px-[70px] shadow-lg transition-colors duration-500 flex items-center justify-between ${
-        isScrolled
-          ? "bg-[#b00000]"
-          : "bg-white/10 backdrop-blur-md"
+        isScrolled ? "bg-[#b00000]" : "bg-white/10 backdrop-blur-md"
       }`}
     >
       <div className="flex items-center gap-3 lg:gap-[34px]">
-        <img src={logo} className="w-[40px] h-[48px] lg:w-[50px] lg:h-[60px]" alt="" />
+        <img
+          src={logo}
+          className="w-[40px] h-[48px] lg:w-[50px] lg:h-[60px]"
+          alt=""
+        />
         <div className={`text-white leading-tight lg:leading-[20px]`}>
-          <h2 className="font-medium text-xs lg:text-[16px]">Fakultas Kedokteran Gigi</h2>
-          <h1 className="font-semibold text-sm lg:text-[20px]">Universitas Hasanuddin</h1>
+          <h2 className="font-medium text-xs lg:text-[16px]">
+            Fakultas Kedokteran Gigi
+          </h2>
+          <h1 className="font-semibold text-sm lg:text-[20px]">
+            Universitas Hasanuddin
+          </h1>
         </div>
       </div>
       <NavList isScrolled={isScrolled} />
@@ -810,6 +995,29 @@ export function Navigasi() {
     }
   });
 
+  const changeLanguage = (langCode) => {
+    // 1. Cari elemen dropdown bawaan Google Translate
+    const googleSelect = document.querySelector(".goog-te-combo");
+
+    if (googleSelect) {
+      // Jika elemen ditemukan, langsung ubah bahasanya
+      googleSelect.value = langCode;
+      googleSelect.dispatchEvent(new Event("change"));
+    } else {
+      // 2. FALLBACK: Jika script google telat dimuat, kita coba cari lagi dalam 100ms
+      console.warn("Google Translate belum siap, mencoba memicu ulang...");
+      setTimeout(() => {
+        const retrySelect = document.querySelector(".goog-te-combo");
+        if (retrySelect) {
+          retrySelect.value = langCode;
+          retrySelect.dispatchEvent(new Event("change"));
+        } else {
+          alert("Fitur translasi sedang memuat, silakan coba sesaat lagi.");
+        }
+      }, 100);
+    }
+  };
+
   return (
     <motion.header
       animate={{
@@ -821,22 +1029,46 @@ export function Navigasi() {
       <div className="h-[48px] bg-[#b00000] px-4 sm:px-6 lg:px-[70px] w-full flex items-center justify-between">
         <div className="text-white flex items-center gap-2 lg:gap-[16px]">
           <i className="ri-mail-fill text-lg lg:text-[24px]"></i>
-          <span className="text-xs lg:text-[14px] sm:inline">info@dent.unhas.ac.id</span>
+          <span className="text-xs lg:text-[14px] sm:inline">
+            info@dent.unhas.ac.id
+          </span>
         </div>
 
         <div className="w-[97px] h-[30px] bg-[#0B3E9C] rounded-full flex items-center justify-between px-[16px]">
-          <button className="cursor-pointer">
-            <img src={id} alt="" className="w-[24px] h-[16px] rounded-[10px]" />
+          <button
+            className="cursor-pointer"
+            onClick={() => changeLanguage("id")}
+          >
+            <img
+              src={id}
+              alt="Indonesia"
+              className="w-[24px] h-[16px] rounded-[10px]"
+            />
           </button>
-          <button className="cursor-pointer">
-            <img src={en} alt="" className="w-[24px] h-[16px] rounded-[10px]" />
+
+          {/* Tombol Bahasa Inggris */}
+          <button
+            className="cursor-pointer"
+            onClick={() => changeLanguage("en")}
+          >
+            <img
+              src={en}
+              alt="English"
+              className="w-[24px] h-[16px] rounded-[10px]"
+            />
           </button>
         </div>
       </div>
 
-      <GlassNav isScrolled={isPastDvh} onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)} />
+      <GlassNav
+        isScrolled={isPastDvh}
+        onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
+      />
 
-      <MobileDrawer isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <MobileDrawer
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
     </motion.header>
   );
 }

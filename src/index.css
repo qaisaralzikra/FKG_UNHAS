@@ -10,7 +10,20 @@
     background-color: white;
     scroll-behavior: smooth;
     color: black;
+    top: 0px !important;
     @apply font-poppins;
+  }
+  /* Sembunyikan dropdown bawaan Google */
+  #google_translate_element,
+  .skiptranslate {
+    display: none !important;
+  }
+  /* Sembunyikan bar atas "Google Translate" */
+  .goog-te-banner-frame.skiptranslate {
+    display: none !important;
+  }
+  .goog-te-balloon-frame {
+    display: none !important;
   }
 }
 
