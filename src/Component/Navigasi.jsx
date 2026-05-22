@@ -664,9 +664,16 @@ function NavList() {
   );
 }
 
-function GlassNav() {
+function GlassNav({ isScrolled }) {
   return (
-    <div className="z-3 w-full h-[96px] bg-white/10 px-[70px] shadow-lg backdrop-blur-md flex items-center justify-between">
+    // HAPUS class 'fixed' di sini karena pembungkusnya sudah fixed
+    <div
+      className={`w-full h-[96px] px-[70px] shadow-lg transition-colors duration-500 flex items-center justify-between ${
+        isScrolled
+          ? "bg-[#b00000]" // Warna merah ketika sudah melewati 100dvh
+          : "bg-white/10 backdrop-blur-md" // Efek glassmorphism awal
+      }`}
+    >
       <div className="flex items-center gap-[34px]">
         <img src={logo} className="w-[50px] h-[60px]" alt="" />
         <div className="text-white leading-[20px]">
@@ -683,27 +690,41 @@ export function Navigasi() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
 
+  // 2. State untuk mendeteksi apakah posisi scroll sudah melewati 100dvh
+  const [isPastDvh, setIsPastDvh] = useState(false);
+
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious() ?? 0;
+
+    // Logika sembunyikan/tampilkan bar merah atas
     if (current > previous && current > 150) {
       setHidden(true);
     } else {
       setHidden(false);
     }
+
+    // 3. Logika deteksi tinggi layar (100dvh)
+    // window.innerHeight mengukur tinggi viewport aktif saat ini secara dinamis
+    if (current > window.innerHeight) {
+      setIsPastDvh(true);
+    } else {
+      setIsPastDvh(false);
+    }
   });
 
   return (
+    // Gunakan kontainer fixed tunggal yang animasinya dikontrol bersama
     <motion.header
       animate={{
-        y: hidden ? -140 : 0,
-        opacity: hidden ? 0 : 1,
+        y: hidden ? -48 : 0, // Hanya geser ke atas setinggi bar merah (48px)
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="flex flex-col items-center bg-cover bg-center w-full fixed top-0 left-0 right-0 z-10"
+      className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full"
     >
-      <div className="h-[48px] z-2 bg-[#b00000] px-[70px] w-full flex items-center justify-between">
+      {/* Bar Merah Atas */}
+      <div className="h-[48px] bg-[#b00000] px-[70px] w-full flex items-center justify-between">
         <div className="text-white flex items-center gap-[16px]">
-          <i class="ri-mail-fill text-[24px]"></i>
+          <i className="ri-mail-fill text-[24px]"></i>
           <span className="text-[14px]">info@dent.unhas.ac.id</span>
         </div>
 
@@ -716,7 +737,9 @@ export function Navigasi() {
           </button>
         </div>
       </div>
-      <GlassNav />
+
+      {/* GlassNav otomatis berada di bawah bar merah */}
+      <GlassNav isScrolled={isPastDvh} />
     </motion.header>
   );
 }
