@@ -6,9 +6,9 @@ import logo from "../../public/logo unhas.png";
 import { useState, useRef } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
-function Profil() {
+function Profil({isScrolled}) {
   const [isOpen, setIsOpen] = useState(false);
-  // Menyimpan string nama sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
+  // Menyimpan string nama }sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
   const closeTimeoutRef = useRef(null);
@@ -47,7 +47,7 @@ function Profil() {
     >
       {/* TOMBOL PEMICU UTAMA */}
       <div
-        className="flex items-center hover:text-[#b00000] duration-[0.4s] ease-in-out py-2"
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Profil</span>
@@ -248,7 +248,7 @@ function Profil() {
   );
 }
 
-function Akademik() {
+function Akademik({isScrolled}) {
   const [isOpen, setIsOpen] = useState(false);
   // Menyimpan string nama sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -289,7 +289,7 @@ function Akademik() {
     >
       {/* TOMBOL PEMICU UTAMA */}
       <div
-        className="flex items-center hover:text-[#b00000] duration-[0.4s] ease-in-out py-2"
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Akademik</span>
@@ -380,7 +380,7 @@ function Akademik() {
   );
 }
 
-function ProgramStudi() {
+function ProgramStudi({isScrolled}) {
   const [isOpen, setIsOpen] = useState(false);
   // Menyimpan string nama sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -421,7 +421,7 @@ function ProgramStudi() {
     >
       {/* TOMBOL PEMICU UTAMA */}
       <div
-        className="flex items-center hover:text-[#b00000] duration-[0.4s] ease-in-out py-2"
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Akademik</span>
@@ -507,7 +507,7 @@ function ProgramStudi() {
   );
 }
 
-function KomiteEtik() {
+function KomiteEtik({isScrolled}) {
   const [isOpen, setIsOpen] = useState(false);
   // Menyimpan string nama sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -548,7 +548,7 @@ function KomiteEtik() {
     >
       {/* TOMBOL PEMICU UTAMA */}
       <div
-        className="flex items-center hover:text-[#b00000] duration-[0.4s] ease-in-out py-2"
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Komite Etik</span>
@@ -644,22 +644,22 @@ function KomiteEtik() {
   );
 }
 
-function NavList() {
+function NavList({isScrolled}) {
   return (
     <div className="flex text-[16px] text-white items-center gap-[20px]">
-      <a href="" className="hover:text-[#b00000] duration-[0.4s] ease-in-out">
+      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"}  duration-[0.4s] ease-in-out`}>
         Beranda
       </a>
-      <Profil />
-      <Akademik />
-      <a href="" className="hover:text-[#b00000] duration-[0.4s] ease-in-out">
+      <Profil isScrolled={isScrolled} />
+      <Akademik isScrolled={isScrolled} />
+      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}>
         Departement
       </a>
-      <ProgramStudi />
-      <a href="" className="hover:text-[#b00000] duration-[0.4s] ease-in-out">
+      <ProgramStudi isScrolled={isScrolled} />
+      <a href="" className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}>
         PPID
       </a>
-      <KomiteEtik />
+      <KomiteEtik isScrolled={isScrolled} />
     </div>
   );
 }
@@ -676,12 +676,12 @@ function GlassNav({ isScrolled }) {
     >
       <div className="flex items-center gap-[34px]">
         <img src={logo} className="w-[50px] h-[60px]" alt="" />
-        <div className="text-white leading-[20px]">
+        <div className={`text-white leading-[20px]`}>
           <h2 className="font-medium text-[16px]">Fakultas Kedokteran Gigi</h2>
           <h1 className="font-semibold text-[20px]">Universitas Hasanuddin</h1>
         </div>
       </div>
-      <NavList />
+      <NavList isScrolled={isScrolled} />
     </div>
   );
 }
