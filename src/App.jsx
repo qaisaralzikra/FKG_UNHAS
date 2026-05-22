@@ -37,15 +37,19 @@ function App() {
     <div classname="overflow-visible h-auto">
       <Navigasi />
       <Beranda />
-      {showButton && (
-        <div
-          className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] bg-[#b00000] fixed right-[20px] bottom-[40px] sm:bottom-[20px] z-50 rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:w-[60px] hover:h-[60px] transition-all"
-          onClick={scrollToTop}
-        >
-          {/* Kamu bisa menambahkan ikon panah di sini nanti */}
-          <span className="text-white text-[28px]">↑</span>
-        </div>
-      )}
+      <div
+        className={`
+            ${
+              showButton
+                ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+                : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+            }
+            w-[40px] h-[40px] md:w-[50px] md:h-[50px] bg-[#b00000] fixed right-[20px] bottom-[40px] sm:bottom-[20px] z-50 rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:w-[60px] hover:h-[60px] transition-all`}
+        onClick={scrollToTop}
+      >
+        {/* Kamu bisa menambahkan ikon panah di sini nanti */}
+        <span className="text-white text-[28px]">↑</span>
+      </div>
       <Footer />
       <Css />
     </div>
