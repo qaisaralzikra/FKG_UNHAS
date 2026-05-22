@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --font-poppins: "Raleway", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: white;
+    scroll-behavior: smooth;
+    color: black;
+    @apply font-poppins;
+  }
+}
+
+:root {
+}
