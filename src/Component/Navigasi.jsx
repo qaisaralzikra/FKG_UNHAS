@@ -247,6 +247,309 @@ function Profil({ isScrolled }) {
     </div>
   );
 }
+function GPM({ isScrolled }) {
+  const [isOpen, setIsOpen] = useState(false);
+  // Menyimpan string nama }sub-menu yang aktif ('menu1', 'menu2', dst) atau null jika tidak ada
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
+
+  const closeTimeoutRef = useRef(null);
+  const subMenuTimeoutRef = useRef(null);
+
+  // ================= HANDLERS MENU UTAMA =================
+  const handleMouseEnterMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+      setActiveSubMenu(null); // Solusi: Langsung menutup semua sub-menu sekaligus saat menu utama tutup
+    }, 200);
+  };
+
+  // ================= HANDLERS SUB-MENU (REUSABLE) =================
+  const handleMouseEnterSub = (menuKey) => {
+    if (subMenuTimeoutRef.current) clearTimeout(subMenuTimeoutRef.current);
+    setActiveSubMenu(menuKey);
+  };
+
+  const handleMouseLeaveSub = () => {
+    subMenuTimeoutRef.current = setTimeout(() => {
+      setActiveSubMenu(null);
+    }, 200);
+  };
+
+  return (
+    <div
+      className="relative flex items-center cursor-pointer text-[16px]"
+      onMouseEnter={handleMouseEnterMenu}
+      onMouseLeave={handleMouseLeaveMenu}
+    >
+      {/* TOMBOL PEMICU UTAMA */}
+      <div
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-[16px]">GPM</span>
+        <i className="ri-arrow-down-s-line text-[20px]"></i>
+      </div>
+
+      {/* MENU UTAMA DROPDOWN */}
+      <ul
+        id="menu_profil"
+        className={`menu bg-white text-black rounded-box z-1 w-[240px] absolute top-full left-0 mt-2 shadow-md text-[16px]
+          transition-all duration-300 ease-in-out
+          ${
+            isOpen
+              ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+              : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+          }
+        `}
+      >
+        {/* SUB-MENU 1 */}
+        <li
+          className="relative rounded-[10px]"
+          onMouseEnter={() => handleMouseEnterSub("menu1")}
+          onMouseLeave={handleMouseLeaveSub}
+        >
+          <div
+            className="flex items-center justify-between w-full hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]"
+            onClick={() =>
+              setActiveSubMenu(activeSubMenu === "menu1" ? null : "menu1")
+            }
+          >
+            <span>Sistem Penjaminan Mutu Internal</span>
+            <i className="ri-arrow-right-s-line text-[20px]"></i>
+          </div>
+          <ul
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            ${activeSubMenu === "menu1" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
+          `}
+          >
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Audit Mutu Internal</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Tinjauan Manajemen Fakultas</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Evaluasi Proses Belajar Mengajar</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">
+                Laporan Permintaan Tindakan Koreksi Hasil Rapat Tinjauan
+                Manajemen
+              </a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Bukti Pelaksanaan AMI</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Laporan Benchmarking</a>
+            </li>
+          </ul>
+        </li>
+
+        {/* SUB-MENU 2 */}
+        <li
+          className="relative rounded-[10px]"
+          onMouseEnter={() => handleMouseEnterSub("menu2")}
+          onMouseLeave={handleMouseLeaveSub}
+        >
+          <div
+            className="flex items-center justify-between w-full hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]"
+            onClick={() =>
+              setActiveSubMenu(activeSubMenu === "menu2" ? null : "menu2")
+            }
+          >
+            <span>Sistem Penjaminan Mutu Eksternal</span>
+            <i className="ri-arrow-right-s-line text-[20px]"></i>
+          </div>
+          <ul
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            ${activeSubMenu === "menu2" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
+          `}
+          >
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Akreditasi Nasioanal</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Akreditasi Internasional</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Sertifikasi ISO</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Sertifikasi Laboratorium</a>
+            </li>
+          </ul>
+        </li>
+
+        {/* SUB-MENU 3 */}
+        <li
+          className="relative rounded-[10px]"
+          onMouseEnter={() => handleMouseEnterSub("menu3")}
+          onMouseLeave={handleMouseLeaveSub}
+        >
+          <div
+            className="flex items-center justify-between w-full hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]"
+            onClick={() =>
+              setActiveSubMenu(activeSubMenu === "menu3" ? null : "menu3")
+            }
+          >
+            <span>Hasil Survey</span>
+            <i className="ri-arrow-right-s-line text-[20px]"></i>
+          </div>
+          <ul
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            ${activeSubMenu === "menu3" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
+          `}
+          >
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Hasil Survey 2025</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Hasil Survey 2024</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Hasil Survey 2023</a>
+            </li>
+          </ul>
+        </li>
+
+        {/* SUB-MENU 4 */}
+        <li
+          className="relative rounded-[10px]"
+          onMouseEnter={() => handleMouseEnterSub("menu4")}
+          onMouseLeave={handleMouseLeaveSub}
+        >
+          <div
+            className="flex items-center justify-between w-full hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]"
+            onClick={() =>
+              setActiveSubMenu(activeSubMenu === "menu4" ? null : "menu4")
+            }
+          >
+            <span>Dokumen Mutu</span>
+            <i className="ri-arrow-right-s-line text-[20px]"></i>
+          </div>
+          <ul
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            ${activeSubMenu === "menu4" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
+          `}
+          >
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Dokumen SPMI Standar</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Dokumen SPMI Kebijakan</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Dokumen SPMI Manual</a>
+            </li>
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">Dokumen SPMI Formulir</a>
+            </li>
+          </ul>
+        </li>
+
+        {/* MENU UTAMA LAIN TANPA SUB-MENU */}
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Laporan Kinerja</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Renstra Unhas Dan FKG</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Standar Pelayanan Publik</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Kebijakan SPMI</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Dasar Hukum</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Dokumen</a>
+          </div>
+        </li>
+
+        {/* SUB-MENU 5 */}
+        <li
+          className="relative rounded-[10px]"
+          onMouseEnter={() => handleMouseEnterSub("menu5")}
+          onMouseLeave={handleMouseLeaveSub}
+        >
+          <div
+            className="flex items-center justify-between w-full hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]"
+            onClick={() =>
+              setActiveSubMenu(activeSubMenu === "menu5" ? null : "menu5")
+            }
+          >
+            <span>Peningkatan Reputasi</span>
+            <i className="ri-arrow-right-s-line text-[20px]"></i>
+          </div>
+          <ul
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            ${activeSubMenu === "menu5" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
+          `}
+          >
+            <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
+              <a href="">QS.WUR & The WUR 2025</a>
+            </li>
+          </ul>
+        </li>
+
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Proses Bisnis</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Kegiatan GPM</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Instrumen</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Sistem Audit</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Akreditasi</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Gallery</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Bench Marking</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+}
 
 function Akademik({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -324,7 +627,7 @@ function Akademik({ isScrolled }) {
             <i className="ri-arrow-right-s-line text-[20px]"></i>
           </div>
           <ul
-            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 right-[235px] ml-1 transition-all duration-300 ease-in-out
             ${activeSubMenu === "menu1" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
           `}
           >
@@ -356,7 +659,7 @@ function Akademik({ isScrolled }) {
             <i className="ri-arrow-right-s-line text-[20px]"></i>
           </div>
           <ul
-            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
+            className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 right-[235px] ml-1 transition-all duration-300 ease-in-out
             ${activeSubMenu === "menu2" ? "opacity-100 scale-100 pointer-events-auto translate-x-0" : "opacity-0 scale-95 pointer-events-none -translate-x-2"}
           `}
           >
@@ -406,7 +709,7 @@ function ProgramStudi({ isScrolled }) {
         className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-[16px]">Akademik</span>
+        <span className="text-[16px]">Program Studi</span>
         <i className="ri-arrow-down-s-line text-[20px]"></i>
       </div>
 
@@ -482,6 +785,249 @@ function ProgramStudi({ isScrolled }) {
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
             <a href="">PPDGS Radiologi Kedokteran Gigi</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function Unduhan({ isScrolled }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
+
+  const handleMouseEnterMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 200);
+  };
+
+  return (
+    <div
+      className="relative flex items-center cursor-pointer text-[16px]"
+      onMouseEnter={handleMouseEnterMenu}
+      onMouseLeave={handleMouseLeaveMenu}
+    >
+      {/* TOMBOL PEMICU UTAMA */}
+      <div
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-[16px]">Unduhan</span>
+        <i className="ri-arrow-down-s-line text-[20px]"></i>
+      </div>
+
+      {/* MENU UTAMA DROPDOWN */}
+      <ul
+        id="menu_profil"
+        className={`menu bg-white text-black rounded-box z-1 w-[240px] absolute top-full left-0 mt-2 shadow-md text-[16px]
+          transition-all duration-300 ease-in-out
+          ${
+            isOpen
+              ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+              : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+          }
+        `}
+      >
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Download</a>
+          </div>
+        </li>
+
+        {/* MENU UTAMA LAIN TANPA SUB-MENU */}
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Peraturan</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Perjanjian Kinerja Rektor-Dekan</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+}
+function ZonaIntegritas({ isScrolled }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
+
+  const handleMouseEnterMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 200);
+  };
+
+  return (
+    <div
+      className="relative flex items-center cursor-pointer text-[16px]"
+      onMouseEnter={handleMouseEnterMenu}
+      onMouseLeave={handleMouseLeaveMenu}
+    >
+      {/* TOMBOL PEMICU UTAMA */}
+      <div
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-[16px]">Zona integritas</span>
+        <i className="ri-arrow-down-s-line text-[20px]"></i>
+      </div>
+
+      {/* MENU UTAMA DROPDOWN */}
+      <ul
+        id="menu_profil"
+        className={`menu bg-white text-black rounded-box z-1 w-[240px] absolute top-full left-0 mt-2 shadow-md text-[16px]
+          transition-all duration-300 ease-in-out
+          ${
+            isOpen
+              ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+              : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+          }
+        `}
+      >
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Zona Integritas</a>
+          </div>
+        </li>
+
+        {/* MENU UTAMA LAIN TANPA SUB-MENU */}
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Unit Layanan Terpadu</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Laporan Kinerja Area ZI</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Laporan Survey Pelayanan Publik</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Laporan Pengaduan</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function Departement({ isScrolled }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeTimeoutRef = useRef(null);
+
+  const handleMouseEnterMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 200);
+  };
+
+  return (
+    <div
+      className="relative flex items-center cursor-pointer text-[16px]"
+      onMouseEnter={handleMouseEnterMenu}
+      onMouseLeave={handleMouseLeaveMenu}
+    >
+      {/* TOMBOL PEMICU UTAMA */}
+      <div
+        className={`flex items-center ${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out py-2`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-[16px]">Departemen</span>
+        <i className="ri-arrow-down-s-line text-[20px]"></i>
+      </div>
+
+      {/* MENU UTAMA DROPDOWN */}
+      <ul
+        id="menu_profil"
+        className={`menu bg-white text-black rounded-box z-1 w-[240px] absolute top-full left-0 mt-2 shadow-md text-[16px]
+          transition-all duration-300 ease-in-out
+          ${
+            isOpen
+              ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+              : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+          }
+        `}
+      >
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Biologi Oral</a>
+          </div>
+        </li>
+
+        {/* MENU UTAMA LAIN TANPA SUB-MENU */}
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Ilmu Bahasa dan Teknologi</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Ilmu Kedokteran Gigi Anak</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">
+              Departemen Ilmu Kedokteran Gigi Masyarakat - Pencegahan
+            </a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Ilmu Penyakit Mulut</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Konservasi Gigi</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Oral and Maxillofacial Radiology</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Ortodonti</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Periodonsia</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departemen Prostodonsia</a>
+          </div>
+        </li>
+        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
+          <div className="flex items-center justify-between">
+            <a href="">Departement Oral and Maxillofacial Surgery</a>
           </div>
         </li>
       </ul>
@@ -621,7 +1167,7 @@ function MobileAccordion({ label, isOpen, onToggle, children, nested }) {
         ></i>
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? " opacity-100" : "max-h-0 opacity-0"}`}
       >
         <div className="pb-2">{children}</div>
       </div>
@@ -764,50 +1310,44 @@ function MobileDrawer({ isOpen, onClose }) {
           </MobileAccordion>
 
           <MobileAccordion
-            label="Akademik"
-            isOpen={expanded.akademik}
-            onToggle={() => toggle("akademik")}
+            label="Departemen"
+            isOpen={expanded.departemen}
+            onToggle={() => toggle("departemen")}
           >
-            <MobileAccordion
-              label="Informasi Akademik"
-              isOpen={expanded.infoAkademik}
-              onToggle={() => toggle("infoAkademik")}
-              nested
-            >
-              <a href="#" className="block py-2 text-sm ps-3">
-                Akreditasi
-              </a>
-              <a href="#" className="block py-2 text-sm ps-3">
-                SK & Kontrak Kinerja
-              </a>
-              <a href="#" className="block py-2 text-sm ps-3">
-                Pengabdian
-              </a>
-            </MobileAccordion>
-            <MobileAccordion
-              label="Kemahasiswaan"
-              isOpen={expanded.kemahasiswaan}
-              onToggle={() => toggle("kemahasiswaan")}
-              nested
-            >
-              <a href="#" className="block py-2 text-sm ps-3">
-                Kemahasiswaan
-              </a>
-              <a href="#" className="block py-2 text-sm ps-3">
-                Ormawa
-              </a>
-            </MobileAccordion>
-            <a
-              href="#"
-              className="block py-3 text-[16px] border-b border-gray-100 ms-3"
-            >
-              Buku Pedoman
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Biologi Oral
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Ilmu Bahan dan Teknologi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Ilmu Kedokteran Gigi Anak
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Ilmu Kedokteran Gigi Masyarakat - Pencegahan
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Ilmu Penyakit Mulut
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Konservasi Gigi
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Oral and Maxillofacial Radiology
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Ortodonti
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Periodonsia
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departemen Prostodonsia
+            </a>
+            <a href="#" className="block py-2 text-sm ps-3">
+              Departement Oral and Maxillofacial Surgery
             </a>
           </MobileAccordion>
-
-          <a href="#" className="block py-3 border-b text-[16px] font-medium">
-            Departement
-          </a>
 
           <MobileAccordion
             label="Program Studi"
@@ -852,9 +1392,272 @@ function MobileDrawer({ isOpen, onClose }) {
             </a>
           </MobileAccordion>
 
+          <MobileAccordion
+            label="GPM" // Anda bisa sesuaikan nama label utamanya
+            isOpen={expanded.GPM}
+            onToggle={() => toggle("GPM")}
+          >
+            {/* SUB-MENU 1 */}
+            <MobileAccordion
+              label="Sistem Penjaminan Mutu Internal"
+              isOpen={expanded.spmi}
+              onToggle={() => toggle("spmi")}
+              nested
+            >
+              <a href="" className="block py-2 text-sm ps-3">
+                Audit Mutu Internal
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Tinjauan Manajemen Fakultas
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Evaluasi Proses Belajar Mengajar
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Laporan Permintaan Tindakan Koreksi Hasil Rapat Tinjauan
+                Manajemen
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Bukti Pelaksanaan AMI
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Laporan Benchmarking
+              </a>
+            </MobileAccordion>
+
+            {/* SUB-MENU 2 */}
+            <MobileAccordion
+              label="Sistem Penjaminan Mutu Eksternal"
+              isOpen={expanded.spme}
+              onToggle={() => toggle("spme")}
+              nested
+            >
+              <a href="" className="block py-2 text-sm ps-3">
+                Akreditasi Nasional
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Akreditasi Internasional
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Sertifikasi ISO
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Sertifikasi Laboratorium
+              </a>
+            </MobileAccordion>
+
+            {/* SUB-MENU 3 */}
+            <MobileAccordion
+              label="Hasil Survey"
+              isOpen={expanded.survey}
+              onToggle={() => toggle("survey")}
+              nested
+            >
+              <a href="" className="block py-2 text-sm ps-3">
+                Hasil Survey 2025
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Hasil Survey 2024
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Hasil Survey 2023
+              </a>
+            </MobileAccordion>
+
+            {/* SUB-MENU 4 */}
+            <MobileAccordion
+              label="Dokumen Mutu"
+              isOpen={expanded.dokumenMutu}
+              onToggle={() => toggle("dokumenMutu")}
+              nested
+            >
+              <a href="" className="block py-2 text-sm ps-3">
+                Dokumen SPMI Standar
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Dokumen SPMI Kebijakan
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Dokumen SPMI Manual
+              </a>
+              <a href="" className="block py-2 text-sm ps-3">
+                Dokumen SPMI Formulir
+              </a>
+            </MobileAccordion>
+
+            {/* MENU UTAMA LAIN TANPA SUB-MENU */}
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Laporan Kinerja
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Renstra Unhas Dan FKG
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Standar Pelayanan Publik
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Kebijakan SPMI
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Dasar Hukum
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Dokumen
+            </a>
+
+            {/* SUB-MENU 5 */}
+            <MobileAccordion
+              label="Peningkatan Reputasi"
+              isOpen={expanded.reputasi}
+              onToggle={() => toggle("reputasi")}
+              nested
+            >
+              <a href="" className="block py-2 text-sm ps-3">
+                QS.WUR & The WUR 2025
+              </a>
+            </MobileAccordion>
+
+            {/* MENU UTAMA SISA TANPA SUB-MENU */}
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Proses Bisnis
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Kegiatan GPM
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Instrumen
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Sistem Audit
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Akreditasi
+            </a>
+            <a
+              href=""
+              className="block py-3 text-[16px] border-b border-gray-100 ps-3"
+            >
+              Gallery
+            </a>
+            <a href="" className="block py-3 text-[16px] ps-3">
+              Bench Marking
+            </a>
+          </MobileAccordion>
+          <MobileAccordion
+            label="Unduh" // Anda bisa sesuaikan nama label utamanya
+            isOpen={expanded.Unduh}
+            onToggle={() => toggle("Unduh")}
+          >
+            <a href="" className="block py-2 text-sm ps-3">
+              Download
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Peraturan
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Perjanjian Kinerja Rektor-Dekan
+            </a>
+          </MobileAccordion>
+          <MobileAccordion
+            label="Zona Integritas" // Anda bisa sesuaikan nama label utamanya
+            isOpen={expanded.zonaintegritas}
+            onToggle={() => toggle("zonaintegritas")}
+          >
+            <a href="" className="block py-2 text-sm ps-3">
+              Zona Integritas
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Unit Layanan Terpadu
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Laporan Kinerja Area ZI
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Laporan Survey Pelayanan Publik
+            </a>
+            <a href="" className="block py-2 text-sm ps-3">
+              Laporan Pengaduan
+            </a>
+          </MobileAccordion>
+
           <a href="#" className="block py-3 border-b text-[16px] font-medium">
             PPID
           </a>
+
+          <MobileAccordion
+            label="Akademik"
+            isOpen={expanded.akademik}
+            onToggle={() => toggle("akademik")}
+          >
+            <MobileAccordion
+              label="Informasi Akademik"
+              isOpen={expanded.infoAkademik}
+              onToggle={() => toggle("infoAkademik")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Akreditasi
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                SK & Kontrak Kinerja
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Pengabdian
+              </a>
+            </MobileAccordion>
+            <MobileAccordion
+              label="Kemahasiswaan"
+              isOpen={expanded.kemahasiswaan}
+              onToggle={() => toggle("kemahasiswaan")}
+              nested
+            >
+              <a href="#" className="block py-2 text-sm ps-3">
+                Kemahasiswaan
+              </a>
+              <a href="#" className="block py-2 text-sm ps-3">
+                Ormawa
+              </a>
+            </MobileAccordion>
+            <a
+              href="#"
+              className="block py-3 text-[16px] border-b border-gray-100 ms-3"
+            >
+              Buku Pedoman
+            </a>
+          </MobileAccordion>
 
           <MobileAccordion
             label="Komite Etik"
@@ -912,7 +1715,7 @@ function MobileDrawer({ isOpen, onClose }) {
 
 function NavList({ isScrolled }) {
   return (
-    <div className="hidden lg:flex text-[16px] text-white items-center gap-[20px]">
+    <div className="hidden lg:flex lg:flex-wrap text-[16px] text-white items-center gap-x-[20px]">
       <a
         href=""
         className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"}  duration-[0.4s] ease-in-out`}
@@ -920,20 +1723,18 @@ function NavList({ isScrolled }) {
         Beranda
       </a>
       <Profil isScrolled={isScrolled} />
-      <Akademik isScrolled={isScrolled} />
-      <a
-        href=""
-        className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}
-      >
-        Departement
-      </a>
+      <Departement isScrolled={isScrolled} />
       <ProgramStudi isScrolled={isScrolled} />
+      <GPM isScrolled={isScrolled} />
+      <Unduhan isScrolled={isScrolled} />
+      <ZonaIntegritas isScrolled={isScrolled} />
       <a
         href=""
         className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"} duration-[0.4s] ease-in-out`}
       >
         PPID
       </a>
+      <Akademik isScrolled={isScrolled} />
       <KomiteEtik isScrolled={isScrolled} />
     </div>
   );
@@ -942,17 +1743,17 @@ function NavList({ isScrolled }) {
 function GlassNav({ isScrolled, onToggleMobile }) {
   return (
     <div
-      className={`w-full h-[72px] lg:h-[96px] px-4 sm:px-6 lg:px-[70px] shadow-lg transition-colors duration-500 flex items-center justify-between ${
+      className={`w-full h-[72px] lg:h-[96px] px-4 sm:px-6 lg:px-[70px] shadow-lg transition-colors duration-500 flex items-center justify-between 2xl:gap-[50px] lg:gap-[100px] ${
         isScrolled ? "bg-[#b00000]" : "bg-white/10 backdrop-blur-md"
       }`}
     >
-      <div className="flex items-center gap-3 lg:gap-[34px]">
+      <div className="flex items-center gap-3 lg:gap-[34px] w-[300px]">
         <img
           src={logo}
           className="w-[40px] h-[48px] lg:w-[50px] lg:h-[60px]"
           alt=""
         />
-        <div className={`text-white leading-tight lg:leading-[20px]`}>
+        <div className={`text-white leading-tight lg:leading-[20px] whitespace-nowrap`}>
           <h2 className="font-medium text-xs lg:text-[16px]">
             Fakultas Kedokteran Gigi
           </h2>
