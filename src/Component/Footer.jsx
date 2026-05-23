@@ -1,9 +1,26 @@
+import logo from "../../public/logo unhas.png";
+
 function ColumnKiri() {
   return (
     <div className="flex flex-col col-span-1 items-start gap-4 lg:gap-[24px]">
       <div className="text-xl lg:text-[26px] font-bold leading-snug">
-        <h1>Fakultas Kedokteran Gigi</h1>
-        <h1>Universitas Hasanuddin</h1>
+        <div className="flex items-center gap-3 lg:gap-[10px] w-[300px]">
+          <img
+            src={logo}
+            className="w-[30px] h-[38px] lg:w-[50px] lg:h-[60px]"
+            alt=""
+          />
+          <div
+            className={`text-white leading-tight lg:leading-[20px] whitespace-nowrap`}
+          >
+            <h2 className="font-medium text-xs lg:text-[16px]">
+              Fakultas Kedokteran Gigi
+            </h2>
+            <h1 className="font-semibold text-sm lg:text-[20px]">
+              Universitas Hasanuddin
+            </h1>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col gap-3 lg:gap-[16px]">
         <div className="text-sm lg:text-base">
@@ -45,16 +62,16 @@ function ColumnKiri() {
 
 function ColumnKanan() {
   return (
-    <div className="col-span-1">
-      <div className="flex flex-col gap-4 lg:gap-[20px]">
-        <h1 className="text-xl lg:text-[24px] font-semibold">Quick Links</h1>
+    <div className="grid md:grid-cols-3 gap-[40px] md:gap-[40px]">
+      <div className="flex flex-col gap-4 lg:gap-[16px]">
+        <h1 className="text-xl lg:text-[24px] font-bold">Layanan Publik</h1>
         <div className="flex flex-col gap-2 lg:gap-[8px]">
-          <div className="text-sm lg:text-[16px] font-semibold flex flex-wrap gap-x-4 gap-y-1 lg:gap-x-[20px]">
+          <div className="text-sm lg:text-[16px] flex flex-col gap-y-4 gap-y-1 lg:gap-y-[10px]">
             <a href="http://" target="_blank" rel="noopener noreferrer">
-              UNHAS
+              keadilan dan Anti Diskriminasi
             </a>
             <a href="http://" target="_blank" rel="noopener noreferrer">
-              Apps
+              Layanan Terpadu
             </a>
             <a
               href="http://"
@@ -62,32 +79,75 @@ function ColumnKanan() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Portal Mahasiswa
+              Aduan Unhas
             </a>
             <a href="http://" target="_blank" rel="noopener noreferrer">
-              Berita
+              LAPOR
             </a>
             <a href="http://" target="_blank" rel="noopener noreferrer">
-              Acara
-            </a>
-            <a href="http://" target="_blank" rel="noopener noreferrer">
-              Jadwal
-            </a>
-            <a href="http://" target="_blank" rel="noopener noreferrer">
-              Logbook
-            </a>
-            <a href="http://" target="_blank" rel="noopener noreferrer">
-              ItemBank
+              SIPPN
             </a>
           </div>
-          <a
-            href="http://"
-            className="text-sm lg:text-[16px] font-semibold"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Zona Integritas
-          </a>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 lg:gap-[16px]">
+        <h1 className="text-xl lg:text-[24px] font-bold">Menu</h1>
+        <div className="flex flex-col gap-2 lg:gap-[8px]">
+          <div className="text-sm lg:text-[16px] flex flex-col gap-y-4 gap-y-1 lg:gap-y-[10px]">
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Kalender Akademik
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Kemitraan
+            </a>
+            <a
+              href="http://"
+              className="whitespace-nowrap"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Akademik
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Riset dan Inovasi
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Green Campuss
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Laporan Keuangan
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 lg:gap-[16px]">
+        <h1 className="text-xl lg:text-[24px] font-bold">Link Cepat</h1>
+        <div className="flex flex-col gap-2 lg:gap-[8px]">
+          <div className="text-sm lg:text-[16px] flex flex-col gap-y-4 gap-y-1 lg:gap-y-[10px]">
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Perpustakaan
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              SIKOLA
+            </a>
+            <a
+              href="http://"
+              className="whitespace-nowrap"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              APPS
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Jurnal
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Repositori
+            </a>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
+              Publikasi Videotron
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -97,13 +157,15 @@ function ColumnKanan() {
 export function Footer() {
   return (
     <div className="px-4 sm:px-6 lg:px-[70px] bg-[#4A0000]">
-      <div className="py-6 lg:py-[48px] text-white grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-[20px] 2xl:gap-[40px]">
+      <div className="py-6 lg:py-[48px] text-white flex justify-between lg:flex-row flex-col gap-6 lg:gap-[20px] 2xl:gap-[40px]">
         <ColumnKiri />
         <ColumnKanan />
       </div>
-      <div className='w-full h-[2px] bg-white opacity-[0.30]'></div>
+      <div className="w-full h-[2px] bg-white opacity-[0.30]"></div>
       <div className="flex items-center justify-center text-white py-4 lg:py-[20px]">
-        <p className="text-sm lg:text-base text-center">© Copyright <strong>IT FKG Support</strong> All Rights Reserved</p>
+        <p className="text-sm lg:text-base text-center">
+          © Copyright <strong>IT FKG Support</strong> All Rights Reserved
+        </p>
       </div>
     </div>
   );
