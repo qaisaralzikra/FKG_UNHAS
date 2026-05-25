@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   PageHero,
   ContentSection,
@@ -62,6 +63,7 @@ const blogData = [
 ];
 
 export function DaftarBerita() {
+  const [hoveredId, setHoveredId] = useState(null);
   return (
     <>
       <PageHero
@@ -84,49 +86,65 @@ export function DaftarBerita() {
 
           {/* Card Blog */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[40px] mt-[20px]">
-            {blogData.map((item, index) => (
-              <div
-                key={item.id || index}
-                className={`${index === 0 ? "lg:col-span-3 md:col-span-2" : "col-span-1"}`}
-              >
-                <div
-                  className={`overflow-hidden w-full rounded-[20px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] ${index === 0 ? "grid md:grid-cols-2 md:max-h-[354px]" : "flex flex-col"}`}
+            {blogData.map((item, index) => {
+              const isCurrentHovered = hoveredId === item.id;
+              return (
+                <Link
+                  onMouseEnter={() => setHoveredId(item.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  to={`/blog/detail/${item.id}`}
+                  key={item.id || index}
+                  className={`group ${index === 0 ? "lg:col-span-3 md:col-span-2" : "col-span-1"}`}
                 >
-                  <img src={item.image} className={`min-h-[192px] ${index === 0 ? "object-cover w-full md:h-full" : "object-cover"}`} alt="" />
                   <div
-                    className={`${index === 0 ? "md:me-[30px] md:my-[40px] m-[20px]" : "m-[20px]"} space-y-4`}
+                    className={`overflow-hidden w-full rounded-[20px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] ${index === 0 ? "grid md:grid-cols-2 md:max-h-[354px]" : "flex flex-col"}`}
                   >
-                    <div className="flex items-center gap-[20px]">
-                      <p className="px-[20px] py-[4px] text-white text-[12px] rounded-full bg-[#4a0000] max-w-max">
-                        Featured
-                      </p>
-                      <p className="px-[20px] py-[4px] text-[#4a0000] text-[12px] rounded-full bg-[rgba(0,0,0,0.1)] max-w-max">
-                        {item.category}
-                      </p>
-                    </div>
-                    <div className="max-w-[620px] space-y-2">
-                      <p className={`${index === 0 ? 'md:text-[26px] lg:text-[30px] text-[18px]' : 'text-[18px]'} font-bold leading-tight line-clamp-2`}>
-                        {item.title}
-                      </p>
-                      <div
-                        dangerouslySetInnerHTML={{ __html: item.conten }}
-                        className={`${index === 0 ? 'lg:text-[16px] text-[14px] md:line-clamp-4 line-clamp-3' : 'text-[14px] line-clamp-3'} text-gray-700`}
-                      ></div>
-                      <p className="text-gray-600 text-[14px]">
-                        <i class="ri-calendar-line text-[16px] me-[8px]"></i>
-                        {item.date}
-                      </p>
-                    </div>
-                    <div>
-                      <Link className="text-[#4a0000]">
-                        Baca Selengkapnya{" "}
-                        <i class="ri-arrow-right-long-line ms-[8px]"></i>
-                      </Link>
+                    <img
+                      src={item.image}
+                      className={`min-h-[192px] transition-transform duration-300 ${
+                        isCurrentHovered ? "scale-105" : "scale-100"
+                      } ${index === 0 ? "object-cover w-full md:h-full" : "object-cover"}`}
+                      alt=""
+                    />
+                    <div
+                      className={`${index === 0 ? "md:mx-[30px] md:my-[40px] m-[20px]" : "m-[20px]"} space-y-4`}
+                    >
+                      <div className="flex items-center gap-[20px]">
+                        <p className="px-[20px] py-[4px] text-white text-[12px] rounded-full bg-[#4a0000] max-w-max">
+                          Featured
+                        </p>
+                        <p className="px-[20px] py-[4px] text-[#4a0000] text-[12px] rounded-full bg-[rgba(0,0,0,0.1)] max-w-max">
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="max-w-[620px] space-y-2">
+                        <p
+                          className={`${isCurrentHovered ? "text-[#4a0000]" : ""} ${index === 0 ? "md:text-[26px] lg:text-[30px] text-[18px]" : "text-[18px]"} font-bold leading-tight line-clamp-2`}
+                        >
+                          {item.title}
+                        </p>
+                        <div
+                          dangerouslySetInnerHTML={{ __html: item.conten }}
+                          className={`${index === 0 ? "lg:text-[16px] text-[14px] md:line-clamp-4 line-clamp-3" : "text-[14px] line-clamp-3"} text-gray-700`}
+                        ></div>
+                        <p className="text-gray-600 text-[14px]">
+                          <i class="ri-calendar-line text-[16px] me-[8px]"></i>
+                          {item.date}
+                        </p>
+                      </div>
+                      <div>
+                        {/* 2. Hapus class 'group' dari Link kecil ini, ubah menjadi div saja karena Link luar sudah mengarah ke URL yang sama */}
+                        <div className="text-[#4a0000] flex items-center font-medium">
+                          Baca Selengkapnya{" "}
+                          {/* 3. Gunakan inline-block agar transform translate-x bisa bekerja maksimal pada tag <i> */}
+                          <i className="ri-arrow-right-long-line ms-[8px] inline-block transition-transform duration-300 group-hover:translate-x-[6px]"></i>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </ContentSection>
