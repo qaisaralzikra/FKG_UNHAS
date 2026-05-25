@@ -40,6 +40,8 @@ import { NotFound } from "./Pages/NotFound";
 import { Pendahuluan } from "./Pages/KomiteEtik/Pendahuluan";
 import { AnggotaKE } from "./Pages/KomiteEtik/AnggotaKomiteEtik";
 import { StrukturOrganisasiKomiteEtik } from "./Pages/KomiteEtik/StrukturOrganisasi";
+import { DaftarBerita } from "./Pages/Berita/DaftarBerita";
+import { DetailBerita } from "./Pages/Berita/DetailBerita";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -67,6 +69,8 @@ function App() {
   const routes = (
     <Routes>
       <Route path="/" element={<Beranda />} />
+      <Route path="/blog/daftar" element={<DaftarBerita />} />
+      <Route path="/blog/detail/:id" element={<DetailBerita />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/profil/selayang-pandang" element={<SelayangPandang />} />
       <Route path="/profil/sejarah" element={<Sejarah />} />

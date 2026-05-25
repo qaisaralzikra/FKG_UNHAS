@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Blog1 from "../../assets/blog1.png";
 import {motion} from 'motion/react'
+import { Link } from "react-router-dom";
 
 // ================= COLUMN KIRI (DAFTAR 4 BERITA SISA) =================
 function ColumnKiri({ data }) {
@@ -52,12 +53,12 @@ function ColumnKanan({ activeData }) {
         <span className="text-white/80 text-[12px] lg:text-[14px] font-light mb-2">
           {activeData.date}
         </span>
-        <a
-          href=""
+        <Link
+        to='/blog/daftar'
           className="text-base sm:text-lg lg:text-[24px] font-bold leading-snug mb-4 max-w-[90%] hover:underline text-white"
         >
           {activeData.title}
-        </a>
+        </Link>
         <div className="border-t border-white/20 pt-3">
           <span className="text-white/60 text-[12px] block font-medium tracking-wider uppercase">
             SDGS Category
@@ -148,9 +149,9 @@ export function Blog() {
         <div className="flex flex-col gap-[20px]">
           <div className="flex items-center justify-between">
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Berita Terbaru</h1>
-            <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
+            <Link to="/blog/daftar" className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
               Lihat Semua <i className="ri-arrow-right-long-line text-[20px]"></i>
-            </button>
+            </Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-x-[20px] 2xl:gap-x-[60px]">
             {/* Sisi Kanan: Selalu merender elemen pertama dari array state */}
