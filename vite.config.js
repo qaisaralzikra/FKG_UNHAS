@@ -8,6 +8,9 @@ export default defineConfig({
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/**/*.{js,ts,jsx,tsx}",
+    "./src/**/**/**/*.{js,ts,jsx,tsx}",
+    "./src/**/**/**/**/*.{js,ts,jsx,tsx}",
     "./src/*.{js,ts,jsx,tsx,css,scss,sass,less,styl}",
   ],
   theme: {
