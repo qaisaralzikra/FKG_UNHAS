@@ -50,7 +50,7 @@ export function PageHeroDetailBlog({ img }) {
 export function ContentSection({ children, className = "" }) {
   return (
     <div
-      className={`px-4 sm:px-6 lg:px-[70px] py-8 md:py-12 lg:py-[64px] ${className}`}
+      className={`px-4 sm:px-6 lg:px-[70px] py-8 md:py-12 lg:py-[64px] ${className} flex items-center justify-center`}
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
