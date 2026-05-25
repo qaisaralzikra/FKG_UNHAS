@@ -1,4 +1,5 @@
 import {motion} from 'motion/react'
+import { Link } from 'react-router-dom';
 
 function Card({ data }) {
   return (
@@ -68,9 +69,9 @@ export function Acara() {
         <div>
           <div className="flex items-center justify-between">
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Acara Akan Datang</h1>
-            <button className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
+            <Link to={'/acara/daftar'} className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
               Lihat Semua <i className="ri-arrow-right-long-line text-[20px]"></i>
-            </button>
+            </Link>
           </div>
           <div className="mt-[20px]">
             <select className="w-full max-w-[400px] p-2 lg:p-[8px] border" name="" id="">

@@ -42,6 +42,7 @@ import { AnggotaKE } from "./Pages/KomiteEtik/AnggotaKomiteEtik";
 import { StrukturOrganisasiKomiteEtik } from "./Pages/KomiteEtik/StrukturOrganisasi";
 import { DaftarBerita } from "./Pages/Berita/DaftarBerita";
 import { DetailBerita } from "./Pages/Berita/DetailBerita";
+import { DaftarAcara } from "./Pages/Acara/DaftarAcara";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -69,6 +70,7 @@ function App() {
   const routes = (
     <Routes>
       <Route path="/" element={<Beranda />} />
+      <Route path="/acara/daftar" element={<DaftarAcara />} />
       <Route path="/blog/daftar" element={<DaftarBerita />} />
       <Route path="/blog/detail/:id" element={<DetailBerita />} />
       <Route path="/profil" element={<Profil />} />
