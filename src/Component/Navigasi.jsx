@@ -999,69 +999,48 @@ function MobileDrawer({ isOpen, onClose }) {
             isOpen={expanded.profil}
             onToggle={() => toggle("profil")}
           >
-            <MobileAccordion
-              label="Selayang Pandang"
-              isOpen={expanded.selayang1}
-              onToggle={() => toggle("selayang1")}
-              nested
+            <Link
+              to="/profil/sambutan-dekan"
+              className="block py-2 text-sm ps-3"
             >
-              <Link
-                to="/profil/selayang-pandang"
-                className="block py-2 text-sm ps-3"
-              >
-                Selayang Pandang
-              </Link>
-              <Link to="/profil/sejarah" className="block py-2 text-sm ps-3">
-                Sejarah
-              </Link>
-              <Link to="/profil/profil-fkg" className="block py-2 text-sm ps-3">
-                Profil
-              </Link>
-              <Link to="/profil/visi-misi" className="block py-2 text-sm ps-3">
-                Visi & Misi
-              </Link>
-            </MobileAccordion>
-            <MobileAccordion
-              label="Profil Pimpinan"
-              isOpen={expanded.pimpinan}
-              onToggle={() => toggle("pimpinan")}
-              nested
+              Sambutan Dekan
+            </Link>
+            <Link
+              to="/profil/selayang-pandang"
+              className="block py-2 text-sm ps-3"
             >
-              <Link
-                to="/profil/sambutan-dekan"
-                className="block py-2 text-sm ps-3"
-              >
-                Sambutan Dekan
-              </Link>
-              <Link
-                to="/profil/pimpinan-fakultas"
-                className="block py-2 text-sm ps-3"
-              >
-                Pimpinan Fakultas
-              </Link>
-              <Link
-                to="/profil/struktur-organisasi"
-                className="block py-2 text-sm ps-3"
-              >
-                Struktur Organisasi
-              </Link>
-            </MobileAccordion>
-            <MobileAccordion
-              label="Staff Fakultas"
-              isOpen={expanded.staff}
-              onToggle={() => toggle("staff")}
-              nested
+              Selayang Pandang
+            </Link>
+            <Link to="/profil/sejarah" className="block py-2 text-sm ps-3">
+              Sejarah
+            </Link>
+            <Link to="/profil/profil-fkg" className="block py-2 text-sm ps-3">
+              Profil
+            </Link>
+            <Link to="/profil/visi-misi" className="block py-2 text-sm ps-3">
+              Visi & Misi
+            </Link>
+            <Link
+              to="/profil/pimpinan-fakultas"
+              className="block py-2 text-sm ps-3"
             >
-              <Link to="/profil/data-dosen" className="block py-2 text-sm ps-3">
-                Data Dosen
-              </Link>
-              <Link
-                to="/profil/tenaga-pendidik"
-                className="block py-2 text-sm ps-3"
-              >
-                Tenaga Pendidik
-              </Link>
-            </MobileAccordion>
+              Pimpinan Fakultas
+            </Link>
+            <Link to="/profil/data-dosen" className="block py-2 text-sm ps-3">
+              Data Dosen
+            </Link>
+            <Link
+              to="/profil/tenaga-pendidik"
+              className="block py-2 text-sm ps-3"
+            >
+              Tenaga Pendidik
+            </Link>
+            <Link
+              to="/profil/struktur-organisasi"
+              className="block py-2 text-sm ps-3"
+            >
+              Struktur Organisasi
+            </Link>
           </MobileAccordion>
 
           <MobileAccordion
