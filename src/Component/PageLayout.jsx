@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 
 export function PageHero({ title, subtitle }) {
   return (
-    <div className="relative min-h-[400px] md:min-h-[600px] flex items-center bg-[#4A0000] overflow-hidden">
+    <div className="relative min-h-[400px] md:min-h-[400px] flex items-center bg-[#4A0000] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-[#4A0000] via-[#b00000] to-[#4A0000] opacity-80" />
       <div className="relative z-10 px-4 sm:px-6 lg:px-[70px] w-full">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="md:mt-[120px]"
         >
           <h1 className="text-white text-3xl md:text-4xl lg:text-[48px] font-bold leading-tight">
             {title}

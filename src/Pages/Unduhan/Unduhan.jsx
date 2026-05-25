@@ -33,7 +33,7 @@ export function Unduhan() {
           {files.map((f, i) => (
             <a
               key={i}
-              href="https://sci.unhas.ac.id/download"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 bg-white p-4 rounded-[14px] shadow-sm border border-gray-100 hover:border-[#b00000] transition-colors group"
