@@ -3,7 +3,7 @@
 import en from "../assets/en.png";
 import id from "../assets/id.png";
 import logo from "../../public/logo unhas.png";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { Link } from "react-router-dom";
 
@@ -1642,41 +1642,35 @@ function GlassNav({ isScrolled, onToggleMobile }) {
 }
 
 export function Navigasi() {
-  const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
-  const [isPastDvh, setIsPastDvh] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (current) => {
-    const previous = scrollY.getPrevious() ?? 0;
+  useEffect(() => {
+    const handleScroll = () => {
+      // Ambil posisi scroll saat ini
+      const scrollY = window.scrollY;
 
-    // 1. Logika Menyembunyikan Navigasi (Saat Scroll ke Bawah)
-    if (current > previous && current > 50) {
-      setHidden(true);
-    }
-    // 2. KUNCI UTAMA: Hanya munculkan kembali jika posisi scroll sudah mentok/mendekati paling atas (misal < 10px)
-    else if (current <= 10) {
-      setHidden(false);
-    }
+      // Jika layar di-scroll melebihi tinggi topbar merah (48px), sembunyikan topbar
+      if (scrollY > 48) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+    };
 
-    // Logika mendeteksi apakah sudah melewati batas viewport tinggi layar
-    if (current > window.innerHeight) {
-      setIsPastDvh(true);
-    } else {
-      setIsPastDvh(false);
-    }
-  });
+    // Pasang listener saat komponen dimuat
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Bersihkan listener saat komponen dibongkar
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const changeLanguage = (langCode) => {
-    // 1. Cari elemen dropdown bawaan Google Translate
     const googleSelect = document.querySelector(".goog-te-combo");
-
     if (googleSelect) {
-      // Jika elemen ditemukan, langsung ubah bahasanya
       googleSelect.value = langCode;
       googleSelect.dispatchEvent(new Event("change"));
     } else {
-      // 2. FALLBACK: Jika script google telat dimuat, kita coba cari lagi dalam 100ms
       console.warn("Google Translate belum siap, mencoba memicu ulang...");
       setTimeout(() => {
         const retrySelect = document.querySelector(".goog-te-combo");
@@ -1691,56 +1685,58 @@ export function Navigasi() {
   };
 
   return (
-    <motion.header
-      animate={{
-        y: hidden ? -48 : 0,
-      }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full"
-    >
-      <div className="h-[48px] bg-[#b00000] px-4 sm:px-6 lg:px-[70px] w-full flex items-center justify-between">
-        <div className="text-white flex items-center gap-2 lg:gap-[16px]">
-          <i className="ri-mail-fill text-lg lg:text-[24px]"></i>
-          <span className="text-xs lg:text-[14px] sm:inline">
-            info@dent.unhas.ac.id
-          </span>
+    <>
+      {/* 1. Hapus div sentinel sebelumnya karena kita sudah menggunakan window.scrollY */}
+      <motion.header
+        animate={{
+          y: hidden ? -48 : 0,
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full"
+      >
+        {/* Topbar Merah */}
+        <div className="h-[48px] bg-[#b00000] px-4 sm:px-6 lg:px-[70px] w-full flex items-center justify-between">
+          <div className="text-white flex items-center gap-2 lg:gap-[16px]">
+            <i className="ri-mail-fill text-lg lg:text-[24px]"></i>
+            <span className="text-xs lg:text-[14px] sm:inline">
+              info@dent.unhas.ac.id
+            </span>
+          </div>
+
+          <div className="w-[97px] h-[30px] bg-[#0B3E9C] rounded-full flex items-center justify-between px-[16px]">
+            <button
+              className="cursor-pointer"
+              onClick={() => changeLanguage("id")}
+            >
+              <img
+                src={id}
+                alt="Indonesia"
+                className="w-[24px] h-[16px] rounded-[10px]"
+              />
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => changeLanguage("en")}
+            >
+              <img
+                src={en}
+                alt="English"
+                className="w-[24px] h-[16px] rounded-[10px]"
+              />
+            </button>
+          </div>
         </div>
 
-        <div className="w-[97px] h-[30px] bg-[#0B3E9C] rounded-full flex items-center justify-between px-[16px]">
-          <button
-            className="cursor-pointer"
-            onClick={() => changeLanguage("id")}
-          >
-            <img
-              src={id}
-              alt="Indonesia"
-              className="w-[24px] h-[16px] rounded-[10px]"
-            />
-          </button>
+        <GlassNav
+          isScrolled={hidden}
+          onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
+        />
 
-          {/* Tombol Bahasa Inggris */}
-          <button
-            className="cursor-pointer"
-            onClick={() => changeLanguage("en")}
-          >
-            <img
-              src={en}
-              alt="English"
-              className="w-[24px] h-[16px] rounded-[10px]"
-            />
-          </button>
-        </div>
-      </div>
-
-      <GlassNav
-        isScrolled={isPastDvh}
-        onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
-      />
-
-      <MobileDrawer
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-      />
-    </motion.header>
+        <MobileDrawer
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+      </motion.header>
+    </>
   );
 }
