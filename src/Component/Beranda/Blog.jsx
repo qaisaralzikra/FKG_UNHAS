@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Blog1 from "../../assets/blog1.png";
-import {motion} from 'motion/react'
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
 // ================= COLUMN KIRI (DAFTAR 4 BERITA SISA) =================
@@ -8,7 +8,8 @@ function ColumnKiri({ data }) {
   return (
     <div className="col-span-12 lg:col-span-4 flex flex-col justify-between h-auto lg:h-[502px] overflow-y-auto gap-3">
       {data.map((item, index) => (
-        <div
+        <Link
+          to={`/blog/detail/${item.id}`}
           key={item.id || index}
           className="flex gap-4 items-start group cursor-pointer border-b border-gray-100 pb-2 last:border-0 hover:bg-gray-50/50 transition-all duration-300 p-1"
         >
@@ -30,7 +31,7 @@ function ColumnKiri({ data }) {
               {item.date}
             </span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
@@ -41,7 +42,10 @@ function ColumnKanan({ activeData }) {
   if (!activeData) return null;
 
   return (
-    <div className="col-span-12 lg:col-span-8 w-full h-[280px] sm:h-[350px] lg:h-[502px] overflow-hidden rounded-[20px] group relative cursor-pointer">
+    <Link
+      to={`/blog/detail/${activeData.id}`}
+      className="col-span-12 lg:col-span-8 w-full h-[280px] sm:h-[350px] lg:h-[502px] overflow-hidden rounded-[20px] group relative cursor-pointer"
+    >
       <img
         key={activeData.id}
         src={activeData.image}
@@ -54,7 +58,7 @@ function ColumnKanan({ activeData }) {
           {activeData.date}
         </span>
         <Link
-        to='/blog/daftar'
+          to={`/blog/detail/${activeData.id}`}
           className="text-base sm:text-lg lg:text-[24px] font-bold leading-snug mb-4 max-w-[90%] hover:underline text-white"
         >
           {activeData.title}
@@ -68,7 +72,7 @@ function ColumnKanan({ activeData }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -148,9 +152,15 @@ export function Blog() {
       >
         <div className="flex flex-col gap-[20px]">
           <div className="flex items-center justify-between">
-            <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Berita Terbaru</h1>
-            <Link to="/blog/daftar" className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0">
-              Lihat Semua <i className="ri-arrow-right-long-line text-[20px]"></i>
+            <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">
+              Berita Terbaru
+            </h1>
+            <Link
+              to="/blog/daftar"
+              className="w-[174px] h-[40px] bg-[#B00000] text-center font-medium text-white flex items-center justify-center gap-[20px] rounded-[8px] shrink-0"
+            >
+              Lihat Semua{" "}
+              <i className="ri-arrow-right-long-line text-[20px]"></i>
             </Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-x-[20px] 2xl:gap-x-[60px]">

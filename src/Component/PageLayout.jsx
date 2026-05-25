@@ -28,7 +28,7 @@ export function PageHero({ title, subtitle }) {
 export function PageHeroDetailBlog({ img }) {
   return (
     // 1. Tambahkan h-[400px] (bukan cuma max-h) agar parent punya tinggi tetap saat gambar dimuat
-    <div className="relative h-[350px] md:h-[400px] w-full flex items-center justify-center bg-[#4A0000] overflow-hidden">
+    <div className="relative h-[350px] md:h-[500px] w-full flex items-center justify-center bg-[#4A0000] overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
