@@ -104,6 +104,15 @@ const apiService = {
             throw new Error(error.response?.data?.message || error.message);
         }
     },
+    getPpid: async (cat) => {
+        try {
+            // Gunakan backtick (``) dan ${slug} untuk memasukkan ID secara dinamis ke URL
+            const response = await api.get(`/webcontent/PPID?cat=${cat}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
 };
 
 export default apiService;
