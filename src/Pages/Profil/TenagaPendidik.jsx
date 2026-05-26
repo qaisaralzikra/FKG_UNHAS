@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { PageHero, ContentSection, BackLink } from "../../Component/PageLayout";
-import Dekan from "../../assets/dekan.png";
 import apiService from "../../Services/api";
 import { LoadingPage } from "../../Component/LoadingPage";
 

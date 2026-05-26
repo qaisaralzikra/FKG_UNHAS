@@ -432,6 +432,11 @@ function Akademik({ isScrolled }) {
     }, 200);
   };
 
+  const sk = "sk";
+  const pengabdian = "pengabdian";
+  const kemahasiswaan = "kemahasiswaan";
+  const ormawa = "ormawa";
+
   return (
     <div
       className="relative flex items-center cursor-pointer text-[16px]"
@@ -483,12 +488,12 @@ function Akademik({ isScrolled }) {
               <Link to="/akademik/akreditasi">Akreditasi</Link>
             </li>
             <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
-              <Link to="/akademik/sk-kontrak-kinerja">
+              <Link to={`/akademik/kontrak-kinerja/${sk}`}>
                 SK & Kontrak Kinerja
               </Link>
             </li>
             <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
-              <Link to="/akademik/pengabdian">Pengabdian</Link>
+              <Link to={`/akademik/pengabdian/${pengabdian}`}>Pengabdian</Link>
             </li>
           </ul>
         </li>
@@ -514,10 +519,12 @@ function Akademik({ isScrolled }) {
           `}
           >
             <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
-              <Link to="/akademik/kemahasiswaan">Kemahasiswaan</Link>
+              <Link to={`/akademik/kemahasiswaan/${kemahasiswaan}`}>
+                Kemahasiswaan
+              </Link>
             </li>
             <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] rounded-[10px]">
-              <Link to="/akademik/ormawa">Ormawa</Link>
+              <Link to={`/akademik/ormawa/${ormawa}`}>Ormawa</Link>
             </li>
           </ul>
         </li>
@@ -908,6 +915,11 @@ function MobileDrawer({ isOpen, onClose, data }) {
 
   const toggle = (key) =>
     setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  const sk = "sk";
+  const pengabdian = "pengabdian";
+  const kemahasiswaan = "kemahasiswaan";
+  const ormawa = "ormawa";
 
   return (
     <>
@@ -1325,13 +1337,13 @@ function MobileDrawer({ isOpen, onClose, data }) {
                 Akreditasi
               </Link>
               <Link
-                to="/akademik/sk-kontrak-kinerja"
+                to={`/akademik/kontrak-kinerja/${sk}`}
                 className="block py-2 text-sm ps-3"
               >
                 SK & Kontrak Kinerja
               </Link>
               <Link
-                to="/akademik/pengabdian"
+                to={`/akademik/pengabdian/${pengabdian}`}
                 className="block py-2 text-sm ps-3"
               >
                 Pengabdian
@@ -1344,12 +1356,15 @@ function MobileDrawer({ isOpen, onClose, data }) {
               nested
             >
               <Link
-                to="/akademik/kemahasiswaan"
+                to={`/akademik/kemahasiswaan/${kemahasiswaan}`}
                 className="block py-2 text-sm ps-3"
               >
                 Kemahasiswaan
               </Link>
-              <Link to="/akademik/ormawa" className="block py-2 text-sm ps-3">
+              <Link
+                to={`/akademik/ormawa/${ormawa}`}
+                className="block py-2 text-sm ps-3"
+              >
                 Ormawa
               </Link>
             </MobileAccordion>

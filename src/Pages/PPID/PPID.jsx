@@ -13,28 +13,28 @@ const items = [
   {
     slug: "serta-merta",
     cat: "serta_merta",
-    title: "Serta Merta",
+    title: "Informasi Serta Merta",
     icon: "ri-alarm-line",
     desc: "Informasi yang harus segera disampaikan kepada publik.",
   },
   {
     slug: "dikecualikan",
     cat: "dikecualikan",
-    title: "Dikecualikan",
+    title: "Informasi Dikecualikan",
     icon: "ri-lock-line",
     desc: "Informasi yang dikecualikan dari akses publik.",
   },
   {
     slug: "setiap-saat",
     cat: "setiap_saat",
-    title: "Setiap Saat",
+    title: "Informasi Setiap Saat",
     icon: "ri-time-line",
     desc: "Informasi yang tersedia setiap saat bagi publik.",
   },
   {
     slug: "berkala",
     cat: "berkala",
-    title: "Berkala",
+    title: "Informasi Berkala",
     icon: "ri-calendar-line",
     desc: "Informasi yang disediakan secara berkala.",
   },
@@ -146,7 +146,7 @@ function PPIDDetail() {
   return (
     <>
       <PageHero
-        title={`PPID ${decodeURIComponent(title)}`}
+        title={`${decodeURIComponent(title)}`}
         subtitle="PPID FKG Unhas"
       />
       <ContentSection>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api', // <-- Pastikan ada /api di ujungnya
+    baseURL: 'https://lazily-unveiling-lumber.ngrok-free.dev/api/', // <-- Pastikan ada /api di ujungnya
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -108,6 +108,33 @@ const apiService = {
         try {
             // Gunakan backtick (``) dan ${slug} untuk memasukkan ID secara dinamis ke URL
             const response = await api.get(`/webcontent/PPID?cat=${cat}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
+    getAkreditasi: async () => {
+        try {
+            // Gunakan backtick (``) dan ${slug} untuk memasukkan ID secara dinamis ke URL
+            const response = await api.get(`/akreditasi`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
+    getProfil: async () => {
+        try {
+            // Gunakan backtick (``) dan ${slug} untuk memasukkan ID secara dinamis ke URL
+            const response = await api.get(`/profil`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
+    getWebcontent: async (content) => {
+        try {
+            // Gunakan backtick (``) dan ${slug} untuk memasukkan ID secara dinamis ke URL
+            const response = await api.get(`/webcontent/${content}`);
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.message || error.message);

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   PageHero,
   ContentSection,
@@ -6,6 +7,8 @@ import {
 } from "../../Component/PageLayout";
 
 import IMG from "../../assets/dekan.png";
+import apiService from "../../Services/api";
+import { LoadingPage } from "../../Component/LoadingPage";
 
 const prodi = [
   "Doktor Ilmu Kedokteran Gigi",
@@ -23,6 +26,33 @@ const prodi = [
 ];
 
 export function ProfilFKG() {
+  const [prodi, setProdi] = useState([]);
+  const [dosen, setDosen] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    apiService
+      .getProfil()
+      .then((response) => {
+        const result = response.data || response;
+
+        if (result) {
+          setProdi(result.prodiList || []);
+          setDosen(result.dosenList || []);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+    if (loading) return <LoadingPage />;
+    if (error) return <p className="text-center py-10 text-red-600">Gagal memuat data: {error}</p>;
   return (
     <>
       <PageHero
@@ -65,17 +95,18 @@ export function ProfilFKG() {
                 Program Studi
               </h3>
               <p className="text-gray-600 mb-4">
-                FKG Unhas menyelenggarakan 11 program studi:
+                FKG Unhas menyelenggarakan {prodi.length} program studi:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {prodi.map((p, i) => (
-                  <div
-                    key={i}
-                    className="bg-white p-3 rounded-[10px] shadow-sm border border-gray-100 flex items-center gap-2"
+                  <a
+                    key={i, p.Uni1}
+                    href={p.DeptDomain}
+                    className="bg-white p-3 rounded-[10px] shadow-sm border border-gray-100 hover:border-[#b00000] duration-[0.3s] flex items-center gap-2 cursor-pointer"
                   >
                     <i className="ri-graduation-cap-line text-[#b00000]"></i>
-                    <span className="text-gray-700">{p}</span>
-                  </div>
+                    <span className="text-gray-700">{p.DeptNama}</span>
+                  </a>
                 ))}
               </div>
             </div>
@@ -85,26 +116,14 @@ export function ProfilFKG() {
               Pimpinan Fakultas
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              <CardIMG
-                img={IMG}
-                nama="Irfan Sugianto, drg., Ph.D., M.Med., Sp.RKG"
-                jabatan="Dekan"
-              />
-              <CardIMG
-                img={IMG}
-                nama="Acing Habibie Mude, drg., Ph.D., Sp.Pros., Subsp.OGST(K)"
-                jabatan="Wakil Dekan Bidang Akademik"
-              />
-              <CardIMG
-                img={IMG}
-                nama="Dr. Juni Jekti Nugroho, drg., Sp.KG., Subsp., KE (K)"
-                jabatan="Wakil Dekan Bidang Umum dan Keuangan"
-              />
-              <CardIMG
-                img={IMG}
-                nama="Erni Marlina,drg., Ph.D., Sp.PM, Subsp.Inf(K)"
-                jabatan="Wakil Dekan Bidang Kemahasiswaan dan Alumni"
-              />
+              {dosen.map((item) => (
+                  <CardIMG
+                  key={item.id}
+                    img={item.foto}
+                    nama={item.nama}
+                    jabatan={item.nama_jabatan}
+                  />
+                ))}
             </div>
           </div>
           <div className="bg-white p-5 rounded-[16px] shadow-sm border border-gray-100 max-w-[900px] space-y-8">

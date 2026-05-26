@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { PageHero, ContentSection, BackLink } from "../../Component/PageLayout";
 import { CardIMG } from "../../Component/PageLayout";
 
-import IMG from "../../assets/dekan.png";
 import apiService from "../../Services/api";
 import { LoadingPage } from "../../Component/LoadingPage";
 
@@ -48,7 +47,7 @@ export function PimpinanFakultas() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:grid-cols-4 gap-4">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <CardIMG
                 img={item.foto}
                 nama={item.nama}
