@@ -538,6 +538,80 @@ function Ormawa() {
   );
 }
 
+function BukuPedoman() {
+  const { content } = useParams();
+
+  const [BukuPedoman, setBukuPedoman] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    apiService
+      .getWebcontent(content)
+      .then((response) => {
+        const result = response.data || response;
+
+        if (result) {
+          setBukuPedoman(result.webcontentList || []);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [content]);
+
+  if (loading) return <LoadingPage />;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">
+        Gagal memuat data: {error}
+      </p>
+    );
+  return (
+    <>
+      <PageHero title={"Buku Pedoman"} subtitle="Akademik FKG Unhas" />
+      <ContentSection>
+        <div className="max-w-[900px] lg:min-w-[800px] md:min-w-[600px] sm:min-w-[400px] min-w-[260px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px] p-[20px]">
+          <BackLink to="/akademik" />
+          {BukuPedoman.length > 0 ? (
+            <div class="overflow-x-auto">
+              <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
+                <thead className="border-[2px] border-gray-200">
+                  <tr>
+                    <th colSpan={5} className="py-[10px] px-[10px] text-start">
+                      data belum di ambil
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {BukuPedoman.map((d, index) => (
+                    <tr
+                      key={d.Uniq}
+                      className={`${index % 2 === 1 ? "bg-gray-100 hover:bg-gray-200" : "bg-white"}`}
+                    >
+                      <td colSpan={5} className="py-[20px] px-[20px]">
+                        Data Belum Di ambil
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div>
+              Data <strong>Buku Pedoman</strong> tidak ditemukan.
+            </div>
+          )}
+        </div>
+      </ContentSection>
+    </>
+  );
+}
+
 export function Akademik() {
   return (
     <Routes>
@@ -548,6 +622,7 @@ export function Akademik() {
       <Route path="/pengabdian/:content" element={<Pengabdian />} />
       <Route path="/kemahasiswaan/:content" element={<Kemahasiswaan />} />
       <Route path="/ormawa/:content" element={<Ormawa />} />
+      <Route path="/buku-pedoman/:content" element={<BukuPedoman />} />
     </Routes>
   );
 }

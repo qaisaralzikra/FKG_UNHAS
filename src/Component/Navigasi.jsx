@@ -436,6 +436,7 @@ function Akademik({ isScrolled }) {
   const pengabdian = "pengabdian";
   const kemahasiswaan = "kemahasiswaan";
   const ormawa = "ormawa";
+  const BukuPedoman = "buku_pedoman";
 
   return (
     <div
@@ -532,7 +533,7 @@ function Akademik({ isScrolled }) {
         {/* MENU UTAMA LAIN TANPA SUB-MENU */}
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/akademik/buku-pedoman">Buku Pedoman</Link>
+            <Link to={`/akademik/buku-pedoman/${BukuPedoman}`}>Buku Pedoman</Link>
           </div>
         </li>
       </ul>
@@ -920,6 +921,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
   const pengabdian = "pengabdian";
   const kemahasiswaan = "kemahasiswaan";
   const ormawa = "ormawa";
+  const BukuPedoman = "buku_pedoman";
 
   return (
     <>
@@ -1369,7 +1371,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
               </Link>
             </MobileAccordion>
             <Link
-              to="/akademik/buku-pedoman"
+              to={`/akademik/buku-pedoman/${BukuPedoman}`}
               className="block py-3 text-[16px] border-b border-gray-100 ms-3"
             >
               Buku Pedoman
