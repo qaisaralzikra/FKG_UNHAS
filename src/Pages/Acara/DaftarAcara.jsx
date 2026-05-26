@@ -1,85 +1,78 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PageHero, ContentSection, BackLink } from "../../Component/PageLayout";
+import apiService from "../../Services/api";
+import { LoadingPage } from "../../Component/LoadingPage";
 
-// Data Dummy Acara yang disesuaikan dengan kebutuhan card event pada gambar
-const eventData = [
-  {
-    id: 1,
-    title: "Workshop Kesehatan Gigi & Mulut",
-    description:
-      "Workshop komprehensif tentang kesehatan gigi dan mulut untuk mahasiswa.",
-    time: "09:00 - 15:00",
-    location: "Ruang Lab Komputer",
-    day: "30",
-    monthText: "JUN",
-    year: "2025",
-    monthIndex: "JUN", // Untuk filter
-  },
-  {
-    id: 2,
-    title: "Workshop Perawatan Gigi",
-    description: "Pelatihan praktis mengenai teknik perawatan gigi modern.",
-    time: "09:00 - 15:00",
-    location: "Ruang Lab Komputer",
-    day: "29",
-    monthText: "JUN",
-    year: "2025",
-    monthIndex: "JUN",
-  },
-  {
-    id: 3,
-    title: "Seminar Ortodonti Modern",
-    description: "Seminar tentang perkembangan terkini dalam bidang ortodonti.",
-    time: "13:00 - 17:00",
-    location: "Auditorium FKG",
-    day: "15",
-    monthText: "JUL",
-    year: "2025",
-    monthIndex: "JUL",
-  },
-  {
-    id: 4,
-    title: "Pelatihan Endodontik Lanjutan",
-    description: "Pelatihan intensif untuk mahasiswa tingkat lanjut.",
-    time: "08:00 - 16:00",
-    location: "Klinik FKG",
-    day: "20",
-    monthText: "AUG",
-    year: "2025",
-    monthIndex: "AUG",
-  },
-];
-
+// Nilai value disesuaikan dengan format string bulan 2-digit dari database (01 - 12)
 const daftarBulan = [
   { label: "Semua Bulan", value: "ALL" },
-  { label: "JAN", value: "JAN" },
-  { label: "FEB", value: "FEB" },
-  { label: "MAR", value: "MAR" },
-  { label: "APR", value: "APR" },
-  { label: "MEI", value: "MEI" },
-  { label: "JUN", value: "JUN" },
-  { label: "JUL", value: "JUL" },
-  { label: "AUG", value: "AUG" },
-  { label: "SEP", value: "SEP" },
-  { label: "OKT", value: "OKT" },
-  { label: "NOV", value: "NOV" },
-  { label: "DES", value: "DES" },
+  { label: "JAN", value: "01" },
+  { label: "FEB", value: "02" },
+  { label: "MAR", value: "03" },
+  { label: "APR", value: "04" },
+  { label: "MEI", value: "05" },
+  { label: "JUN", value: "06" },
+  { label: "JUL", value: "07" },
+  { label: "AUG", value: "08" },
+  { label: "SEP", value: "09" },
+  { label: "OKT", value: "10" },
+  { label: "NOV", value: "11" },
+  { label: "DES", value: "12" },
 ];
 
 export function DaftarAcara() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("ALL");
+  const [data, setData] = useState([]); // Default gunakan array kosong agar .length tidak error
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Logika Filter gabungan (Bulan & Kolom Pencarian)
-  const filteredEvents = eventData.filter((event) => {
-    const matchesMonth =
-      selectedMonth === "ALL" || event.monthIndex === selectedMonth;
-    const matchesSearch =
-      event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchQuery.toLowerCase());
+  useEffect(() => {
+    apiService
+      .getEvent()
+      .then((response) => {
+        // Menyesuaikan penangkapan data eventList dari backend
+        const result =
+          response.data?.eventList || response.eventList || response;
+        setData(Array.isArray(result) ? result : []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  console.log(data);
+
+
+  // =========================================================================
+  // LOGIKA FILTER GABUNGAN (BULAN & KOLOM PENCARIAN)
+  // =========================================================================
+  const filteredEvents = data.filter((event) => {
+    // 1. Ambil digit bulan dari string "2025-06-30" -> hasil: "06"
+    const bulanItem = event.tanggal_mulai
+      ? event.tanggal_mulai.split("-")[1]
+      : "";
+    const matchesMonth = selectedMonth === "ALL" || bulanItem === selectedMonth;
+
+    // 2. Filter berdasarkan judul event (nama_event)
+    const namaEventLower = (event.nama_event || "").toLowerCase();
+    const matchesSearch = namaEventLower.includes(searchQuery.toLowerCase());
+
     return matchesMonth && matchesSearch;
   });
+
+  if (loading) return <LoadingPage />;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">
+        Gagal memuat data: {error}
+      </p>
+    );
+
+    console.log(filteredEvents);
 
   return (
     <>
@@ -100,7 +93,7 @@ export function DaftarAcara() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full py-[6px] border-0 focus:outline-none text-[15px]"
+                className="w-full py-[6px] border-0 focus:outline-none text-[15px] text-black bg-white"
                 placeholder="Cari Acara..."
               />
             </div>
@@ -131,61 +124,85 @@ export function DaftarAcara() {
           {/* GRID CARD DAFTAR ACARA */}
           {filteredEvents.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-              {filteredEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="bg-white rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col border border-gray-50 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
-                >
-                  {/* Bagian Atas: Banner Tanggal (Maroon Gelap) */}
-                  <div className="bg-[#4A0000] text-white p-6 flex flex-col items-center justify-center relative">
-                    <span className="text-sm font-bold tracking-widest opacity-80">
-                      {event.monthText}
-                    </span>
-                    <span className="text-4xl font-extrabold my-1">
-                      {event.day}
-                    </span>
-                    <span className="text-xs font-medium tracking-wider opacity-70">
-                      {event.year}
-                    </span>
+              {filteredEvents.map((event) => {
+                // Ekstraksi komponen tanggal dari "2025-06-30"
+                const [tahun, bulan, hari] = event.tanggal_mulai
+                  ? event.tanggal_mulai.split("-")
+                  : ["-", "-", "-"];
 
-                    {/* Badge EVENT */}
-                    <div className="mt-3 bg-[rgba(255,255,255,0.15)] px-4 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border border-[rgba(255,255,255,0.2)]">
-                      Event
-                    </div>
-                  </div>
+                // Ubah string tanggal menjadi teks nama bulan pendek bahasa Indonesia (contoh: "Jun")
+                const namaBulanPendek = event.tanggal_mulai
+                  ? new Date(event.tanggal_mulai).toLocaleDateString("id-ID", {
+                      month: "short",
+                    })
+                  : "-";
 
-                  {/* Bagian Bawah: Konten Detail Kard */}
-                  <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="font-bold text-gray-800 text-[18px] leading-snug line-clamp-2 min-h-[52px]">
-                        {event.title}
-                      </h3>
-                      <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed">
-                        {event.description}
-                      </p>
-                    </div>
+                return (
+                  <div
+                    key={event.id}
+                    className="bg-white rounded-[16px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col border border-gray-50 hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+                  >
+                    {/* Bagian Atas: Banner Tanggal (Maroon Gelap) */}
+                    <div className="bg-[#4A0000] text-white p-6 flex flex-col items-center justify-center relative">
+                      <span className="text-sm font-bold tracking-widest uppercase opacity-80">
+                        {namaBulanPendek}
+                      </span>
+                      <span className="text-4xl font-extrabold my-1">
+                        {hari}
+                      </span>
+                      <span className="text-xs font-medium tracking-wider opacity-70">
+                        {tahun}
+                      </span>
 
-                    {/* Metadata Waktu & Tempat */}
-                    <div className="space-y-1.5 pt-2 text-xs text-gray-600 font-medium">
-                      <div className="flex items-center gap-2">
-                        <i className="ri-time-line text-[#4A0000] text-sm"></i>
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <i className="ri-map-pin-line text-[#4A0000] text-sm"></i>
-                        <span>{event.location}</span>
+                      {/* Badge EVENT */}
+                      <div className="mt-3 bg-[rgba(255,255,255,0.15)] px-4 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase border border-[rgba(255,255,255,0.2)]">
+                        Event
                       </div>
                     </div>
+
+                    {/* Bagian Bawah: Konten Detail Kard */}
+                    <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
+                      <div className="space-y-2">
+                        <h3 className="font-bold text-gray-800 text-[18px] leading-snug line-clamp-2 min-h-[52px]">
+                          {event.nama_event}
+                        </h3>
+                        {/* Render deskripsi keterangan html dengan aman */}
+                        <div
+                          dangerouslySetInnerHTML={{ __html: event.keterangan }}
+                          className="text-gray-500 text-sm line-clamp-2 leading-relaxed"
+                        ></div>
+                      </div>
+
+                      {/* Metadata Waktu & Tempat */}
+                      <div className="space-y-1.5 pt-2 text-xs text-gray-600 font-medium border-t border-gray-50">
+                        <div className="flex items-center gap-2">
+                          <i className="ri-time-line text-[#4A0000] text-sm"></i>
+                          <span>
+                            {event.jam_mulai?.substring(0, 5)} -{" "}
+                            {event.jam_selesai?.substring(0, 5)} WITA
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <i className="ri-map-pin-line text-[#4A0000] text-sm-shrink-0"></i>
+                          {/* Render lokasi html dengan aman */}
+                          <div
+                            dangerouslySetInnerHTML={{ __html: event.lokasi }}
+                            className="line-clamp-1 text-gray-600"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
-            /* State kosong jika data pencarian tidak ketemu */
-            <div className="text-center py-12 bg-white rounded-[15px] shadow-[0_0_20px_0_rgba(0,0,0,0.03)] text-gray-400">
+            /* State kosong jika data pencarian atau filter bulan tidak ada yang cocok */
+            <div className="text-center py-16 bg-white rounded-[15px] shadow-[0_0_20px_0_rgba(0,0,0,0.03)] text-gray-400 border-2 border-dashed border-gray-100">
               <i className="ri-calendar-close-line text-4xl mb-2 block text-gray-300"></i>
-              <p className="text-sm">
-                Tidak ada acara yang ditemukan pada bulan ini.
+              <p className="text-sm font-medium">
+                Tidak ada acara yang ditemukan pada kriteria pencarian atau
+                bulan ini.
               </p>
             </div>
           )}

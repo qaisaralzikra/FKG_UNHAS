@@ -4,16 +4,17 @@ function Card({ data }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[20px] 2xl:gap-[40px] mt-6 lg:mt-[32px] text-black text-base lg:text-[20px]">
       {data.map((item) => (
-        <div
+        <a
+        href={item.url} target="_blank"
           key={item.id}
           className="col-span-1 w-full min-h-[220px] lg:h-[298px] bg-white rounded-[20px] p-3 lg:p-[10px] flex items-start flex-col gap-2 lg:gap-[8px]"
         >
           <i className="ri-tooth-line text-4xl lg:text-[53px] text-[#b00000]"></i>
           <p className="w-full text-base lg:text-[22px] line-clamp-4 lg:line-clamp-none flex-1">{item.title}</p>
-          <a href={item.url} className="hover:text-[#b00000] duration-[0.4s] shrink-0">
+          <a href={item.url} target="_blank" className="hover:text-[#b00000] duration-[0.4s] shrink-0">
             Lihat <i className="ri-arrow-right-long-line"></i>
           </a>
-        </div>
+        </a>
       ))}
     </div>
   );
@@ -25,73 +26,73 @@ export function Layanan() {
       id: 1,
       title:
         "Permohonan Surat Keterangan Aktif Kuliah dan Surat Rekomendasi Beasiswa",
-      url: "",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLScgs9wKYdrFKR09HDbZib5nT2TsejpwoLRQvRslozlo7YAPEg/viewform",
     },
     {
       id: 2,
       title:
         "Permohonan Surat Izin Penelitian dan Surat Rekomendasi Etik Penelitian",
-      url: "",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSdrp16xzwNpYItuZ8KWOkVA0ApYnQ5kgEZQ6ad8QkkLWD9FCg/viewform",
     },
     {
       id: 3,
       title: "Surat Rekomendasi Magang",
-      url: "",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSccDxBc-yCba542Z-K8lYk4nLvL7yR9dfyYepIKGso-Z3Gjnw/viewform",
     },
     {
       id: 4,
       title: "Layanan E-Library",
-      url: "",
+      url: "https://drive.google.com/file/d/1i59Gq8V7wpM9NjGVOsBwdGQV43xXEoOo/view",
     },
     {
       id: 5,
       title: "Jurnal Ilmu Dentomaksilofasial",
-      url: "",
+      url: "https://jdmfs.org/index.php/jdmfs",
     },
     {
       id: 6,
       title: "Pusat Bahasa Universitas",
-      url: "",
+      url: "https://pusatbahasa.unhas.ac.id/id/upt-pusat-bahasa-universitas-hasanuddin/",
     },
     {
       id: 7,
       title: "Jurnal Laporan Kasus Kedokteran Gigi",
-      url: "",
+      url: "https://www.jcrdm.org/index.php/jcrdm/",
     },
     {
       id: 8,
       title: "Layanan Penelitian Frontiers Dental Laboratory Research",
-      url: "",
+      url: "https://drive.google.com/drive/folders/1HuAExmPz4TVY44mAti6itMheddsNpBK_",
     },
     {
       id: 9,
       title: "Surat Keterangan Tidak Menerima Beasiswa",
-      url: "",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSe69dup7iTLeRUrKK07eh1YBdJ91c9mLthfM6xS2IOgWgVnDw/viewform",
     },
     {
       id: 10,
       title: "Asrama Mahasiswa",
-      url: "",
+      url: "youtube.com/watch?si=CEIgTtys2vPfLe8-&v=lc7GEVq-si8&feature=youtu.be",
     },
     {
       id: 11,
       title: "Rumah Sakit Gigi Universitas Hasanuddin (RSGMP)",
-      url: "",
+      url: "https://rsgm.unhas.ac.id/",
     },
     {
       id: 12,
       title: "Rumah Sakit Universitas Hasanuddin (RSP)",
-      url: "",
+      url: "https://rs.unhas.ac.id/website/tentang-kami/profil-rumah-sakit-unhas/",
     },
     {
       id: 13,
       title: "Pusat Pengembangan Karir",
-      url: "",
+      url: "https://cdc.unhas.ac.id/eng",
     },
     {
       id: 14,
       title: "Perpustakaan Universitas Hasanuddin",
-      url: "",
+      url: "https://library.unhas.ac.id/",
     },
   ];
   return (

@@ -43,6 +43,8 @@ import { StrukturOrganisasiKomiteEtik } from "./Pages/KomiteEtik/StrukturOrganis
 import { DaftarBerita } from "./Pages/Berita/DaftarBerita";
 import { DetailBerita } from "./Pages/Berita/DetailBerita";
 import { DaftarAcara } from "./Pages/Acara/DaftarAcara";
+import apiService from "./Services/api";
+import { LoadingPage } from "./Component/LoadingPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -72,7 +74,7 @@ function App() {
       <Route path="/" element={<Beranda />} />
       <Route path="/acara/daftar" element={<DaftarAcara />} />
       <Route path="/blog/daftar" element={<DaftarBerita />} />
-      <Route path="/blog/detail/:id" element={<DetailBerita />} />
+      <Route path="/blog/detail/:slug" element={<DetailBerita />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/profil/selayang-pandang" element={<SelayangPandang />} />
       <Route path="/profil/sejarah" element={<Sejarah />} />
@@ -113,11 +115,37 @@ function App() {
     </Routes>
   );
 
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiService
+      .getDepartemen()
+      .then((response) => {
+        const result = response.data?.departemenList || response;
+        setData(result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <LoadingPage />;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">
+        Gagal memuat data: {error}
+      </p>
+    );
+
   return (
     <BrowserRouter>
       <ScrollToTop />
       <div className="overflow-visible h-auto">
-        <Navigasi />
+        <Navigasi data={data} />
         {routes}
         <div
           className={`${

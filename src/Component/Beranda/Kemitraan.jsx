@@ -8,11 +8,6 @@ export function Mitra() {
       desc: "Sejarah dimulai pada tahun 1968. Pertemuan antara tim TNI-AL yang dipimpin oleh drg. Liem Tjing Kiat bersama drg Halima dan Sikati menghadap Rektor Unhas Letkol Dr. M. Nasir Said, SH untuk membahas kemungkinan pembukaan Pendidikan Kedokteran Gigi di Universitas Hasanuddin. Penandatanganan perjanjian kerjasama antara Universitas Hasanuddin dan TNI Angkatan Laut, pada tanggal 23 Januari 1969..",
       img: Mitra1,
     },
-    {
-      id: 2,
-      desc: "Sejarah dimulai pada tahun 1968. Pertemuan antara tim TNI-AL yang dipimpin oleh drg. Liem Tjing Kiat bersama drg Halima dan Sikati menghadap Rektor Unhas Letkol Dr. M. Nasir Said, SH untuk membahas kemungkinan pembukaan Pendidikan Kedokteran Gigi di Universitas Hasanuddin. Penandatanganan perjanjian kerjasama antara Universitas Hasanuddin dan TNI Angkatan Laut, pada tanggal 23 Januari 1969..",
-      img: Mitra1,
-    },
   ];
   return (
     <div className="px-4 sm:px-6 lg:px-[70px] py-8 md:py-12 lg:py-[64px]">

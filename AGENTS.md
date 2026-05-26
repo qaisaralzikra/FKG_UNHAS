@@ -3,7 +3,7 @@
 ## Stack
 - React 19, Vite 8, Tailwind CSS v4, DaisyUI 5
 - JavaScript (JSX) — no TypeScript
-- `motion` (formerly Framer Motion) for animations — import from `"motion/react"` (e.g. `import { motion } from "motion/react"`)
+- `motion` for animations — import from `"motion/react"` (e.g. `import { motion } from "motion/react"`)
 - Remixicon for icons (loaded via CDN in `index.html`)
 - ESLint flat config (`eslint.config.js`) — no Prettier, no formatter config
 
@@ -19,30 +19,28 @@ No test runner is configured.
 
 ## Tailwind v4 specifics
 - No `tailwind.config.js` or `postcss.config.js` — plugin is `@tailwindcss/vite` (see `vite.config.js`)
-- Theme and plugins are defined via CSS directives in `src/index.css`:
-  - `@import "tailwindcss"` (entry point)
-  - `@plugin "daisyui"` (DaisyUI integration)
-  - `@theme { ... }` (custom theme tokens)
-- Do **not** use `@tailwind` or `@apply` directives in a postcss config — they will not work
+- Theme and plugins via CSS directives in `src/index.css`:
+  - `@import "tailwindcss"` (entry point), `@plugin "daisyui"`, `@theme { ... }`
+- Do **not** use `@tailwind` or `@apply` directives — they will not work
 
 ## Architecture
 - Entry: `src/main.jsx` → `src/App.jsx`
-- **React Router** (`react-router-dom`) for multi-page navigation — all nav links use `<Link>` not `<a>`
-- Beranda (`/`) is the homepage with sections: `src/Component/Beranda/` (HeroSection, VisiMisi, Layanan, Acara, JurnalDanPublikasi, Blog, Kemitraan)
+- **React Router** (`react-router-dom`) for navigation — use `<Link>` not `<a>`
+- Beranda (`/`) is the homepage; sections live in `src/Component/Beranda/` (HeroSection, VisiMisi, Layanan, Acara, JurnalDanPublikasi, Blog, Kemitraan)
 - Shared layout: `src/Component/PageLayout.jsx` (PageHero, ContentSection, SectionTitle, BackLink, CardLink, CardGrid)
-- Shared: `src/Component/Navigasi.jsx`, `src/Component/Footer.jsx`
-- `Navigasi.jsx` is a large file (~1876 lines) with complex nested dropdown sub-menus using hover-based state management
-- Page routes: `/profil/*`, `/departemen/*`, `/program-studi/*`, `/gpm/*`, `/unduhan/*`, `/zona-integritas/*`, `/ppid/*`, `/akademik/*`, `/komite-etik/*`
-- Sub-pages live in `src/Pages/ProfIl/`, `src/Pages/GPM/`, etc.
-- `*` wildcard routes fall back to the category index page when a direct sub-page match is missing
-- `src/pages/NotFound.jsx` handles unmatched routes (`path="*"`)
+- Shared: `src/Component/Navigasi.jsx` (1742 lines, complex nested hover-dropdowns), `src/Component/Footer.jsx`, `src/Component/PageListManager.jsx` (search + pagination)
+- Page routes: `/profil`, `/departemen/*`, `/program-studi/*`, `/gpm/*`, `/unduhan/*`, `/zona-integritas/*`, `/ppid/*`, `/akademik/*`, `/komite-etik/*`
+- Sub-pages in `src/Pages/ProfIl/`, `src/Pages/GPM/`, etc. — note the lowercase `l` in `ProfIl` directory name
+- `src/Pages/NotFound.jsx` catches unmatched routes (`path="*"`)
+- Backend API at `http://localhost:8080/api` via axios (`src/Services/api.js`) — provides `/` dashboard data and `/berita` endpoint
 
 ## Conventions
-- Standard `className` attribute in JSX (one `classname` typo existed in old `App.jsx` — do not replicate)
-- Dark theme via DaisyUI data attributes (e.g. `data-theme="dark"`)
-- Accent colors used in code: `#b00000` (red — navigation hover states), `#4A0000` (footer background)
-- `@theme` in `src/index.css` declares `--font-poppins: "Raleway", sans-serif` — the CSS variable name says Poppins but uses the Raleway font family
+- Standard `className` in JSX
+- Dark theme via DaisyUI `data-theme="dark"`
+- Accent colors: `#b00000` (red — nav hovers), `#4A0000` (footer/dark sections)
+- `@theme` in `src/index.css` declares `--font-poppins: "Raleway", sans-serif` — name says Poppins, font is Raleway
 
 ## Additional integrations
-- Google Translate widget embedded in `index.html` (language pair id/en) — hidden via CSS in `src/index.css` (`.goog-te-banner-frame`, `.skiptranslate`)
+- Google Translate widget in `index.html` (id/en) — hidden via CSS in `src/index.css`
+- `puppeteer` in dependencies — a PDF generation script (`scripts/generate-pdfs.mjs`) exists in `.opencode/plans/generate-pdfs-plan.md`; it builds → previews → puppeteer-screenshots all routes to A4 PDFs
 - No pre-commit hooks, CI/CD, or codegen/migration steps

@@ -1,32 +1,49 @@
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import apiService from "../../Services/api";
+import { LoadingPage } from "../../Component/LoadingPage";
 import { PageHeroDetailBlog, BackLink } from "../../Component/PageLayout";
-import Blog1 from "../../assets/blog1.png";
-import { useState } from "react";
 
-const DataDetail = {
-  id: 1,
-  title:
-    "Perkuat Kompetensi Klinik Mahasiswa, FKG Unhas Gelar Dental Laboratory Camp",
-  category: "04. Quality Education",
-  conten:
-    "<p>Fakultas Kedokteran Gigi (FKG) Universitas Hasanuddin menggelar kegiatan Sosialisasi Program Studi Spesialis, Program Magister (S2) Ilmu Kedokteran Gigi, dan Program Doktor (S3) Ilmu Kedokteran Gigi pada Sabtu (28/6/2025), bertempat di Aula RSUD Nene Mallomo, Pangkajene, Kabupaten Sidrap, Sulawesi Selatan.</p><p>Kegiatan yang dimulai pukul 10.00 WITA ini bertujuan untuk memperluas akses dan informasi pendidikan lanjutan bagi dokter gigi di wilayah Ajatappareng, khususnya Kabupaten Sidrap.</p><p>Acara dibuka secara resmi oleh Direktur RSUD Nene Mallomo, drg. Hj. Sahriah Usman, M.Kes., Sp.KG. dan turut dihadiri oleh Ibu Bupati Sidrap, Hj. Haslindah Syaharuddin, S.Pd.</p><p>Hadir sebagai pembicara dalam kegiatan ini:</p><p>•&nbsp;&nbsp;&nbsp;&nbsp;Prof. Dr. Bahruddin Thalib, drg., M.Kes., Sp.Pros., Subsp.PKIKG(K), selaku Ketua Senat Akademik Unhas, yang memaparkan mengenai Program Magister dan Doktor Ilmu Kedokteran Gigi FKG Unhas.</p><p>•&nbsp;&nbsp;&nbsp;&nbsp;Prof. Dr. Sri Oktawati, drg., Sp.Perio., Subsp.R.P.I.D (K), yang menyampaikan informasi tentang Program Spesialis Kedokteran Gigi.</p><p>Peserta kegiatan terdiri dari anggota PDGI Cabang Sidrap serta para dokter gigi umum yang berasal dari wilayah Ajatappareng.</p><p>Antusiasme peserta terlihat dari aktifnya sesi diskusi dan tanya jawab terkait peluang studi lanjutan, sistem pembelajaran, hingga beasiswa pendidikan.</p><p>Turut hadir dalam rombongan FKG Unhas:</p><p>•&nbsp;&nbsp;&nbsp;&nbsp;Direktur RSGMP Unhas, Andi Tajrin, drg., M.Kes., Sp.BMM., Subsp.COM(K)<br>•&nbsp;&nbsp;&nbsp;&nbsp;Ketua Gugus Penjaminan Mutu dan Peningkatan Reputasi FKG Unhas, Prof. Dr. Asmawati, drg., M.Kes., PBO.<br>•&nbsp;&nbsp;&nbsp;&nbsp;Surijana Mappangara, drg., M.Kes., Sp.Perio (K)<br>•&nbsp;&nbsp;&nbsp;&nbsp;Supiaty, drg., M.Kes.<br>•&nbsp;&nbsp;&nbsp;&nbsp;Muliaty Yunus, drg., M.Kes, Sp.OF (K)., dan<br>•&nbsp;&nbsp;&nbsp;&nbsp;Dian Setiawaty, drg., Sp.Perio., Subsp.MP(K)</p><p>Laporan : Majid (Humas FKG Unhas)</p>",
-  date: "07-Jan-2026",
-  image: Blog1,
-};
 export function DetailBerita() {
+  // 1. Mengambil parameter slug dari URL router React
+  const { slug } = useParams();
   const [copied, setCopied] = useState(false);
+
+  const [berita, setBerita] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    // 2. Mengirim slug ke API Service
+    apiService
+      .getDetailBerita(slug)
+      .then((response) => {
+        const result = response.data || response;
+        setBerita(result.postDetail);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [slug]); // Memicu re-fetch jika slug di URL berubah
+
+  if (loading) return <LoadingPage />;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">
+        Gagal memuat berita: {error}
+      </p>
+    );
+  if (!berita)
+    return <p className="text-center py-10">Berita tidak ditemukan</p>;
 
   const handleCopyLink = async () => {
     try {
-      // 1. Ambil URL halaman aktif saat ini secara dinamis
       const currentUrl = window.location.href;
-
-      // 2. Jalankan fungsi copy ke clipboard browser
       await navigator.clipboard.writeText(currentUrl);
-
-      // 3. Set state copied menjadi true untuk feedback visual
       setCopied(true);
-
-      // 4. Kembalikan teks ke "Bagikan" setelah 2 detik
       setTimeout(() => {
         setCopied(false);
       }, 2000);
@@ -35,39 +52,42 @@ export function DetailBerita() {
       alert("Gagal menyalin tautan, silakan salin manual dari address bar.");
     }
   };
+
+  console.log(berita);
+
   return (
     <>
-      <PageHeroDetailBlog img={DataDetail.image} />
+      {/* Gambar banner mengambil properti dari state berita */}
+      <PageHeroDetailBlog img={berita.postImages} />
 
-      {/* 1. Ubah my-[80px] menjadi -mt-[100px] (margin top negatif) untuk menarik konten ke atas.
-    2. Tambahkan pb-[80px] agar bagian bawah tetap memiliki ruang (ganti dari my).
-    3. Tambahkan relative dan z-10 supaya box putih ini berada di atas komponen Hero.
-  */}
       <div className="relative z-10 max-w-full flex items-center justify-center -mt-[100px] md:-mt-[160px] pb-[80px] px-4">
         <div className="max-w-[900px] w-full">
           <div className="p-[24px] md:p-[48px] w-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px]">
             <BackLink to="/blog/daftar" />
 
             <div className="space-y-3">
-              <div className="flex items-center gap-[16px]">
+              <div className="flex items-center gap-[16px] text-gray-500">
                 <i className="ri-price-tag-3-line"></i>
-                <p>{DataDetail.category}</p>
+                {/* Menampilkan kategori SDG berita */}
+                <p>{berita.SdgKategori || "General"}</p>
               </div>
 
               <div>
-                {/* Responsif text heading agar aman di mobile */}
-                <h1 className="font-bold text-[24px] md:text-[36px]">
-                  {DataDetail.title}
+                {/* DIUBAH: Menggunakan berita.PostTitle */}
+                <h1 className="font-bold text-[24px] md:text-[36px] text-black leading-tight">
+                  {berita.PostTitle}
                 </h1>
               </div>
 
               <div className="flex items-center justify-between mb-[30px]">
+                {/* DIUBAH: Menggunakan berita.PostDate */}
                 <p className="text-gray-600 text-[14px]">
                   <i className="ri-calendar-line text-[16px] me-[8px]"></i>
-                  {DataDetail.date}
+                  {berita.PostDate}
                 </p>
+
                 <button
-                  className="text-[#4a0000] cursor-pointer flex items-center transition-all duration-200"
+                  className="text-[#4a0000] cursor-pointer flex items-center transition-all duration-200 font-medium"
                   onClick={handleCopyLink}
                 >
                   <i
@@ -77,11 +97,12 @@ export function DetailBerita() {
                 </button>
               </div>
 
-              <hr />
+              <hr className="border-gray-200" />
 
+              {/* DIUBAH: Menggunakan berita.PostContent */}
               <div
-                className="text-[16px] md:text-[18px] text-gray-600 mt-[30px]"
-                dangerouslySetInnerHTML={{ __html: DataDetail.conten }}
+                className="text-[16px] md:text-[18px] text-gray-700 mt-[30px] leading-relaxed space-y-4"
+                dangerouslySetInnerHTML={{ __html: berita.PostContent }}
               ></div>
             </div>
           </div>

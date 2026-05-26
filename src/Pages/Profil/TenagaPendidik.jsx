@@ -1,45 +1,35 @@
+import { useEffect, useState } from "react";
 import { PageHero, ContentSection, BackLink } from "../../Component/PageLayout";
 import Dekan from "../../assets/dekan.png";
-
-const dosen = [
-  {
-    id: 1,
-    foto: Dekan,
-    nama: "Prof. Dr. Susilowati, drg., SU",
-    unit_kerja: "Ortodonti",
-    nip: "19550415198010 001",
-  },
-  {
-    id: 2,
-    foto: Dekan,
-    nama: "Prof. Dr. Burhanuddin Daeng Pasiga, drg.",
-    unit_kerja: "IKGM-Pencegahan",
-    nip: "19550415198010 001",
-  },
-  {
-    id: 3,
-    foto: Dekan,
-    nama: "Prof. Dr. Edy Machmud, drg., Sp.Pros",
-    unit_kerja: "Prostodonsia",
-    nip: "19550415198010 001",
-  },
-  {
-    id: 4,
-    foto: Dekan,
-    nama: "Erni Marlina, drg., Ph.D., Sp.PM",
-    Unit_kerja: "Penyakit Mulut",
-    nip: "19550415198010 001",
-  },
-  {
-    id: 5,
-    foto: Dekan,
-    nama: "Irfan Sugianto, drg., M.Med.Ed., Ph.D., Sp.RKG",
-    unit_kerja: "Oral Radiology",
-    nip: "19550415198010 001",
-  },
-];
+import apiService from "../../Services/api";
+import { LoadingPage } from "../../Component/LoadingPage";
 
 export function TenagaPendidik() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiService
+      .getDataPendidik()
+      .then((response) => {
+        const result = response.data?.dosenList || response;
+        setData(result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <LoadingPage />;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">
+        Gagal memuat data: {error}
+      </p>
+    );
   return (
     <>
       <PageHero
@@ -66,20 +56,20 @@ export function TenagaPendidik() {
                 </tr>
               </thead>
               <tbody>
-                {dosen.map((d, index) => (
+                {data.map((d, index) => (
                   <tr
-                    key={d.id}
+                    key={d.Uniq}
                     className={`${index % 2 === 1 ? "bg-gray-100 hover:bg-gray-200" : "bg-white"}`}
                   >
                     <td className="py-[20px] px-[20px]">{index + 1}</td>
                     <td className="py-[20px] px-[20px]">
                       <div className="w-[80px] h-[100px] overflow-hidden rounded-[4px]">
-                        <img src={Dekan} className="object-center" alt="" />
+                        <img src={`https://dent.unhas.ac.id/uploads/TenagaPendidik/${d.ContentDesc4}`} className="object-center" alt="" />
                       </div>
                     </td>
-                    <td className="py-[20px] px-[20px]">{d.nama}</td>
-                    <td className="py-[20px] px-[20px]">{d.unit_kerja}</td>
-                    <td className="py-[20px] px-[20px]">{d.nip}</td>
+                    <td className="py-[20px] px-[20px]">{d.ContentDesc1}</td>
+                    <td className="py-[20px] px-[20px]">{d.ContentUnitID}</td>
+                    <td className="py-[20px] px-[20px]">{d.ContentDesc3}</td>
                   </tr>
                 ))}
               </tbody>

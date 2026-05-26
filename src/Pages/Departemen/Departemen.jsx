@@ -49,17 +49,17 @@ export function Departemen() {
   return (
     <Routes>
       <Route index element={<DepartemenIndex />} />
-      <Route path="biologi-oral" element={<BiologiOral />} />
-      <Route path="ilmu-bahan-dan-teknologi" element={<IlmuBahanDanTeknologi />} />
-      <Route path="ilmu-kedokteran-gigi-anak" element={<IlmuKedokteranGigiAnak />} />
-      <Route path="ilmu-kedokteran-gigi-masyarakat-pencegahan" element={<IKGMPencegahan />} />
-      <Route path="ilmu-penyakit-mulut" element={<IlmuPenyakitMulut />} />
-      <Route path="konservasi-gigi" element={<KonservasiGigi />} />
-      <Route path="oral-and-maxillofacial-radiology" element={<OralMaxillofacialRadiology />} />
-      <Route path="ortodonti" element={<Ortodonti />} />
-      <Route path="periodonsia" element={<Periodonsia />} />
-      <Route path="prostodonsia" element={<Prostodonsia />} />
-      <Route path="oral-and-maxillofacial-surgery" element={<OralMaxillofacialSurgery />} />
+      <Route path="departemen-biologi-oral/:uniq" element={<BiologiOral />} />
+      <Route path="departemen-ilmu-bahan-dan-teknologi/:uniq" element={<IlmuBahanDanTeknologi />} />
+      <Route path="departemen-ilmu-kedokteran-gigi-anak/:uniq" element={<IlmuKedokteranGigiAnak />} />
+      <Route path="departemen-ilmu-kedokteran-gigi-masyarakat-pencegahan/:uniq" element={<IKGMPencegahan />} />
+      <Route path="departemen-ilmu-penyakit-mulut/:uniq" element={<IlmuPenyakitMulut />} />
+      <Route path="departemen-konservasi-gigi/:uniq" element={<KonservasiGigi />} />
+      <Route path="departemen-oral-and-maxillofacial-radiology/:uniq" element={<OralMaxillofacialRadiology />} />
+      <Route path="departemen-ortodonti/:uniq" element={<Ortodonti />} />
+      <Route path="departemen-periodonsia/:uniq" element={<Periodonsia />} />
+      <Route path="departemen-prostodonsia/:uniq" element={<Prostodonsia />} />
+      <Route path="departement-oral-and-maxillofacial-surgery/:uniq" element={<OralMaxillofacialSurgery />} />
     </Routes>
   )
 }

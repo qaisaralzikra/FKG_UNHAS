@@ -682,7 +682,7 @@ function ZonaIntegritas({ isScrolled }) {
   );
 }
 
-function Departement({ isScrolled }) {
+function Departement({ isScrolled, data }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef(null);
 
@@ -724,77 +724,18 @@ function Departement({ isScrolled }) {
           }
         `}
       >
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/biologi-oral">Departemen Biologi Oral</Link>
-          </div>
-        </li>
-
-        {/* MENU UTAMA LAIN TANPA SUB-MENU */}
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/ilmu-bahan-dan-teknologi">
-              Departemen Ilmu Bahan dan Teknologi
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/ilmu-kedokteran-gigi-anak">
-              Departemen Ilmu Kedokteran Gigi Anak
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/ilmu-kedokteran-gigi-masyarakat-pencegahan">
-              Departemen Ilmu Kedokteran Gigi Masyarakat - Pencegahan
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/ilmu-penyakit-mulut">
-              Departemen Ilmu Penyakit Mulut
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/konservasi-gigi">
-              Departemen Konservasi Gigi
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/oral-and-maxillofacial-radiology">
-              Departemen Oral and Maxillofacial Radiology
-            </Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/ortodonti">Departemen Ortodonti</Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/periodonsia">Departemen Periodonsia</Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/prostodonsia">Departemen Prostodonsia</Link>
-          </div>
-        </li>
-        <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
-          <div className="flex items-center justify-between">
-            <Link to="/departemen/oral-and-maxillofacial-surgery">
-              Departement Oral and Maxillofacial Surgery
-            </Link>
-          </div>
-        </li>
+        {data.map((item, index) => (
+          <li
+            key={item.Uniq || index}
+            className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]"
+          >
+            <div className="flex items-center justify-between">
+              <Link to={`/departemen/${item.DeptDomain}/${item.Uniq}`}>
+                {item.DeptNama}
+              </Link>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -962,7 +903,7 @@ function MobileAccordion({ label, isOpen, onToggle, children, nested }) {
   );
 }
 
-function MobileDrawer({ isOpen, onClose }) {
+function MobileDrawer({ isOpen, onClose, data }) {
   const [expanded, setExpanded] = useState({});
 
   const toggle = (key) =>
@@ -1048,72 +989,15 @@ function MobileDrawer({ isOpen, onClose }) {
             isOpen={expanded.departemen}
             onToggle={() => toggle("departemen")}
           >
-            <Link
-              to="/departemen/biologi-oral"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Biologi Oral
-            </Link>
-            <Link
-              to="/departemen/ilmu-bahan-dan-teknologi"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Ilmu Bahan dan Teknologi
-            </Link>
-            <Link
-              to="/departemen/ilmu-kedokteran-gigi-anak"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Ilmu Kedokteran Gigi Anak
-            </Link>
-            <Link
-              to="/departemen/ilmu-kedokteran-gigi-masyarakat-pencegahan"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Ilmu Kedokteran Gigi Masyarakat - Pencegahan
-            </Link>
-            <Link
-              to="/departemen/ilmu-penyakit-mulut"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Ilmu Penyakit Mulut
-            </Link>
-            <Link
-              to="/departemen/konservasi-gigi"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Konservasi Gigi
-            </Link>
-            <Link
-              to="/departemen/oral-and-maxillofacial-radiology"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Oral and Maxillofacial Radiology
-            </Link>
-            <Link
-              to="/departemen/ortodonti"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Ortodonti
-            </Link>
-            <Link
-              to="/departemen/periodonsia"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Periodonsia
-            </Link>
-            <Link
-              to="/departemen/prostodonsia"
-              className="block py-2 text-sm ps-3"
-            >
-              Departemen Prostodonsia
-            </Link>
-            <Link
-              to="/departemen/oral-and-maxillofacial-surgery"
-              className="block py-2 text-sm ps-3"
-            >
-              Departement Oral and Maxillofacial Surgery
-            </Link>
+            {data.map((item, index) => (
+              <Link
+                key={item.Uniq || index}
+                to={`/departemen/${item.DeptDomain}/${item.Uniq}`}
+                className="block py-2 text-sm ps-3"
+              >
+                {item.DeptNama}
+              </Link>
+            ))}
           </MobileAccordion>
 
           <Link
@@ -1573,7 +1457,7 @@ function MobileDrawer({ isOpen, onClose }) {
   );
 }
 
-function NavList({ isScrolled }) {
+function NavList({ isScrolled, data }) {
   return (
     <div className="hidden lg:flex lg:flex-wrap text-[16px] text-white items-center gap-x-[20px]">
       <Link
@@ -1583,7 +1467,7 @@ function NavList({ isScrolled }) {
         Beranda
       </Link>
       <Profil isScrolled={isScrolled} />
-      <Departement isScrolled={isScrolled} />
+      <Departement data={data} isScrolled={isScrolled} />
       <Link
         to="/program-studi"
         className={`${isScrolled ? "hover:underline" : "hover:text-[#b00000]"}  duration-[0.4s] ease-in-out`}
@@ -1605,7 +1489,7 @@ function NavList({ isScrolled }) {
   );
 }
 
-function GlassNav({ isScrolled, onToggleMobile }) {
+function GlassNav({ isScrolled, onToggleMobile, data }) {
   return (
     <div
       className={`w-full h-[72px] lg:h-[96px] px-4 sm:px-6 lg:px-[70px] shadow-lg transition-colors duration-500 flex items-center justify-between 2xl:gap-[50px] lg:gap-[100px] ${
@@ -1629,7 +1513,7 @@ function GlassNav({ isScrolled, onToggleMobile }) {
           </h1>
         </div>
       </div>
-      <NavList isScrolled={isScrolled} />
+      <NavList data={data} isScrolled={isScrolled} />
       <button
         onClick={onToggleMobile}
         className="lg:hidden text-white text-2xl p-2"
@@ -1641,7 +1525,7 @@ function GlassNav({ isScrolled, onToggleMobile }) {
   );
 }
 
-export function Navigasi() {
+export function Navigasi({ data }) {
   const [hidden, setHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -1728,11 +1612,13 @@ export function Navigasi() {
         </div>
 
         <GlassNav
+          data={data}
           isScrolled={hidden}
           onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
         />
 
         <MobileDrawer
+          data={data}
           isOpen={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
         />
