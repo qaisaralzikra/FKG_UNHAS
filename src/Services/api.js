@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://lazily-unveiling-lumber.ngrok-free.dev/api/', // <-- Pastikan ada /api di ujungnya
+    baseURL: 'https://lazily-unveiling-lumber.ngrok-free.dev/api/',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true' // <-- TAMBAHKAN BARIS INI
     }
 });
 
