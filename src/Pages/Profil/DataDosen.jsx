@@ -6,10 +6,8 @@ import apiService from "../../Services/api";
 
 // 1. Terima data dosen melalui props { data }
 function StatistikDosen({ data }) {
-  // Pastikan data adalah array, jika belum ter-load berikan array kosong []
   const listDosen = Array.isArray(data) ? data : [];
 
-  // Fungsi pembantu untuk menghitung jumlah dosen berdasarkan jabatan yang presisi
   const countByJabatan = (targetJabatan, isDekan = false) => {
     return listDosen.filter((dosen) => {
       if (isDekan) {
@@ -19,11 +17,7 @@ function StatistikDosen({ data }) {
         const unitKerja = (dosen.DeptNama || "").toLowerCase().trim();
         return jabatanStruktural === "dekan" || unitKerja.includes("dekan");
       }
-
-      // Ambil nilai jabatan fungsional, bersihkan spasi di awal/akhir, lalu ubah ke lowercase
       const jabatanFungsional = (dosen.nama_jabatan || "").toLowerCase().trim();
-
-      // Menggunakan perbandingan absolut (===) agar "lektor kepala" tidak masuk ke hitungan "lektor"
       return jabatanFungsional === targetJabatan.toLowerCase().trim();
     }).length;
   };
@@ -41,7 +35,7 @@ function StatistikDosen({ data }) {
     },
     {
       label: "Lektor",
-      count: countByJabatan("Lektor"), // Sekarang hanya menghitung yang TEPAT "Lektor" saja
+      count: countByJabatan("Lektor"),
       icon: "ri-user-star-line",
     },
     {
@@ -57,29 +51,31 @@ function StatistikDosen({ data }) {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6 mb-8 w-full">
+    // PERBAIKAN: Menghapus min-w-[900px] kaku yang merusak lebar halaman, diganti w-full murni
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 lg:gap-4 mb-8 w-full">
       {dataStatistik.map((item, index) => (
         <div
           key={index}
-          className="relative overflow-hidden bg-white border border-gray-100 p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[120px] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(176,0,0,0.08)] hover:-translate-y-1 group"
+          className="relative overflow-hidden bg-white border border-gray-100 p-4 lg:p-5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[110px] lg:min-h-[120px] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(176,0,0,0.08)] hover:-translate-y-1 group w-full"
         >
-          {/* Dekorasi Garis Kiri Penanda Aksentuasi */}
           <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#b00000] rounded-l-2xl transition-all duration-300 group-hover:w-[6px]"></div>
 
-          <div className="flex justify-between items-start pl-2">
-            <h3 className="font-semibold text-gray-500 text-xs lg:text-sm tracking-wide uppercase leading-tight max-w-[80%]">
+          <div className="flex justify-between items-start pl-1 lg:pl-2">
+            <h3 className="font-semibold text-gray-500 text-[10px] lg:text-xs tracking-wide uppercase leading-tight max-w-[85%]">
               {item.label}
             </h3>
             <i
-              className={`${item.icon} text-gray-300 text-lg lg:text-xl transition-colors duration-300 group-hover:text-[#b00000]`}
+              className={`${item.icon} text-gray-300 text-base lg:text-xl transition-colors duration-300 group-hover:text-[#b00000]`}
             ></i>
           </div>
 
-          <div className="pl-2 mt-4 flex items-baseline gap-1">
-            <span className="text-3xl lg:text-4xl font-extrabold text-gray-800 tracking-tight transition-colors duration-300 group-hover:text-[#b00000]">
+          <div className="pl-1 lg:pl-2 mt-3 flex items-baseline gap-1">
+            <span className="text-2xl lg:text-4xl font-extrabold text-gray-800 tracking-tight transition-colors duration-300 group-hover:text-[#b00000]">
               {item.count}
             </span>
-            <span className="text-gray-400 text-xs font-medium">Orang</span>
+            <span className="text-gray-400 text-[10px] lg:text-xs font-medium">
+              Orang
+            </span>
           </div>
         </div>
       ))}
@@ -119,60 +115,70 @@ export function DataDosen() {
       <PageHero title="Data Dosen" subtitle="Informasi dosen FKG Unhas" />
       <ContentSection>
         <BackLink to="/profil" />
-        <div className="max-w-full">
+        <div className="max-w-[340px] sm:max-w-[600px] md:max-w-[900px] overflow-hidden">
           <div className="max-w-[900px]">
-            <p className="text-gray-600 text-base lg:text-[18px] mb-8">
+            <p className="text-gray-600 text-sm lg:text-base mb-6">
               Fakultas Kedokteran Gigi Universitas Hasanuddin memiliki{" "}
-              {data?.length || 0} dosen tetap yang berkompeten di bidangnya
-              masing-masing.
+              <span className="font-bold text-gray-900">
+                {data?.length || 0}
+              </span>{" "}
+              dosen tetap yang berkompeten di bidangnya masing-masing.
             </p>
-            <StatistikDosen data={data} />
           </div>
 
-          <div className="overflow-x-auto w-full bg-white rounded-2xl border border-gray-200 shadow-sm mt-4">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="py-4 px-6 text-start w-[60px]">No</th>
-                  <th className="py-4 px-6 text-center w-[120px]">Foto</th>
-                  <th className="py-4 px-6 text-start">Nama</th>
-                  <th className="py-4 px-6 text-start">Unit Kerja</th>
-                  <th className="py-4 px-6 text-start">NIP</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {data.map((d, index) => (
-                  <tr
-                    key={d.Uniq}
-                    className={`${index % 2 === 1 ? "bg-gray-50/50" : "bg-white"} hover:bg-gray-50 transition-colors`}
-                  >
-                    <td className="py-4 px-6 font-medium text-gray-900">
-                      {index + 1}
-                    </td>
-                    <td className="py-4 px-6 flex justify-center">
-                      <div className="w-[60px] h-[75px] overflow-hidden rounded-md border border-gray-100 shadow-sm bg-gray-50">
-                        <img
-                          src={`https://dent.unhas.ac.id/uploads/dosen/${d.ContentDesc4}`}
-                          className="w-full h-full object-cover object-center"
-                          alt={d.ContentDesc1}
-                          onError={(e) => {
-                            e.target.src =
-                              "https://placehold.co/150x200?text=No+Image";
-                          }}
-                        />
-                      </div>
-                    </td>
-                    <td className="py-4 px-6 font-semibold text-gray-900">
-                      {d.ContentDesc1}
-                    </td>
-                    <td className="py-4 px-6 text-gray-600">{d.DeptNama}</td>
-                    <td className="py-4 px-6 text-gray-600 font-mono tracking-wider">
-                      {d.ContentDesc3}
-                    </td>
+          <div className="max-w-full">
+            {/* Komponen statistik sekarang aman tidak akan mendesak layout keluar screen */}
+            <StatistikDosen data={data} />
+
+            {/* PERBAIKAN MUTLAK TABLE WRAPPER: Mengunci lebar maksimal kotak pembungkus */}
+            <div className="w-full overflow-x-auto bg-white rounded-2xl border border-gray-200 shadow-sm mt-4">
+              <table className="w-full text-sm text-left text-gray-500">
+                <thead>
+                  <tr className="text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-200">
+                    <th className="py-4 px-6 text-start">No</th>
+                    <th className="py-4 px-6 text-center">Foto</th>
+                    <th className="py-4 px-6 text-start">Nama</th>
+                    <th className="py-4 px-6 text-start">Unit Kerja</th>
+                    <th className="py-4 px-6 text-start">NIP</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {data &&
+                    data.map((d, index) => (
+                      <tr
+                        key={d.Uniq}
+                        className={`${index % 2 === 1 ? "bg-gray-50/50" : "bg-white"} hover:bg-gray-50 transition-colors`}
+                      >
+                        <td className="py-4 px-6 font-medium text-gray-900">
+                          {index + 1}
+                        </td>
+                        <td className="py-4 px-6 text-center">
+                          <div className="w-[60px] h-[75px] overflow-hidden rounded-md border border-gray-100 shadow-sm bg-gray-50 mx-auto">
+                            <img
+                              src={`https://dent.unhas.ac.id/uploads/dosen/${d.ContentDesc4}`}
+                              className="w-full h-full object-cover object-center"
+                              alt={d.ContentDesc1}
+                              onError={(e) => {
+                                e.target.src =
+                                  "https://placehold.co/150x200?text=No+Image";
+                              }}
+                            />
+                          </div>
+                        </td>
+                        <td className="py-4 px-6 font-semibold text-gray-900">
+                          {d.ContentDesc1}
+                        </td>
+                        <td className="py-4 px-6 text-gray-600">
+                          {d.DeptNama}
+                        </td>
+                        <td className="py-4 px-6 text-gray-600 font-mono tracking-wider">
+                          {d.ContentDesc3}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </ContentSection>

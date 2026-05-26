@@ -37,38 +37,60 @@ export function TenagaPendidik() {
       />
       <ContentSection>
         <BackLink to="/profil" />
-        <div className="max-w-full">
+        <div className="max-w-[340px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-full overflow-hidden">
           <p className="max-w-[900px] text-gray-600 text-base lg:text-[18px] mb-8">
             Tenaga kependidikan di lingkungan Fakultas Kedokteran Gigi
             Universitas Hasanuddin yang profesional dan berdedikasi dalam
             mendukung pelaksanaan Tri Dharma Perguruan Tinggi.
           </p>
-          <div class="overflow-x-auto">
-            <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
-              <thead className="border-[2px] border-gray-200">
-                <tr>
-                  <th className="py-[10px] px-[10px] text-start">No</th>
-                  <th className="py-[10px] px-[10px] text-center">Foto</th>
-                  <th className="py-[10px] px-[10px] text-start">Nama</th>
-                  <th className="py-[10px] px-[10px] text-start">Unit Kerja</th>
-                  <th className="py-[10px] px-[10px] text-cener">NIP</th>
+          <div
+            className="w-full rounded-2xl border border-gray-200 shadow-sm bg-white"
+            style={{
+              overflowX: "auto",
+              display: "block",
+              maxWidth: "100%",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
+            <table
+              className="text-sm text-left text-gray-500"
+              style={{
+                width: "100%",
+                minWidth: "760px",
+                tableLayout: "fixed",
+              }}
+            >
+              <thead>
+                <tr className="text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-200">
+                  <th className="py-4 px-6 text-start" style={{ width: "70px" }}>No</th>
+                  <th className="py-4 px-6 text-center" style={{ width: "120px" }}>Foto</th>
+                  <th className="py-4 px-6 text-start" style={{ width: "250px" }}>Nama</th>
+                  <th className="py-4 px-6 text-start" style={{ width: "200px" }}>Unit Kerja</th>
+                  <th className="py-4 px-6 text-start" style={{ width: "170px" }}>NIP</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {data.map((d, index) => (
                   <tr
                     key={d.Uniq}
-                    className={`${index % 2 === 1 ? "bg-gray-100 hover:bg-gray-200" : "bg-white"}`}
+                    className={`${index % 2 === 1 ? "bg-gray-50/50" : "bg-white"} hover:bg-gray-50 transition-colors`}
                   >
-                    <td className="py-[20px] px-[20px]">{index + 1}</td>
-                    <td className="py-[20px] px-[20px]">
-                      <div className="w-[80px] h-[100px] overflow-hidden rounded-[4px]">
-                        <img src={`https://dent.unhas.ac.id/uploads/TenagaPendidik/${d.ContentDesc4}`} className="object-center" alt="" />
+                    <td className="py-4 px-6 font-medium text-gray-900" style={{ whiteSpace: "nowrap" }}>{index + 1}</td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="w-[60px] h-[75px] overflow-hidden rounded-md border border-gray-100 shadow-sm bg-gray-50 mx-auto">
+                        <img
+                          src={`https://dent.unhas.ac.id/uploads/TenagaPendidik/${d.ContentDesc4}`}
+                          className="w-full h-full object-cover object-center"
+                          alt={d.ContentDesc1}
+                          onError={(e) => {
+                            e.target.src = "https://placehold.co/150x200?text=No+Image";
+                          }}
+                        />
                       </div>
                     </td>
-                    <td className="py-[20px] px-[20px]">{d.ContentDesc1}</td>
-                    <td className="py-[20px] px-[20px]">{d.ContentUnitID}</td>
-                    <td className="py-[20px] px-[20px]">{d.ContentDesc3}</td>
+                    <td className="py-4 px-6 font-semibold text-gray-900" style={{ wordBreak: "break-word" }}>{d.ContentDesc1}</td>
+                    <td className="py-4 px-6 text-gray-600" style={{ wordBreak: "break-word" }}>{d.ContentUnitID}</td>
+                    <td className="py-4 px-6 text-gray-600 font-mono tracking-wider" style={{ whiteSpace: "nowrap" }}>{d.ContentDesc3}</td>
                   </tr>
                 ))}
               </tbody>
