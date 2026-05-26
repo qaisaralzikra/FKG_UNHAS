@@ -38,14 +38,11 @@ export function DaftarBerita() {
         setError(err.message);
         setLoading(false);
       });
-  }, [currentPage, searchTerm]);
+  }, [currentPage, searchTerm, itemsPerPage]);
 
-  // =========================================================================
-  // FUNGSI INI YANG TADI HILANG / BELUM DICIPTAKAN:
-  // =========================================================================
   const handleSearchChange = (value) => {
     setSearchTerm(value);
-    setCurrentPage(1); // Reset kembali ke halaman 1 setiap kali kata kunci pencarian berubah
+    setCurrentPage(1); 
   };
 
   if (loading) return <LoadingPage />;
@@ -62,7 +59,7 @@ export function DaftarBerita() {
         <div className="max-w-full space-y-6">
           <PageListManager
             searchTerm={searchTerm}
-            onSearchChange={handleSearchChange} // <-- Sekarang handleSearchChange sudah aman terbaca
+            onSearchChange={handleSearchChange}
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={setCurrentPage}
@@ -71,11 +68,10 @@ export function DaftarBerita() {
 
           {/* Card Blog List */}
           {data.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[40px] mt-[20px]">
+            // PERBAIKAN: Mengatur grid responsive dari 1 kolom (mobile), 2 kolom (tablet), ke 3 kolom (desktop)
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-[40px] mt-[20px]">
               {data.map((item, index) => {
                 const isCurrentHovered = hoveredId === item.PostID;
-
-                // Di halaman manapun, item pertama di page tersebut (index 0) akan selalu menjadi wide card
                 const isFeaturedItem = index === 0;
 
                 return (
@@ -84,55 +80,62 @@ export function DaftarBerita() {
                     onMouseLeave={() => setHoveredId(null)}
                     to={`/blog/detail/${item.PostSlug}`}
                     key={item.PostID || index}
-                    className={`group ${isFeaturedItem ? "lg:col-span-3 md:col-span-2" : "col-span-1"}`}
+                    className={`group ${isFeaturedItem ? "lg:col-span-3 md:col-span-2 col-span-1" : "col-span-1"}`}
                   >
                     <div
-                      className={`overflow-hidden w-full rounded-[20px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] bg-white ${
+                      // PERBAIKAN: Mengubah max-h menjadi md:max-h agar versi mobile tingginya bisa menyesuaikan konten otomatis
+                      className={`overflow-hidden w-full rounded-[20px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] bg-white transition-all duration-300 h-full ${
                         isFeaturedItem
-                          ? "grid md:grid-cols-2 md:max-h-[354px]"
-                          : "flex flex-col h-full"
+                          ? "grid grid-cols-1 md:grid-cols-2 md:max-h-[380px]"
+                          : "flex flex-col"
                       }`}
                     >
-                      <div className="overflow-hidden">
+                      <div className="overflow-hidden w-full h-full">
                         <img
                           src={`https://dent.unhas.ac.id/${item.postImages}`}
-                          className={`min-h-[192px] w-full transition-transform duration-300 ${
+                          className={`w-full transition-transform duration-300 ${
                             isCurrentHovered ? "scale-105" : "scale-100"
-                          } ${isFeaturedItem ? "object-cover md:h-full" : "object-cover max-h-[192px]"}`}
+                          } ${isFeaturedItem ? "object-cover h-[220px] md:h-full w-full" : "object-cover h-[200px] w-full"}`}
                           alt={item.PostTitle}
                         />
                       </div>
 
                       <div
-                        className={`${isFeaturedItem ? "md:mx-[30px] md:my-[40px] m-[20px]" : "m-[20px] flex flex-col justify-between flex-grow"} space-y-4`}
+                        // PERBAIKAN: Mengatur margin dan padding flexbox supaya tidak overflow di layar kecil
+                        className={`p-5 md:p-6 lg:p-8 flex flex-col justify-between flex-grow space-y-4`}
                       >
-                        <div className="space-y-4">
-                          <div className="flex items-center gap-[20px]">
-                            <p className="px-[20px] py-[4px] text-white text-[12px] rounded-full bg-[#4a0000] max-w-max">
+                        <div className="space-y-3">
+                          {/* Tag Kategori */}
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="px-3 py-1 text-white text-[11px] font-semibold rounded-full bg-[#4a0000]">
                               Featured
-                            </p>
-                            <p className="px-[20px] py-[4px] text-[#4a0000] text-[12px] rounded-full bg-[rgba(0,0,0,0.1)] max-w-max">
+                            </span>
+                            <span className="px-3 py-1 text-[#4a0000] text-[11px] font-semibold rounded-full bg-gray-100 line-clamp-1">
                               {item.sdgKategori ? item.sdgKategori : "04. Quality Education"}
-                            </p>
+                            </span>
                           </div>
-                          <div className="max-w-[620px] space-y-2">
-                            <p className={`${isCurrentHovered ? "text-[#4a0000]" : ""} ${isFeaturedItem ? "md:text-[26px] lg:text-[30px] text-[18px]" : "text-[18px]"} font-bold leading-tight line-clamp-2`}>
+
+                          {/* Judul & Konten */}
+                          <div className="space-y-2">
+                            <h3 className={`${isCurrentHovered ? "text-[#4a0000]" : ""} ${isFeaturedItem ? "md:text-[22px] lg:text-[26px] text-[18px]" : "text-[18px]"} font-bold leading-tight line-clamp-2`}>
                               {item.PostTitle}
-                            </p>
+                            </h3>
                             <div
                               dangerouslySetInnerHTML={{ __html: item.PostContent }}
-                              className={`${isFeaturedItem ? "lg:text-[16px] text-[14px] md:line-clamp-4 line-clamp-3" : "text-[14px] line-clamp-3"} text-gray-700`}
+                              className={`text-[14px] text-gray-600 leading-relaxed ${isFeaturedItem ? "md:line-clamp-3 lg:line-clamp-4 line-clamp-2" : "line-clamp-2"}`}
                             ></div>
                           </div>
                         </div>
-                        <div className="space-y-2 pt-2">
-                          <p className="text-gray-600 text-[14px]">
-                            <i className="ri-calendar-line text-[16px] me-[8px]"></i>
+
+                        {/* Footer Card */}
+                        <div className="space-y-2 pt-2 border-t border-gray-50">
+                          <p className="text-gray-500 text-[13px] flex items-center">
+                            <i className="ri-calendar-line text-[15px] me-2"></i>
                             {item.PostDate}
                           </p>
-                          <div className="text-[#4a0000] flex items-center font-medium">
-                            Baca Selengkapnya{" "}
-                            <i className="ri-arrow-right-long-line ms-[8px] inline-block transition-transform duration-300 group-hover:translate-x-[6px]"></i>
+                          <div className="text-[#4a0000] flex items-center text-[14px] font-semibold">
+                            Baca Selengkapnya
+                            <i className="ri-arrow-right-long-line ms-2 inline-block transition-transform duration-300 group-hover:translate-x-1"></i>
                           </div>
                         </div>
                       </div>
