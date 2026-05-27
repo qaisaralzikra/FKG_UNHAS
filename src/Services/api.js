@@ -132,6 +132,14 @@ const apiService = {
             throw new Error(error.response?.data?.message || error.message);
         }
     },
+    getSambutan: async () => {
+        try {
+            const response = await api.get(`/sambutan`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
 };
 
 export default apiService;

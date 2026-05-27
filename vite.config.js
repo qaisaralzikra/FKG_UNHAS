@@ -21,4 +21,14 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      // Setiap request yang diawali '/api' akan diteruskan oleh Vite ke server UNHAS
+      '/api': {
+        target: 'https://dent.unhas.ac.id',
+        changeOrigin: true,
+        secure: false,
+      }
+    },
+  },
 })

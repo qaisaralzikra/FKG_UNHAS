@@ -31,7 +31,7 @@ export function Jurnal() {
               <div key={item.id} className="w-full">
                 <a href={item.url} target="_blank">
                   <div className="w-full min-h-[160px] lg:h-[192px] bg-[#b00000] rounded-[20px] relative shadow-[0_0_20px_rgba(0,0,0,0.25)] overflow-hidden flex items-center justify-between">
-                    <h1 className="z-100 text-white font-bold text-6xl lg:text-[96px] ms-3 lg:ms-[20px] text-transparent [-webkit-text-stroke:2px_#b00000]">
+                    <h1 className="z-1 text-white font-bold text-6xl lg:text-[96px] ms-3 lg:ms-[20px] text-transparent [-webkit-text-stroke:2px_#b00000]">
                       0{index + 1}
                     </h1>
                     <img
