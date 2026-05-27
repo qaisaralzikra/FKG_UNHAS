@@ -11,25 +11,28 @@ import apiService from "../../Services/api";
 
 const items = [
   {
-    slug: "akreditasi",
+    // slug: "akreditasi",
     title: "Akreditasi",
     icon: "ri-award-line",
     category: "Informasi Akademik",
     desc: "Informasi akreditasi program studi di FKG Unhas.",
+    content: "akreditasi",
   },
   {
-    slug: "sk-kontrak-kinerja",
+    slug: "kontrak-kinerja",
     title: "SK & Kontrak Kinerja",
     icon: "ri-file-text-line",
     category: "Informasi Akademik",
     desc: "Surat keputusan dan kontrak kinerja.",
+    content: "sk",
   },
   {
-    slug: "Kemahasiswaan",
-    title: "Kemahasiswaan",
+    slug: "pengabdian",
+    title: "Pengabdian",
     icon: "ri-heart-line",
     category: "Informasi Akademik",
-    desc: "Kegiatan Kemahasiswaan kepada masyarakat.",
+    desc: "Kegiatan Pengabdian kepada masyarakat.",
+    content: "pengabdian",
   },
   {
     slug: "kemahasiswaan",
@@ -37,6 +40,7 @@ const items = [
     icon: "ri-user-community-line",
     category: "Kemahasiswaan",
     desc: "Informasi kegiatan kemahasiswaan.",
+    content: "kemahasiswaan",
   },
   {
     slug: "ormawa",
@@ -44,6 +48,7 @@ const items = [
     icon: "ri-group-line",
     category: "Kemahasiswaan",
     desc: "Organisasi mahasiswa di FKG Unhas.",
+    content: "ormawa",
   },
   {
     slug: "buku-pedoman",
@@ -51,6 +56,7 @@ const items = [
     icon: "ri-book-open-line",
     category: "Lainnya",
     desc: "Buku pedoman akademik dan panduan.",
+    content: "buku-pedoman",
   },
 ];
 
@@ -102,7 +108,7 @@ function AkademikIndex() {
                 .map((item) => (
                   <Link
                     key={item.slug}
-                    to={`/akademik/${item.slug}`}
+                    to={`/akademik/${item.slug ? item.slug : ''}/${item.content}`}
                     className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 hover:shadow-md hover:border-[#b00000] transition-all group"
                   >
                     <i className={`${item.icon} text-3xl text-[#b00000]`}></i>
@@ -179,7 +185,7 @@ function Akreditasi() {
       <PageHero title={"Akreditasi"} subtitle="Akademik FKG Unhas" />
       <ContentSection>
         <BackLink to="/akademik" />
-        <div className="max-w-[900px]">
+        <div className="max-w-[350px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-full overflow-hidden">
           <div class="overflow-x-auto">
             <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
               <thead className="border-[2px] border-gray-200">
@@ -276,8 +282,8 @@ function Sk() {
     <>
       <PageHero title={"SK & Kontrak Kinerja"} subtitle="Akademik FKG Unhas" />
       <ContentSection>
+      <BackLink to="/akademik" />
         <div className="max-w-[900px] lg:min-w-[800px] md:min-w-[600px] sm:min-w-[400px] min-w-[260px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px] p-[20px]">
-          <BackLink to="/akademik" />
           {sk.length > 0 ? (
             <div class="overflow-x-auto">
               <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
@@ -351,10 +357,10 @@ function Pengabdian() {
     );
   return (
     <>
-      <PageHero title={"Kemahasiswaan"} subtitle="Akademik FKG Unhas" />
+      <PageHero title={"Pengabdian"} subtitle="Akademik FKG Unhas" />
       <ContentSection>
+      <BackLink to="/akademik" />
         <div className="max-w-[900px] lg:min-w-[800px] md:min-w-[600px] sm:min-w-[400px] min-w-[260px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px] p-[20px]">
-          <BackLink to="/akademik" />
           {Kemahasiswaan.length > 0 ? (
             <div class="overflow-x-auto">
               <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
@@ -427,8 +433,8 @@ function Kemahasiswaan() {
     <>
       <PageHero title={"Kemahasiswaan"} subtitle="Kemahasiswaan FKG Unhas" />
       <ContentSection>
+      <BackLink to="/akademik" />
         <div className="max-w-[900px] lg:min-w-[800px] md:min-w-[600px] sm:min-w-[400px] min-w-[260px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px] p-[20px]">
-          <BackLink to="/akademik" />
           {Kemahasiswaan.length > 0 ? (
             <div class="overflow-x-auto">
               <table class="$$table border-[2px] border-gray-200 rounded-[20px]">
@@ -501,8 +507,8 @@ function Ormawa() {
     <>
       <PageHero title={"Ormawa"} subtitle="Kemahasiswaan FKG Unhas" />
       <ContentSection>
+      <BackLink to="/akademik" />
         <div className="max-w-[900px] lg:min-w-[800px] md:min-w-[600px] sm:min-w-[400px] min-w-[260px] shadow-[0_0_20px_0_rgba(0,0,0,0.1)] rounded-[20px] p-[20px]">
-          <BackLink to="/akademik" />
           {Ormawa.length > 0 ? (
             <div class="overflow-x-auto">
               <table class="$$table border-[2px] border-gray-200 rounded-[20px]">

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://lazily-unveiling-lumber.ngrok-free.dev/api/',
+    baseURL: 'https://dent.unhas.ac.id/api/',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
