@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
     // HAPUS tanda / di ujung kata api
-    baseURL: '/api',
+    baseURL: 'https://dent.unhas.ac.id/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
