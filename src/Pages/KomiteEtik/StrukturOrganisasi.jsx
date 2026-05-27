@@ -13,8 +13,8 @@ export function StrukturOrganisasiKomiteEtik() {
         <BackLink to="/" />
         <div className="max-w-[900px]">
           <div className="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100 grid gap-[40px] grid-cols-1 lg:grid-cols-2">
-            <img className="rounded-[20px] lg:max-h-[900px]" src={AlurPengajuan} alt="" />
-            <img className="rounded-[20px] lg:max-h-[900px]" src={StrukturOrganisasiIMG} alt="" />
+            <img className="rounded-[20px] lg:max-h-[900px]" loading="lazy" src={AlurPengajuan} alt="" />
+            <img className="rounded-[20px] lg:max-h-[900px]" loading="lazy" src={StrukturOrganisasiIMG} alt="" />
           </div>
         </div>
       </ContentSection>

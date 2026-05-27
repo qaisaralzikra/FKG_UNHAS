@@ -12,7 +12,7 @@ export function StrukturOrganisasi() {
           <p className="text-gray-600 text-base lg:text-[18px] mb-8">
             Struktur organisasi Fakultas Kedokteran Gigi Universitas Hasanuddin terdiri dari:
           </p>
-          <img src={StrukturOrganisasiIMG} alt="" />
+          <img loading="lazy" src={StrukturOrganisasiIMG} alt="" />
         </div>
       </ContentSection>
     </>

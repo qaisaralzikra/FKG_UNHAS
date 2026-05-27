@@ -1,3 +1,4 @@
+import { RiLoader2Line } from "@remixicon/react";
 import { motion } from "motion/react";
 
 export function LoadingPage({ message = "Memuat data...", section = false }) {
@@ -15,11 +16,15 @@ export function LoadingPage({ message = "Memuat data...", section = false }) {
       className="flex flex-col items-center gap-5"
     >
       <motion.i
-        className="ri-loader-2-line text-[#b00000]"
+        className="text-[#b00000]"
         style={{ fontSize: section ? "40px" : "52px" }}
         animate={{ rotate: 360 }}
         transition={spinTransition}
-      />
+      >
+        <RiLoader2Line
+          className={`${section ? "w-[40px] h-[40px]" : "w-[52px] h-[52px]"}`}
+        />
+      </motion.i>
       <p
         className="text-gray-500 font-medium"
         style={{ fontSize: section ? "16px" : "18px" }}

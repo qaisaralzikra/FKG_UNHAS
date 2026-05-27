@@ -35,6 +35,7 @@ export function Jurnal() {
                       0{index + 1}
                     </h1>
                     <img
+                    loading="lazy"
                       src={Vector1}
                       className="absolute top-0 right-[-2px] w-[300px] h-[150px] sm:w-[600px] md:w-[500px]"
                       alt=""

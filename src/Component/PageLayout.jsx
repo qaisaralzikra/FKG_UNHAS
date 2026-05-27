@@ -38,6 +38,7 @@ export function PageHeroDetailBlog({ img }) {
         className="w-full h-full" 
       >
         <img 
+        loading="lazy"
           src={`https://dent.unhas.ac.id/${img}`} 
           // 3. w-full h-full dipadu dengan object-cover dan object-center akan membuat gambar pas di tengah
           className="w-full h-full object-cover object-center" 
@@ -122,7 +123,7 @@ export function CardIMG({ nama, jabatan, img }) {
   return (
     <div className="w-[300px]">
       <div className="bg-red-600 rounded-tl-[12px] rounded-tr-[12px] overflow-hidden flex items-center justify-center">
-        <img src={`https://dent.unhas.ac.id/uploads/dosen/${img}`} className="max-h-[344px] object-center" alt="" />
+        <img loading="lazy" src={`https://dent.unhas.ac.id/uploads/dosen/${img}`} className="max-h-[344px] object-center" alt="" />
       </div>
       <div className="bg-white p-4 rounded-bl-[12px] rounded-br-[12px] shadow-sm border border-gray-100">
         <p className="font-semibold">{jabatan}</p>
@@ -136,7 +137,7 @@ export function CardDept({ nama, jabatan, img }) {
   return (
     <div className="w-[300px]">
       <div className="bg-red-600 rounded-tl-[12px] rounded-tr-[12px] overflow-hidden flex items-center justify-center h-[322px] relative">
-        <img src={`https://dent.unhas.ac.id/uploads/dosen/${img}`} className="w-full h-full object-center absolute bottom-0" alt="" />
+        <img loading="lazy" src={`https://dent.unhas.ac.id/uploads/dosen/${img}`} className="w-full h-full object-center absolute bottom-0" alt="" />
       </div>
       <div className="bg-white p-4 rounded-bl-[12px] rounded-br-[12px] shadow-sm border border-gray-100">
         <p className="font-semibold text-[18px]">{nama}</p>

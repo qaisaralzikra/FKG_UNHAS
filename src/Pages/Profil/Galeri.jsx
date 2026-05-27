@@ -51,6 +51,7 @@ export function Galeri() {
 
             {/* Gambar tetap berada di background dengan z-0 */}
             <img
+            loading="lazy"
               src={GaleryIMG}
               className="z-0 absolute top-0 left-0 w-full h-full object-cover"
               alt=""

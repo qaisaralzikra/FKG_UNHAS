@@ -1,3 +1,4 @@
+import { RiArrowRightLongLine, RiToothLine } from "@remixicon/react";
 import { motion } from "motion/react";
 
 function Card({ data }) {
@@ -5,14 +6,22 @@ function Card({ data }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[20px] 2xl:gap-[40px] mt-6 lg:mt-[32px] text-black text-base lg:text-[20px]">
       {data.map((item) => (
         <a
-        href={item.url} target="_blank"
+          href={item.url}
+          target="_blank"
           key={item.id}
           className="col-span-1 w-full min-h-[220px] lg:h-[298px] bg-white rounded-[20px] p-3 lg:p-[10px] flex items-start flex-col gap-2 lg:gap-[8px]"
         >
-          <i className="ri-tooth-line text-4xl lg:text-[53px] text-[#b00000]"></i>
-          <p className="w-full text-base lg:text-[22px] line-clamp-4 lg:line-clamp-none flex-1">{item.title}</p>
-          <a href={item.url} target="_blank" className="hover:text-[#b00000] duration-[0.4s] shrink-0">
-            Lihat <i className="ri-arrow-right-long-line"></i>
+          <RiToothLine className="w-[36px] h-[36px] lg:w-[53px] lg:h-[53px] text-[#b00000]" />
+          <p className="w-full text-base lg:text-[22px] line-clamp-4 lg:line-clamp-none flex-1">
+            {item.title}
+          </p>
+          <a
+            href={item.url}
+            target="_blank"
+            className="hover:text-[#b00000] duration-[0.4s] shrink-0 flex items-center justify-center gap-[8px]"
+          >
+            Lihat 
+            <RiArrowRightLongLine />
           </a>
         </a>
       ))}
@@ -106,7 +115,9 @@ export function Layanan() {
         }}
       >
         <div className="text-white">
-          <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">Layanan Mahasiswa</h1>
+          <h1 className="font-semibold text-2xl md:text-3xl lg:text-[32px]">
+            Layanan Mahasiswa
+          </h1>
           <Card data={data} />
         </div>
       </motion.div>

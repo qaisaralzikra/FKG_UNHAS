@@ -6,6 +6,14 @@ import logo from "../../public/logo unhas.png";
 import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { Link } from "react-router-dom";
+import {
+  RiArrowDownSFill,
+  RiArrowDownSLine,
+  RiArrowRightSLine,
+  RiCloseLine,
+  RiMailFill,
+  RiMenuLine,
+} from "@remixicon/react";
 
 function Profil({ isScrolled }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +45,7 @@ function Profil({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Profil</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -128,7 +136,7 @@ function GPM({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">GPM</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -156,7 +164,7 @@ function GPM({ isScrolled }) {
             }
           >
             <span>Sistem Penjaminan Mutu Internal</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
@@ -204,7 +212,7 @@ function GPM({ isScrolled }) {
             }
           >
             <span>Sistem Penjaminan Mutu Eksternal</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
@@ -243,7 +251,7 @@ function GPM({ isScrolled }) {
             }
           >
             <span>Hasil Survey</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
@@ -275,7 +283,7 @@ function GPM({ isScrolled }) {
             }
           >
             <span>Dokumen Mutu</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
@@ -346,7 +354,7 @@ function GPM({ isScrolled }) {
             }
           >
             <span>Peningkatan Reputasi</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 left-[230px] ml-1 transition-all duration-300 ease-in-out
@@ -450,7 +458,7 @@ function Akademik({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Akademik</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -478,7 +486,7 @@ function Akademik({ isScrolled }) {
             }
           >
             <span>Informasi Akademik</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 right-[235px] ml-1 transition-all duration-300 ease-in-out
@@ -512,7 +520,7 @@ function Akademik({ isScrolled }) {
             }
           >
             <span>Kemahasiswaan</span>
-            <i className="ri-arrow-right-s-line text-[20px]"></i>
+            <RiArrowRightSLine className="w-[20px] h-[20px]" />
           </div>
           <ul
             className={`w-[220px] menu bg-white text-black absolute shadow-md text-[16px] rounded-box top-0 right-[235px] ml-1 transition-all duration-300 ease-in-out
@@ -533,7 +541,9 @@ function Akademik({ isScrolled }) {
         {/* MENU UTAMA LAIN TANPA SUB-MENU */}
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to={`/akademik/buku-pedoman/${BukuPedoman}`}>Buku Pedoman</Link>
+            <Link to={`/akademik/buku-pedoman/${BukuPedoman}`}>
+              Buku Pedoman
+            </Link>
           </div>
         </li>
       </ul>
@@ -568,7 +578,7 @@ function Unduhan({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Unduhan</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSFill className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -633,7 +643,7 @@ function ZonaIntegritas({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Zona Integritas</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -717,7 +727,7 @@ function Departement({ isScrolled, data }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Departemen</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -776,7 +786,7 @@ function KomiteEtik({ isScrolled }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-[16px]">Komite Etik</span>
-        <i className="ri-arrow-down-s-line text-[20px]"></i>
+        <RiArrowDownSLine className="w-[20px] h-[20px]" />
       </div>
 
       {/* MENU UTAMA DROPDOWN */}
@@ -898,9 +908,9 @@ function MobileAccordion({ label, isOpen, onToggle, children, nested }) {
         onClick={onToggle}
       >
         <span>{label}</span>
-        <i
-          className={`ri-arrow-down-s-line text-[20px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-        ></i>
+        <RiArrowDownSLine
+          className={`w-[20px] h-[20px] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${isOpen ? " opacity-100" : "max-h-0 opacity-0"}`}
@@ -941,7 +951,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
         <div className="flex items-center justify-between p-4 border-b sticky top-0 bg-white z-10">
           <span className="font-semibold text-lg text-black">Menu</span>
           <button onClick={onClose} className="text-2xl p-1 text-black">
-            <i className="ri-close-line"></i>
+            <RiCloseLine />
           </button>
         </div>
         <div className="overflow-y-auto h-[calc(100%-60px)] p-4 text-black">
@@ -1515,6 +1525,7 @@ function GlassNav({ isScrolled, onToggleMobile, data }) {
     >
       <div className="flex items-center gap-3 lg:gap-[34px] w-[300px]">
         <img
+          loading="lazy"
           src={logo}
           className="w-[40px] h-[48px] lg:w-[50px] lg:h-[60px]"
           alt=""
@@ -1536,7 +1547,7 @@ function GlassNav({ isScrolled, onToggleMobile, data }) {
         className="lg:hidden text-white text-2xl p-2"
         aria-label="Toggle menu"
       >
-        <i className="ri-menu-line"></i>
+        <RiMenuLine />
       </button>
     </div>
   );
@@ -1598,7 +1609,7 @@ export function Navigasi({ data }) {
         {/* Topbar Merah */}
         <div className="h-[48px] bg-[#b00000] px-4 sm:px-6 lg:px-[70px] w-full flex items-center justify-between">
           <div className="text-white flex items-center gap-2 lg:gap-[16px]">
-            <i className="ri-mail-fill text-lg lg:text-[24px]"></i>
+            <RiMailFill className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px] "/>
             <span className="text-xs lg:text-[14px] sm:inline">
               info@dent.unhas.ac.id
             </span>
@@ -1610,6 +1621,7 @@ export function Navigasi({ data }) {
               onClick={() => changeLanguage("id")}
             >
               <img
+                loading="lazy"
                 src={id}
                 alt="Indonesia"
                 className="w-[24px] h-[16px] rounded-[10px]"
@@ -1620,6 +1632,7 @@ export function Navigasi({ data }) {
               onClick={() => changeLanguage("en")}
             >
               <img
+                loading="lazy"
                 src={en}
                 alt="English"
                 className="w-[24px] h-[16px] rounded-[10px]"

@@ -12,7 +12,7 @@ export function Perjanjian() {
             Fakultas Kedokteran Gigi Universitas Hasanuddin menjalin kerjasama dengan berbagai institusi pendidikan dan penelitian di dalam dan luar negeri.
           </p>
           <div>
-            <img src={PerjanjianIMG} alt="" />
+            <img loading="lazy" src={PerjanjianIMG} alt="" />
           </div>
         </div>
       </ContentSection>

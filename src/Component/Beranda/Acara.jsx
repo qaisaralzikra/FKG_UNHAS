@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { useState } from "react"; // 1. Import useState
+import { RiCalendarTodoLine, RiMapLine, RiMapPinLine, RiTimeLine } from "@remixicon/react";
 
 function Card({ data }) {
   return (
@@ -38,13 +39,13 @@ function Card({ data }) {
               ></div>
               <div className="flex flex-wrap gap-x-4 gap-y-1 lg:gap-[20px] mt-auto">
                 <div className="text-xs lg:text-[16px] flex items-center gap-1 lg:gap-[4px] text-gray-600">
-                  <i className="ri-time-line"></i>
+                  <RiTimeLine/>
                   <span>{item.jam_mulai}</span>
                   <span className="mx-0.5">-</span>
                   <span>{item.jam_selesai}</span>
                 </div>
                 <div className="text-xs lg:text-[16px] flex items-center gap-1 lg:gap-[4px] text-gray-600">
-                  <i className="ri-map-pin-line"></i>
+                  <RiMapPinLine/>
                   <div
                     dangerouslySetInnerHTML={{ __html: item.lokasi }}
                     className="line-clamp-1"
@@ -125,7 +126,7 @@ export function Acara({ data }) {
             <Card data={filteredEvents} />
           ) : (
             <div className="text-center py-16 bg-gray-50 rounded-[20px] mt-6 border-2 border-dashed">
-              <i className="ri-calendar-todo-line text-[40px] text-gray-300 block mb-2"></i>
+              <RiCalendarTodoLine className="text-[40px] text-gray-300 block mb-2" />
               <p className="text-gray-500 font-medium">
                 Tidak ada agenda acara pada bulan ini
               </p>
