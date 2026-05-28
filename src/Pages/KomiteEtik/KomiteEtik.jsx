@@ -1,40 +1,99 @@
-import { Routes, Route, Link, useParams } from "react-router-dom"
-import { PageHero, ContentSection, SectionTitle, BackLink } from "../../Component/PageLayout"
-import { SPSM } from "./SPSM"
-import { SPH } from "./SPH"
-import { FormulirPanduan } from "./FormulirPanduan"
-import { JadwalRapat } from "./JadwalRapat"
-import { Protokol } from "./Protokol"
-import { Referensi } from "./Referensi"
+import { Routes, Route, Link, useParams } from "react-router-dom";
+import {
+  PageHero,
+  ContentSection,
+  SectionTitle,
+  BackLink,
+} from "../../Component/PageLayout";
+import { SPSM } from "./SPSM";
+import { SPH } from "./SPH";
+import { FormulirPanduan } from "./FormulirPanduan";
+import { JadwalRapat } from "./JadwalRapat";
+import { Protokol } from "./Protokol";
+import { Referensi } from "./Referensi";
+import { useEffect, useState } from "react";
+import apiService from "../../Services/api";
+import { LoadingPage } from "../../Component/LoadingPage";
 
 const items = [
   { slug: "pendahuluan", title: "Pendahuluan", icon: "ri-information-line" },
-  { slug: "akreditasi-komite-etik", title: "Akreditasi Komite Etik", icon: "ri-award-line" },
-  { slug: "struktur-organisasi-alur-pengajuan", title: "Struktur Organisasi & Alur Pengajuan", icon: "ri-organization-chart" },
-  { slug: "anggota-komite-etik", title: "Anggota Komite Etik", icon: "ri-team-line" },
-  { slug: "konsultan-independen-komite-etik", title: "Konsultan Independen Komite Etik", icon: "ri-user-search-line" },
-  { slug: "sop-penelitian-subjek-manusia", title: "SOP Penelitian Subjek Manusia", icon: "ri-file-text-line" },
-  { slug: "sop-penelitian-hewan", title: "SOP Penelitian Hewan", icon: "ri-flask-line" },
-  { slug: "formulir-panduan-pengajuan-untuk-pi", title: "Formulir & Panduan Pengajuan untuk PI", icon: "ri-file-edit-line" },
+  {
+    slug: "akreditasi-komite-etik",
+    title: "Akreditasi Komite Etik",
+    icon: "ri-award-line",
+  },
+  {
+    slug: "struktur-organisasi-alur-pengajuan",
+    title: "Struktur Organisasi & Alur Pengajuan",
+    icon: "ri-organization-chart",
+  },
+  {
+    slug: "anggota-komite-etik",
+    title: "Anggota Komite Etik",
+    icon: "ri-team-line",
+  },
+  {
+    slug: "konsultan-independen-komite-etik",
+    title: "Konsultan Independen Komite Etik",
+    icon: "ri-user-search-line",
+  },
+  {
+    slug: "sop-penelitian-subjek-manusia",
+    title: "SOP Penelitian Subjek Manusia",
+    icon: "ri-file-text-line",
+  },
+  {
+    slug: "sop-penelitian-hewan",
+    title: "SOP Penelitian Hewan",
+    icon: "ri-flask-line",
+  },
+  {
+    slug: "formulir-panduan-pengajuan-untuk-pi",
+    title: "Formulir & Panduan Pengajuan untuk PI",
+    icon: "ri-file-edit-line",
+  },
   { slug: "jadwal-rapat", title: "Jadwal Rapat", icon: "ri-calendar-line" },
-  { slug: "protokol-yang-disetujui", title: "Protokol yang Disetujui", icon: "ri-check-double-line" },
-  { slug: "referensi-komite-etik", title: "Referensi Komite Etik", icon: "ri-bookmark-line" },
-  { slug: "biaya-kontribusi-ethical-clearance", title: "Biaya Kontribusi Ethical Clearance", icon: "ri-money-dollar-circle-line" },
-  { slug: "pelatihan-komite-etik", title: "Pelatihan Komite Etik", icon: "ri-graduation-cap-line" },
-  { slug: "kontak-komite-etik", title: "Kontak Komite Etik", icon: "ri-contacts-line" },
-]
+  {
+    slug: "protokol-yang-disetujui",
+    title: "Protokol yang Disetujui",
+    icon: "ri-check-double-line",
+  },
+  {
+    slug: "referensi-komite-etik",
+    title: "Referensi Komite Etik",
+    icon: "ri-bookmark-line",
+  },
+  {
+    slug: "biaya-kontribusi-ethical-clearance",
+    title: "Biaya Kontribusi Ethical Clearance",
+    icon: "ri-money-dollar-circle-line",
+  },
+  {
+    slug: "pelatihan-komite-etik",
+    title: "Pelatihan Komite Etik",
+    icon: "ri-graduation-cap-line",
+  },
+  {
+    slug: "kontak-komite-etik",
+    title: "Kontak Komite Etik",
+    icon: "ri-contacts-line",
+  },
+];
 
 const contentMap = {
   pendahuluan: {
     title: "Pendahuluan",
+    slug: "introduction",
     body: "Komite Etik Penelitian Fakultas Kedokteran Gigi Universitas Hasanuddin (KEPK FKG-RSGMP UNHAS) didirikan pada tahun 2017. Komite ini bertugas melakukan review etik terhadap penelitian yang melibatkan subjek manusia, hewan, dan spesimen biologis yang diajukan oleh peneliti. KEPK FKG-RSGMP UNHAS berkomitmen untuk melindungi hak dan kesejahteraan subjek penelitian serta memastikan penelitian dilaksanakan sesuai dengan prinsip etika yang berlaku secara nasional dan internasional.",
   },
   "akreditasi-komite-etik": {
     title: "Akreditasi Komite Etik",
+    slug: "Akreditasi Komite Etik",
     body: "Akreditasi Komite Etik Penelitian FKG-RSGMP UNHAS diberikan oleh Komisi Akreditasi Komite Etik Penelitian (KAKEP) sebagai pengakuan bahwa komite telah memenuhi standar dalam melakukan review etik penelitian. Proses akreditasi mencakup evaluasi terhadap struktur organisasi, kompetensi anggota, prosedur operasional standar, dan dokumentasi kegiatan review etik.",
   },
   "struktur-organisasi-alur-pengajuan": {
     title: "Struktur Organisasi & Alur Pengajuan",
+    slug: "Struktur Organisasi & Alur Pengajuan",
     body: "Struktur organisasi KEPK FKG-RSGMP UNHAS terdiri dari Ketua, Sekretaris, dan anggota yang berasal dari berbagai bidang ilmu. Alur pengajuan ethical clearance dimulai dari peneliti mengajukan dokumen, dilakukan review oleh sekretariat, dilanjutkan dengan review oleh reviewer, dan ditetapkan dalam rapat pleno komite etik.",
   },
   "anggota-komite-etik": {
@@ -81,16 +140,21 @@ const contentMap = {
     title: "Kontak Komite Etik",
     body: "Untuk informasi lebih lanjut mengenai pengajuan ethical clearance, silakan menghubungi:\n\nSekretariat Komite Etik Penelitian FKG-RSGMP UNHAS\nGedung RSGMP Unhas Lantai 2\nJl. Perintis Kemerdekaan KM.10, Makassar\nEmail: kepk_fkgrsgm@unhas.ac.id",
   },
-}
+};
 
 function KomiteEtikIndex() {
   return (
     <>
-      <PageHero title="Komite Etik" subtitle="Komite Etik Penelitian FKG Unhas" />
+      <PageHero
+        title="Komite Etik"
+        subtitle="Komite Etik Penelitian FKG Unhas"
+      />
       <ContentSection>
         <SectionTitle>Komite Etik Penelitian</SectionTitle>
         <p className="text-gray-600 mt-2 text-base lg:text-[18px] max-w-[800px]">
-          Komite Etik Penelitian Fakultas Kedokteran Gigi Universitas Hasanuddin bertugas memastikan penelitian dilaksanakan sesuai dengan prinsip etika yang berlaku.
+          Komite Etik Penelitian Fakultas Kedokteran Gigi Universitas Hasanuddin
+          bertugas memastikan penelitian dilaksanakan sesuai dengan prinsip
+          etika yang berlaku.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
           {items.map((item) => (
@@ -100,34 +164,78 @@ function KomiteEtikIndex() {
               className="bg-white p-5 rounded-[16px] shadow-sm border border-gray-100 hover:shadow-md hover:border-[#b00000] transition-all group"
             >
               <i className={`${item.icon} text-3xl text-[#b00000]`}></i>
-              <h3 className="font-semibold text-black group-hover:text-[#b00000] transition-colors mt-2">{item.title}</h3>
+              <h3 className="font-semibold text-black group-hover:text-[#b00000] transition-colors mt-2">
+                {item.title}
+              </h3>
             </Link>
           ))}
         </div>
       </ContentSection>
     </>
-  )
+  );
 }
 
 function KomiteEtikDetail() {
-  const { slug } = useParams()
-  const content = contentMap[slug]
+  const { title } = useParams();
+  // const content = contentMap[title];
 
-  if (!content) return <NotFound />
+  const [datas, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiService
+      .getKomite(title)
+      .then((response) => {
+        // Axios + helper di atas langsung mengembalikan response data utuh dari CI4
+        // Jika CI4 kamu membungkusnya lagi dalam objek 'data', gunakan response.data
+        setData(response.data?.webcontentList || response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  // console.log(datas);
+
+  if (loading) return <LoadingPage />;
+  if (error) return <p>Gagal memuat data: {error}</p>;
+
+  // if (!content) return <NotFound />;
+
+  let titles = ''
+
+  if (title === 'introduction') {
+    titles = 'Pendahuluan'
+  } else if (title === 'accreditation') {
+    titles = 'Akreditasi Komite Etik'
+  }
 
   return (
     <>
-      <PageHero title={content.title} subtitle="Komite Etik Penelitian FKG Unhas" />
+      <PageHero
+        title={titles}
+        subtitle="Komite Etik Penelitian FKG Unhas"
+      />
       <ContentSection>
         <BackLink to="/komite-etik" />
         <div className="max-w-[900px]">
-          <div className="bg-white p-6 rounded-[16px] shadow-sm border border-gray-100">
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">{content.body}</p>
+          <div className={`bg-white p-6 rounded-[16px] shadow-sm border border-gray-100 ${datas[0] ? '' : 'w-full'}`}>
+            {datas[0] ? (
+
+            <div dangerouslySetInnerHTML={{ __html: datas[0].ContentDesc1 }} className="text-gray-700 leading-relaxed whitespace-pre-line">
+              {/* {datas[0].ContentDesc1} */}
+            </div>
+            ) : (
+              <p>Data tidak ditemukan</p>
+            )}
           </div>
         </div>
       </ContentSection>
     </>
-  )
+  );
 }
 
 function NotFound() {
@@ -135,14 +243,21 @@ function NotFound() {
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="text-center">
         <i className="ri-error-warning-line text-6xl text-gray-300"></i>
-        <h2 className="text-2xl font-semibold text-black mt-4">Halaman Tidak Ditemukan</h2>
-        <p className="text-gray-500 mt-2">Informasi yang Anda cari tidak tersedia.</p>
-        <Link to="/komite-etik" className="inline-flex items-center gap-2 text-[#b00000] hover:underline mt-4">
+        <h2 className="text-2xl font-semibold text-black mt-4">
+          Halaman Tidak Ditemukan
+        </h2>
+        <p className="text-gray-500 mt-2">
+          Informasi yang Anda cari tidak tersedia.
+        </p>
+        <Link
+          to="/komite-etik"
+          className="inline-flex items-center gap-2 text-[#b00000] hover:underline mt-4"
+        >
           <i className="ri-arrow-left-line"></i> Kembali ke Komite Etik
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
 export function KomiteEtik() {
@@ -151,11 +266,14 @@ export function KomiteEtik() {
       <Route index element={<KomiteEtikIndex />} />
       <Route path="sop-penelitian-subjek-manusia" element={<SPSM />} />
       <Route path="sop-penelitian-hewan" element={<SPH />} />
-      <Route path="formulir-panduan-pengajuan-untuk-pi" element={<FormulirPanduan />} />
+      <Route
+        path="formulir-panduan-pengajuan-untuk-pi"
+        element={<FormulirPanduan />}
+      />
       <Route path="jadwal-rapat" element={<JadwalRapat />} />
       <Route path="protokol-yang-disetujui" element={<Protokol />} />
       <Route path="referensi-komite-etik" element={<Referensi />} />
-      <Route path=":slug" element={<KomiteEtikDetail />} />
+      <Route path=":title" element={<KomiteEtikDetail />} />
     </Routes>
-  )
+  );
 }

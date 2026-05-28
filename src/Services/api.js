@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
     // HAPUS tanda / di ujung kata api
-    baseURL: 'https://dent.unhas.ac.id/api',
+    baseURL: 'https://fkg-unhas.qaisaralzikrah.workers.dev',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -135,6 +135,14 @@ const apiService = {
     getSambutan: async () => {
         try {
             const response = await api.get(`/sambutan`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
+    getKomite: async (title) => {
+        try {
+            const response = await api.get(`/komite-etik/${title}`);
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.message || error.message);

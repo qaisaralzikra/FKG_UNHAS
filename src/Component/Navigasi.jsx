@@ -774,6 +774,9 @@ function KomiteEtik({ isScrolled }) {
     }, 200);
   };
 
+  const pendahuluan = 'introduction';
+  const akreditasi = 'accreditation';
+
   return (
     <div
       className="relative flex items-center cursor-pointer text-[16px]"
@@ -803,14 +806,14 @@ function KomiteEtik({ isScrolled }) {
       >
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/pendahuluan">Pendahuluan</Link>
+            <Link to={`/komite-etik/${pendahuluan}`}>Pendahuluan</Link>
           </div>
         </li>
 
         {/* MENU UTAMA LAIN TANPA SUB-MENU */}
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/akreditasi-komite-etik">
+            <Link to={`/komite-etik/${akreditasi}`}>
               Akreditasi Komite Etik
             </Link>
           </div>
@@ -932,6 +935,10 @@ function MobileDrawer({ isOpen, onClose, data }) {
   const kemahasiswaan = "kemahasiswaan";
   const ormawa = "ormawa";
   const BukuPedoman = "buku_pedoman";
+
+  // komite etik
+  const pendahuluan = 'introduction';
+  const akreditasi = 'accreditation';
 
   return (
     <>
@@ -1394,13 +1401,13 @@ function MobileDrawer({ isOpen, onClose, data }) {
             onToggle={() => toggle("komiteEtik")}
           >
             <Link
-              to="/komite-etik/pendahuluan"
+              to={`/komite-etik/${pendahuluan}`}
               className="block py-2 text-sm ps-3"
             >
               Pendahuluan
             </Link>
             <Link
-              to="/komite-etik/akreditasi-komite-etik"
+              to={`/komite-etik/${akreditasi}`}
               className="block py-2 text-sm ps-3"
             >
               Akreditasi Komite Etik
