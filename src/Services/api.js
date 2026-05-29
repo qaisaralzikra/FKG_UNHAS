@@ -150,6 +150,22 @@ const apiService = {
             throw new Error(error.response?.data?.message || error.message);
         }
     },
+    getJadwal: async (year) => {
+        try {
+            const response = await api.get(`/schedule?year=${year}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
+    getProtokol: async (year) => {
+        try {
+            const response = await api.get(`/protocol-approved?year=${year}`);
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || error.message);
+        }
+    },
 };
 
 export default apiService;

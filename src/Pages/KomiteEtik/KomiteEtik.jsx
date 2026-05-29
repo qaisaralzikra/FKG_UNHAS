@@ -213,6 +213,12 @@ function KomiteEtikDetail() {
     titles = 'Akreditasi Komite Etik'
   } else if (title === 'consultants') {
     titles = 'Konsultan Independen Komite Etik'
+  } else if (title === 'clearance-fee') {
+    titles = 'Biaya Kontribusi Ethical Clearance'
+  } else if (title === 'training') {
+    titles = 'Pelatihan Komite Etik'
+  } else if (title === 'contact') {
+    titles = 'Kontak Komite Etik'
   }
 
   return (

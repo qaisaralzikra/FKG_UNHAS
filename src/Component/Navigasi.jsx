@@ -777,6 +777,9 @@ function KomiteEtik({ isScrolled }) {
   const pendahuluan = 'introduction';
   const akreditasi = 'accreditation';
   const konsultan = 'consultants';
+  const kontribusi = 'clearance-fee';
+  const pelatihan = 'training';
+  const kontak = 'contact';
 
   return (
     <div
@@ -882,21 +885,21 @@ function KomiteEtik({ isScrolled }) {
         </li>
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/biaya-kontribusi-ethical-clearance">
+            <Link to={`/komite-etik/${kontribusi}`}>
               Biaya Kontribusi Ethical Clearance
             </Link>
           </div>
         </li>
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/pelatihan-komite-etik">
+            <Link to={`/komite-etik/${pelatihan}`}>
               Pelatihan Komite Etik
             </Link>
           </div>
         </li>
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/kontak-komite-etik">Kontak Komite Etik</Link>
+            <Link to={`/komite-etik/${kontak}`}>Kontak Komite Etik</Link>
           </div>
         </li>
       </ul>
@@ -941,6 +944,9 @@ function MobileDrawer({ isOpen, onClose, data }) {
   const pendahuluan = 'introduction';
   const akreditasi = 'accreditation';
   const konsultan = 'consultants';
+  const kontribusi = 'clearance-fee';
+  const pelatihan = 'training';
+  const kontak = 'contact';
 
   return (
     <>
@@ -1469,19 +1475,19 @@ function MobileDrawer({ isOpen, onClose, data }) {
               Referensi Komite Etik
             </Link>
             <Link
-              to="/komite-etik/biaya-kontribusi-ethical-clearance"
+              to={`/komite-etik/${kontribusi}`}
               className="block py-2 text-sm ps-3"
             >
               Biaya Kontribusi Ethical Clearance
             </Link>
             <Link
-              to="/komite-etik/pelatihan-komite-etik"
+              to={`/komite-etik/${pelatihan}`}
               className="block py-2 text-sm ps-3"
             >
               Pelatihan Komite Etik
             </Link>
             <Link
-              to="/komite-etik/kontak-komite-etik"
+              to={`/komite-etik/${kontak}`}
               className="block py-2 text-sm ps-3"
             >
               Kontak Komite Etik
