@@ -776,6 +776,7 @@ function KomiteEtik({ isScrolled }) {
 
   const pendahuluan = 'introduction';
   const akreditasi = 'accreditation';
+  const konsultan = 'consultants';
 
   return (
     <div
@@ -834,7 +835,7 @@ function KomiteEtik({ isScrolled }) {
         </li>
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/komite-etik/konsultan-independen-komite-etik">
+            <Link to={`/komite-etik/${konsultan}`}>
               Konsultan Independen Komite Etik
             </Link>
           </div>
@@ -939,6 +940,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
   // komite etik
   const pendahuluan = 'introduction';
   const akreditasi = 'accreditation';
+  const konsultan = 'consultants';
 
   return (
     <>
@@ -1425,7 +1427,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
               Anggota Komite Etik
             </Link>
             <Link
-              to="/komite-etik/konsultan-independen-komite-etik"
+              to={`/komite-etik/${konsultan}`}
               className="block py-2 text-sm ps-3"
             >
               Konsultan Independen Komite Etik

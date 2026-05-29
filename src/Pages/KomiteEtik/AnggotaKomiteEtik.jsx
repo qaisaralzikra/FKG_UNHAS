@@ -10,12 +10,12 @@ export function AnggotaKE() {
       <ContentSection>
         <BackLink to="/" />
         <div className="max-w-[900px]">
-          <div className="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100 grid gap-[40px] grid-cols-1 lg:grid-cols-2">
+          <div className="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100 grid gap-[40px] grid-cols-1 lg:grid-cols-2 w-full">
             <a
               href="https://drive.google.com/file/d/1y9dcukwqO9Xj86azkLjxQzPV9cOZOZXY/view"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white p-5 rounded-[16px] shadow-sm border border-gray-100 hover:border-[#b00000] transition-colors flex items-center gap-3 group"
+              className="bg-white p-5 rounded-[16px] shadow-sm border border-gray-100 hover:border-[#b00000] transition-colors flex items-center gap-3 group w-full"
             >
               <i className="ri-graduation-cap-line text-2xl text-[#b00000]"></i>
               <span className="font-medium text-black group-hover:text-[#b00000] transition-colors">

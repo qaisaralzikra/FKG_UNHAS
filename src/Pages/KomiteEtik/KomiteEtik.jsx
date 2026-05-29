@@ -211,6 +211,8 @@ function KomiteEtikDetail() {
     titles = 'Pendahuluan'
   } else if (title === 'accreditation') {
     titles = 'Akreditasi Komite Etik'
+  } else if (title === 'consultants') {
+    titles = 'Konsultan Independen Komite Etik'
   }
 
   return (
@@ -222,14 +224,14 @@ function KomiteEtikDetail() {
       <ContentSection>
         <BackLink to="/komite-etik" />
         <div className="max-w-[900px]">
-          <div className={`bg-white p-6 rounded-[16px] shadow-sm border border-gray-100 ${datas[0] ? '' : 'w-full'}`}>
+          <div className={`bg-white p-6 rounded-[16px] shadow-sm border border-gray-100 ${datas[0] ? '' : 'w-[300px] sm:w-[400px] md:w-[500px] lg:w-[700px] xl-[1000px]'}`}>
             {datas[0] ? (
 
             <div dangerouslySetInnerHTML={{ __html: datas[0].ContentDesc1 }} className="text-gray-700 leading-relaxed whitespace-pre-line">
               {/* {datas[0].ContentDesc1} */}
             </div>
             ) : (
-              <p>Data tidak ditemukan</p>
+              <p>Data <strong className="capitalize">{title}</strong> tidak ditemukan</p>
             )}
           </div>
         </div>
