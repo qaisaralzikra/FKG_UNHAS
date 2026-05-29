@@ -196,7 +196,7 @@ function KomiteEtikDetail() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [title]);
 
   // console.log(datas);
 
