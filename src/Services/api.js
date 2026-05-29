@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const api = axios.create({
     // HAPUS tanda / di ujung kata api
-    baseURL: 'https://fkg-unhas.qaisaralzikrah.workers.dev',
+    // baseURL: 'https://fkg-unhas.qaisaralzikrah.workers.dev',
+    baseURL: 'http://localhost:8080/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
