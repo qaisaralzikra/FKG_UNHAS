@@ -101,6 +101,7 @@ export function Acara({ data }) {
           {/* 5. Pasang value dan onChange pada komponen Select */}
           <div className="mt-[20px]">
             <select
+            aria-label="select-range-mount"
               className="w-full max-w-[400px] p-2 lg:p-[8px] border rounded-md text-black bg-white focus:outline-none focus:border-[#4A0000]"
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
