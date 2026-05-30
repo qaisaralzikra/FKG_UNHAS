@@ -22,7 +22,7 @@ function ColumnKiri({ data }) {
               loading="lazy"
               width={120}
               height={90}
-              src={`https://dent.unhas.ac.id/${item.postImages}`}
+              src={`https://dent.unhas.ac.id/api/${item.postImages}`}
               alt={`Ilustrasi ${item.PostTitle}`}
               className="w-full h-full object-cover group-hover:scale-105 duration-300 absolute top-0 left-0"
             />
@@ -57,7 +57,7 @@ function ColumnKanan({ activeData }) {
         key={activeData.PostID}
         width={800}
         height={502}
-        src={`https://dent.unhas.ac.id/${activeData.postImages}`}
+        src={`https://dent.unhas.ac.id/api/${activeData.postImages}`}
         className="w-full h-full object-cover group-hover:scale-105 duration-500 absolute top-0 left-0"
         alt={`Foto Cover Berita ${activeData.PostTitle}`}
       />
