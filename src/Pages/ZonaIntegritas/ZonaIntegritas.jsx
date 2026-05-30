@@ -1,13 +1,46 @@
-import { Routes, Route, Link, useParams } from "react-router-dom"
-import { PageHero, ContentSection, SectionTitle, BackLink } from "../../Component/PageLayout"
+import { Routes, Route, Link, useParams } from "react-router-dom";
+import {
+  PageHero,
+  ContentSection,
+  SectionTitle,
+  BackLink,
+} from "../../Component/PageLayout";
+
+import survey1 from "../../assets/survey1.jpg"
+import survey2 from "../../assets/survey2.jpg"
 
 const items = [
-  { slug: "wbs", title: "WBS (Whistle Blowing System)", icon: "ri-shield-check-line", desc: "Sistem pengaduan pelanggaran dan penyimpangan." },
-  { slug: "upg", title: "UPG (Unit Pengendalian Gratifikasi)", icon: "ri-service-line", desc: "Unit pengendalian gratifikasi di FKG Unhas." },
-  { slug: "bk", title: "BK (Benturan Kepentingan)", icon: "ri-scales-line", desc: "Pengelolaan benturan kepentingan." },
-  { slug: "am", title: "AM (Aduan Masyarakat)", icon: "ri-feedback-line", desc: "Saluran pengaduan masyarakat." },
-  { slug: "ikm", title: "IKM (Indeks Kepuasan Masyarakat)", icon: "ri-survey-line", desc: "Hasil survey indeks kepuasan masyarakat." },
-]
+  {
+    slug: "wbs",
+    title: "WBS (Whistle Blowing System)",
+    icon: "ri-shield-check-line",
+    desc: "Sistem pengaduan pelanggaran dan penyimpangan.",
+  },
+  {
+    slug: "upg",
+    title: "UPG (Unit Pengendalian Gratifikasi)",
+    icon: "ri-service-line",
+    desc: "Unit pengendalian gratifikasi di FKG Unhas.",
+  },
+  {
+    slug: "bk",
+    title: "BK (Benturan Kepentingan)",
+    icon: "ri-scales-line",
+    desc: "Pengelolaan benturan kepentingan.",
+  },
+  {
+    slug: "am",
+    title: "AM (Aduan Masyarakat)",
+    icon: "ri-feedback-line",
+    desc: "Saluran pengaduan masyarakat.",
+  },
+  {
+    slug: "ikm",
+    title: "IKM (Indeks Kepuasan Masyarakat)",
+    icon: "ri-survey-line",
+    desc: "Hasil survey indeks kepuasan masyarakat.",
+  },
+];
 
 const contentMap = {
   wbs: {
@@ -30,16 +63,20 @@ const contentMap = {
     title: "Indeks Kepuasan Masyarakat (IKM)",
     body: "Indeks Kepuasan Masyarakat merupakan data dan informasi tentang tingkat kepuasan masyarakat terhadap pelayanan publik di FKG Unhas yang diukur secara berkala.",
   },
-}
+};
 
 function ZonaIntegritasIndex() {
   return (
     <>
-      <PageHero title="Zona Integritas" subtitle="Menuju Wilayah Bebas Korupsi (WBK) dan Wilayah Birokrasi Bersih Melayani (WBBM)" />
+      <PageHero
+        title="Zona Integritas"
+        subtitle="Menuju Wilayah Bebas Korupsi (WBK) dan Wilayah Birokrasi Bersih Melayani (WBBM)"
+      />
       <ContentSection>
         <SectionTitle>Zona Integritas FKG Unhas</SectionTitle>
         <p className="text-gray-600 mt-2 text-base lg:text-[18px] max-w-[800px]">
-          FKG Unhas berkomitmen untuk mewujudkan Zona Integritas menuju Wilayah Bebas Korupsi dan Wilayah Birokrasi Bersih Melayani.
+          FKG Unhas berkomitmen untuk mewujudkan Zona Integritas menuju Wilayah
+          Bebas Korupsi dan Wilayah Birokrasi Bersih Melayani.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
           {items.map((item) => (
@@ -49,20 +86,52 @@ function ZonaIntegritasIndex() {
               className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 hover:shadow-md hover:border-[#b00000] transition-all group"
             >
               <i className={`${item.icon} text-3xl text-[#b00000]`}></i>
-              <h3 className="font-semibold text-lg text-black group-hover:text-[#b00000] transition-colors mt-3">{item.title}</h3>
+              <h3 className="font-semibold text-lg text-black group-hover:text-[#b00000] transition-colors mt-3">
+                {item.title}
+              </h3>
               <p className="text-gray-600 text-sm mt-1">{item.desc}</p>
             </Link>
           ))}
         </div>
       </ContentSection>
     </>
-  )
+  );
+}
+
+function LaporanSurvey() {
+  return (
+    <>
+      <PageHero
+        title="Laporan Survey Pelayanan Publik"
+        subtitle="Menuju Wilayah Bebas Korupsi (WBK) dan Wilayah Birokrasi Bersih Melayani (WBBM)"
+      />
+      <ContentSection>
+        <BackLink to="/" />
+        <div className="max-w-[900px]">
+          <div className="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100 grid gap-[40px] grid-cols-1 lg:grid-cols-2">
+            <img
+              className="rounded-[20px] lg:max-h-[900px]"
+              loading="lazy"
+              src={survey1}
+              alt=""
+            />
+            <img
+              className="rounded-[20px] lg:max-h-[900px]"
+              loading="lazy"
+              src={survey2}
+              alt=""
+            />
+          </div>
+        </div>
+      </ContentSection>
+    </>
+  );
 }
 
 function ZonaIntegritasDetail() {
-  const { slug } = useParams()
-  const content = contentMap[slug]
-  const title = content?.title || "Detail"
+  const { slug } = useParams();
+  const content = contentMap[slug];
+  const title = content?.title || "Detail";
 
   return (
     <>
@@ -70,11 +139,13 @@ function ZonaIntegritasDetail() {
       <ContentSection>
         <BackLink to="/zona-integritas" />
         <div className="max-w-[900px]">
-          <p className="text-gray-700 leading-relaxed">{content?.body || "Informasi tidak tersedia."}</p>
+          <p className="text-gray-700 leading-relaxed">
+            {content?.body || "Informasi tidak tersedia."}
+          </p>
         </div>
       </ContentSection>
     </>
-  )
+  );
 }
 
 export function ZonaIntegritas() {
@@ -82,6 +153,7 @@ export function ZonaIntegritas() {
     <Routes>
       <Route index element={<ZonaIntegritasIndex />} />
       <Route path=":slug" element={<ZonaIntegritasDetail />} />
+      <Route path="laporan-survey" element={<LaporanSurvey />} />
     </Routes>
-  )
+  );
 }

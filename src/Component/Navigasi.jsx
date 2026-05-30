@@ -683,7 +683,7 @@ function ZonaIntegritas({ isScrolled }) {
         </li>
         <li className="hover:bg-[#f2f2f2] hover:text-[#b00000] duration-[0.4s] hover:cursor-pointer rounded-[10px]">
           <div className="flex items-center justify-between">
-            <Link to="/zona-integritas/laporan-survey-pelayanan-publik">
+            <Link to="/zona-integritas/laporan-survey">
               Laporan Survey Pelayanan Publik
             </Link>
           </div>
@@ -1326,7 +1326,7 @@ function MobileDrawer({ isOpen, onClose, data }) {
               Laporan Kinerja Area ZI
             </Link>
             <Link
-              to="/zona-integritas/laporan-survey-pelayanan-publik"
+              to="/zona-integritas/laporan-survey"
               className="block py-2 text-sm ps-3"
             >
               Laporan Survey Pelayanan Publik
