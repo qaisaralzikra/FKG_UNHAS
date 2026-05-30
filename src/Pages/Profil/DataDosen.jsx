@@ -155,7 +155,7 @@ export function DataDosen() {
                         <td className="py-4 px-6 text-center">
                           <div className="w-[60px] h-[75px] overflow-hidden rounded-md border border-gray-100 shadow-sm bg-gray-50 mx-auto">
                             <img
-                              src={`https://dent.unhas.ac.id/uploads/dosen/${d.ContentDesc4}`}
+                              src={`https://dent.unhas.ac.id/api/uploads/dosen/${d.ContentDesc4}`}
                               className="w-full h-full object-cover object-center"
                               alt={d.ContentDesc1}
                               onError={(e) => {

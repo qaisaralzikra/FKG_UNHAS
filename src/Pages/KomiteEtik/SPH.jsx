@@ -4,27 +4,27 @@ import { PageHero, ContentSection, BackLink } from "../../Component/PageLayout";
 const sopItems = [
   {
     code: "Biodata Peneliti Utama",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648263_6a06ff57f8c008947089.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648263_6a06ff57f8c008947089.pdf",
   },
   {
     code: "Dokumen Check List Protokol Uji Hewan",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648253_f21e50fa7825f60b6ca7.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648253_f21e50fa7825f60b6ca7.pdf",
   },
   {
     code: "Formulir Pengajuan Etik Untuk Uji Hewan Coba",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648242_2500da98c00dd89e0538.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648242_2500da98c00dd89e0538.pdf",
   },
   {
     code: "Formulir Persetujuan Pembimbing",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648233_2799facf8fb5650be2f7.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648233_2799facf8fb5650be2f7.pdf",
   },
   {
     code: "Ringkasan Proposal",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648220_8de547339fbe70c83945.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648220_8de547339fbe70c83945.pdf",
   },
   {
     code: "Susunan Tim Peneliti Dan Keahlian",
-    url: "https://dent.unhas.ac.id/uploads/files/1752648211_9489b5f6770517b6306c.pdf",
+    url: "https://dent.unhas.ac.id/api/uploads/files/1752648211_9489b5f6770517b6306c.pdf",
   },
 ];
 

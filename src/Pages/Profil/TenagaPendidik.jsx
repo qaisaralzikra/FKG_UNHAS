@@ -80,7 +80,7 @@ export function TenagaPendidik() {
                       <div className="w-[60px] h-[75px] overflow-hidden rounded-md border border-gray-100 shadow-sm bg-gray-50 mx-auto">
                         <img
                         loading="lazy"
-                          src={`https://dent.unhas.ac.id/uploads/TenagaPendidik/${d.ContentDesc4}`}
+                          src={`https://dent.unhas.ac.id/api/uploads/TenagaPendidik/${d.ContentDesc4}`}
                           className="w-full h-full object-cover object-center"
                           alt={d.ContentDesc1}
                           onError={(e) => {

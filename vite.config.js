@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -21,15 +22,15 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`
-      }
-    }
-  }
+  // build: {
+  //   rollupOptions: {
+  //     output: {
+  //       entryFileNames: `assets/[name].js`,
+  //       chunkFileNames: `assets/[name].js`,
+  //       assetFileNames: `assets/[name].[ext]`
+  //     }
+  //   }
+  // }
   // server: {
   //   proxy: {
   //     // Setiap request yang diawali '/api' akan diteruskan oleh Vite ke server UNHAS
