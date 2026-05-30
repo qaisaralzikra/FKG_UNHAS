@@ -368,7 +368,7 @@ function Pengabdian() {
                   <tr>
                     <th colSpan={5} className="py-[10px] px-[10px] text-start">
                       data belum di ambil
-                    </th>
+                    </th> 
                   </tr>
                 </thead>
                 <tbody>
