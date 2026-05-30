@@ -15,11 +15,10 @@ function VideoPlayer() {
             agar tidak ada blank hitam saat loading awal.
         */
         preload="auto"
-        poster="/poster-hero.jpg" 
         className="w-full h-full object-cover z-0"
       >
         <source
-          src="https://dent.unhas.ac.id/assets/web/video/wellcome_video.mp4"
+          src="https://dent.unhas.ac.id/api/assets/web/video/wellcome_video.mp4"
           type="video/mp4"
         />
         {/* Fallback teks jika browser jadul tidak mendukung video */}
