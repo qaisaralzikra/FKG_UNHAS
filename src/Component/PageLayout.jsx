@@ -39,7 +39,7 @@ export function PageHeroDetailBlog({ img }) {
       >
         <img 
         loading="lazy"
-          src={`https://dent.unhas.ac.id/${img}`} 
+          src={`https://dent.unhas.ac.id/api/${img}`} 
           // 3. w-full h-full dipadu dengan object-cover dan object-center akan membuat gambar pas di tengah
           className="w-full h-full object-cover object-center" 
           alt="Hero Detail Blog" 

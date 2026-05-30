@@ -92,7 +92,7 @@ export function DaftarBerita() {
                     >
                       <div className="overflow-hidden w-full h-full">
                         <img
-                          src={`https://dent.unhas.ac.id/${item.postImages}`}
+                          src={`https://dent.unhas.ac.id/api/${item.postImages}`}
                           className={`w-full transition-transform duration-300 ${
                             isCurrentHovered ? "scale-105" : "scale-100"
                           } ${isFeaturedItem ? "object-cover h-[220px] md:h-full w-full" : "object-cover h-[200px] w-full"}`}
