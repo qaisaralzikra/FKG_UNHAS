@@ -212,7 +212,7 @@ function Akreditasi() {
                       {d.file_akreditasi ? (
                         <a
                           target="_blank"
-                          href={`https://dent.unhas.ac.id/${d.file_akreditasi}`}
+                          href={`https://dent.unhas.ac.id/api/${d.file_akreditasi}`}
                           className="py-[10px] px-[20px] bg-[#b00000] rounded-[10px] text-white"
                         >
                           Lihat
@@ -225,7 +225,7 @@ function Akreditasi() {
                       {d.file_akreditasi_intl ? (
                         <a
                           target="_blank"
-                          href={`https://dent.unhas.ac.id/${d.file_akreditasi}`}
+                          href={`https://dent.unhas.ac.id/api/${d.file_akreditasi_intl}`}
                           className="py-[10px] px-[20px] bg-[#b00000] rounded-[10px] text-white"
                         >
                           Lihat
