@@ -20,7 +20,7 @@ const apiService = {
     getDashboardData: async () => {
         try {
             // Gunakan string kosong atau "/" tanpa memicu double slash
-            const response = await api.get('');
+            const response = await api.get('/');
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.message || error.message);
